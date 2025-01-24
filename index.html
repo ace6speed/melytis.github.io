@@ -3,15 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page 1</title>
-    <script>
-        // Fonction JavaScript pour rediriger vers page2.html
-        function allerBoutique() {
-            window.location.href = "page2.html";
+    <title>Melytis - Boutique de Vêtements</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+            color: #333;
+            line-height: 1.6;
         }
-    </script>
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #111;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #007bff;
+            text-decoration: underline;
+        }
+
+        /* Banner Styles */
+        .banner {
+            background-image: url('https://via.placeholder.com/1500x600?text=Boutique+Melytis');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .banner h2 {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .banner p {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #222; /* Darker shade for the text */
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #111;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Bienvenue sur la page 1</h1>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#">Accueil</a>
+        <a href="#shop">Boutique</a>
+        <a href="#about">À propos</a>
+        <a href="https://wa.me/33612317014">Contact</a>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">
+        <h2>Bienvenue chez Melytis</h2>
+        <p>Découvrez notre collection de vêtements tendances pour chaque occasion</p>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" style="padding: 50px 20px; text-align: center;">
+        <h2>À propos de Melytis</h2>
+        <p>Chez Melytis, nous offrons une large gamme de vêtements modernes et stylés. Notre mission est de rendre la mode accessible à tous, avec des produits de qualité à des prix abordables.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
+    </div>
+
 </body>
 </html>
