@@ -3,180 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Melytis'shop - Boutique</title>
+    <title>Melytis - Boutique</title>
     <style>
         /* Global Styles */
         body {
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1f1f1;
+            background-color: #f8f8f8;
             color: #333;
-            line-height: 1.6;
         }
 
-        h1, h2 {
+        /* Navbar */
+        .navbar {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
+
+        /* Banner */
+        .banner {
+            background: url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
             text-align: center;
-        }
-
-        h1 {
-            margin-top: 20px;
-            font-size: 36px;
-        }
-
-        h2 {
-            margin-bottom: 20px;
+            padding: 100px 20px;
+            color: #fff;
             font-size: 24px;
+            font-weight: bold;
         }
 
+        /* Product Grid */
         .container {
             max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             padding: 20px;
         }
 
         .product {
-            flex: 1 1 calc(50% - 20px); /* Two products per row */
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 20px;
             background-color: #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
-            transition: transform 0.3s;
         }
 
         .product img {
             max-width: 100%;
             border-radius: 10px;
-            max-height: 250px;
-            object-fit: contain;
         }
 
         .price {
-            font-weight: bold;
             font-size: 18px;
-            margin: 10px 0;
+            font-weight: bold;
+            color: #007bff;
         }
 
-        .button-container {
-            margin-top: 15px;
-        }
-
-        button {
+        .btn {
             background-color: #007bff;
             color: white;
+            padding: 10px 20px;
             border: none;
-            padding: 12px 25px;
             border-radius: 5px;
-            font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .contact-info {
-            font-size: 14px;
             margin-top: 10px;
         }
 
-        /* Navbar styles */
-        .navbar {
-            background-color: #111;
-            color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
+        .btn:hover {
+            background-color: #0056b3;
         }
 
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .navbar a:hover {
-            background-color: #007bff;
-        }
-
-        /* Footer styles */
+        /* Footer */
         .footer {
-            background-color: #111;
+            background-color: #222;
             color: white;
-            padding: 20px;
             text-align: center;
-            font-size: 14px;
-        }
-
-        .footer a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Product hover effect */
-        .product:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <div class="navbar">
-        <a href="index.html">Accueil</a>
-        <a href="boutique.html">Boutique</a>
-        <a href="tracks-pants.html">Tracks Pants</a>
-        <a href="https://wa.me/33612317014">Contact</a>
+        <a href="#">Accueil</a>
+        <a href="#">Boutique</a>
+        <a href="#">Contact</a>
     </div>
 
-    <h1 id="top">Melytis'shop</h1>
-    <h2>Bienvenue dans notre boutique</h2>
+    <div class="banner">
+        Bienvenue chez Melytis - Découvrez nos meilleures offres !
+    </div>
 
     <div class="container">
-        <!-- Product 1 -->
         <div class="product">
-            <h2>Apple AirPods PRO 2ème génération</h2>
-            <img src="https://afrikapods.com/cdn/shop/files/rawImage.jpg?v=1699133292&width=1946" alt="Apple AirPods PRO 2ème génération">
-            <p class="price">Prix : 65€</p>
-            <div class="button-container">
-                <button disabled>Commander</button>
-            </div>
-            <p class="contact-info">WhatsApp : +33612317014</p>
+            <img src="https://via.placeholder.com/300" alt="Produit 1">
+            <h2>Produit 1</h2>
+            <p class="price">65€</p>
+            <button class="btn">Commander</button>
         </div>
 
-        <!-- Product 2 -->
         <div class="product">
-            <h2>Apple AirPods 4ème génération</h2>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCISTelKRBf53QU99IUfs-_qHcjWwnLS4OcA&usqp=CAU" alt="Apple AirPods 4ème génération">
-            <p class="price">Prix : 60€</p>
-            <div class="button-container">
-                <button disabled>Commander</button>
-            </div>
-            <p class="contact-info">WhatsApp : +33612317014</p>
+            <img src="https://via.placeholder.com/300" alt="Produit 2">
+            <h2>Produit 2</h2>
+            <p class="price">60€</p>
+            <button class="btn">Commander</button>
         </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
-        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
+        © 2025 Melytis - Tous droits réservés
     </div>
 </body>
 </html>
