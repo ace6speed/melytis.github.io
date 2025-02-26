@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Melytis - Boutique de Vêtements</title>
+    <title>Nike Vintage - Boutique en Ligne</title>
     <style>
         /* Global Styles */
         body {
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1f1f1;
+            background-color: #f9f9f9;
             color: #333;
             line-height: 1.6;
         }
@@ -31,9 +32,9 @@
 
         /* Navbar styles */
         .navbar {
-            background-color: #111;
+            background-color: #222;
             color: white;
-            padding: 15px 30px;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -45,133 +46,145 @@
             font-size: 16px;
             padding: 10px 15px;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .navbar a:hover {
             background-color: #007bff;
-            text-decoration: underline;
+            transform: translateY(-3px);
         }
 
-        /* Banner Styles */
-        .banner {
-            background-image: url('https://via.placeholder.com/1500x600?text=Boutique+Melytis');
-            background-size: cover;
-            background-position: center;
-            color: white;
+        /* Section Nike Vintage */
+        .nike-vintage {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 50px 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nike-vintage .product {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
             text-align: center;
-            padding: 100px 20px;
+            transition: transform 0.3s ease;
         }
 
-        .banner h2 {
-            font-size: 48px;
-            font-weight: bold;
+        .nike-vintage .product:hover {
+            transform: translateY(-10px);
         }
 
-        .banner p {
+        .nike-vintage .product h3 {
             font-size: 20px;
-            margin-top: 10px;
-            color: #222;
-        }
-
-        /* Product Styles */
-        .product {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .product-images {
-            display: flex;
-            overflow-x: auto;
-            gap: 10px;
-        }
-
-        .product-images img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .product h2 {
-            font-size: 24px;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        .product p {
-            font-size: 18px;
-            color: #666;
-        }
-
-        .price {
-            font-size: 20px;
-            font-weight: bold;
             color: #333;
+            margin-top: 15px;
+        }
+
+        .nike-vintage .product p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .nike-vintage .product .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000;
             margin-top: 10px;
         }
 
-        .old-price {
+        .nike-vintage .product .old-price {
             text-decoration: line-through;
-            color: red;
-            font-size: 16px;
+            color: #f44336;
         }
 
-        .button {
-            background-color: #111;
+        .nike-vintage .product button {
+            background: linear-gradient(135deg, #007bff, #00c6ff);
             color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-transform: uppercase;
+            padding: 15px 30px;
             border: none;
-            cursor: pointer;
-            margin-top: 15px;
+            border-radius: 50px;
             font-size: 16px;
-            transition: background-color 0.3s ease;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
         }
 
-        .button:hover {
-            background-color: #007bff;
+        .nike-vintage .product button:hover {
+            background: linear-gradient(135deg, #00c6ff, #007bff);
+            transform: translateY(-3px);
+        }
+
+        /* Image Carousel Styles */
+        .image-carousel {
+            width: 100%;
+            display: flex;
+            overflow-x: scroll;
+            gap: 10px;
+            scroll-behavior: smooth;
+            margin-bottom: 20px;
+        }
+
+        .image-carousel img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-carousel img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #222;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
 
     <!-- Navbar -->
     <div class="navbar">
         <a href="index.html">Accueil</a>
         <a href="boutique.html">Boutique</a>
-        <a href="#about">À propos</a>
+        <a href="#nike-vintage">Nike Vintage</a>
         <a href="https://wa.me/33612317014">Contact</a>
     </div>
 
-    <!-- Banner -->
-    <div class="banner">
-        <h2>Bienvenue chez Melytis</h2>
-        <p>Découvrez notre collection de vêtements tendances pour chaque occasion</p>
-    </div>
-
-    <!-- Product Section -->
-    <div class="product">
-        <!-- Carrousel d'images -->
-        <div class="product-images">
-            <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Photo 1">
-            <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Photo 2">
-            <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Photo 3">
-            <img src="https://i.postimg.cc/zXKJvN9Y/20250219-174641.avif" alt="Photo 4">
+    <!-- Nike Vintage Section -->
+    <div id="nike-vintage" class="nike-vintage">
+        <div class="product">
+            <div class="image-carousel">
+                <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
+                <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
+                <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" alt="Jogging Nike Vintage 3">
+                <img src="https://i.postimg.cc/zXKJvN9Y/20250219-174641.avif" alt="Jogging Nike Vintage 4">
+            </div>
+            <h3>Nike Vintage noir taille M</h3>
+            <p>Grade A</p>
+            <p class="price">30€ <span class="old-price">45€</span></p>
+            <button>Ajouter au Panier</button>
         </div>
-
-        <!-- Product Details -->
-        <h2>Nike Vintage Jogging</h2>
-        <p>Un jogging élégant avec une touche vintage, parfait pour un look décontracté.</p>
-
-        <!-- Price and Add to Cart -->
-        <p class="price">30€</p>
-        <p class="old-price">45€</p>
-        <button class="button">Ajouter au Panier</button>
     </div>
 
     <!-- Footer -->
@@ -180,4 +193,5 @@
     </div>
 
 </body>
+
 </html>
