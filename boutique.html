@@ -8,10 +8,10 @@
     <style>
         /* Global Styles */
         body {
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1f1f1;
+            background-color: #f9f9f9;
             color: #333;
             line-height: 1.6;
         }
@@ -32,9 +32,9 @@
 
         /* Navbar styles */
         .navbar {
-            background-color: #111;
+            background-color: #222;
             color: white;
-            padding: 15px 30px;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -46,80 +46,85 @@
             font-size: 16px;
             padding: 10px 15px;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .navbar a:hover {
             background-color: #007bff;
-            text-decoration: underline;
+            transform: translateY(-3px);
         }
 
         /* Section Nike Vintage */
         .nike-vintage {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            padding: 40px;
-            background-color: white;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 50px 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .nike-vintage .product {
             background-color: #fff;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             text-align: center;
-            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .nike-vintage .product:hover {
+            transform: translateY(-10px);
         }
 
         .nike-vintage .product h3 {
-            font-size: 18px;
+            font-size: 20px;
             color: #333;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .nike-vintage .product p {
-            font-size: 16px;
-            color: #666;
+            font-size: 14px;
+            color: #777;
         }
 
         .nike-vintage .product .price {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             color: #000;
+            margin-top: 10px;
         }
 
         .nike-vintage .product .old-price {
             text-decoration: line-through;
-            color: red;
+            color: #f44336;
         }
 
         .nike-vintage .product button {
-            background-color: #007bff;
+            background: linear-gradient(135deg, #007bff, #00c6ff);
             color: white;
-            padding: 12px 20px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
+            font-size: 16px;
             cursor: pointer;
             margin-top: 20px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .nike-vintage .product button:hover {
-            background-color: #0056b3;
-        }
-
-        .nike-vintage .product button:focus {
-            outline: none;
+            background: linear-gradient(135deg, #00c6ff, #007bff);
+            transform: translateY(-3px);
         }
 
         /* Image Carousel Styles */
         .image-carousel {
             width: 100%;
             display: flex;
-            overflow-x: auto;
+            overflow-x: scroll;
             gap: 10px;
             scroll-behavior: smooth;
+            margin-bottom: 20px;
         }
 
         .image-carousel img {
@@ -128,6 +133,7 @@
             max-width: 100%;
             border-radius: 10px;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .image-carousel img:hover {
@@ -136,9 +142,9 @@
 
         /* Footer Styles */
         .footer {
-            background-color: #111;
+            background-color: #222;
             color: white;
-            padding: 20px;
+            padding: 30px;
             text-align: center;
             font-size: 14px;
         }
@@ -146,6 +152,7 @@
         .footer a {
             color: white;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .footer a:hover {
