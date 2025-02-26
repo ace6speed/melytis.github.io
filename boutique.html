@@ -72,12 +72,6 @@
             padding: 15px;
         }
 
-        .nike-vintage .product img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
         .nike-vintage .product h3 {
             font-size: 18px;
             color: #333;
@@ -103,15 +97,41 @@
         .nike-vintage .product button {
             background-color: #007bff;
             color: white;
-            padding: 10px;
+            padding: 12px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
         }
 
         .nike-vintage .product button:hover {
             background-color: #0056b3;
+        }
+
+        .nike-vintage .product button:focus {
+            outline: none;
+        }
+
+        /* Image Carousel Styles */
+        .image-carousel {
+            width: 100%;
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            scroll-behavior: smooth;
+        }
+
+        .image-carousel img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .image-carousel img:hover {
+            transform: scale(1.05);
         }
 
         /* Footer Styles */
@@ -147,21 +167,35 @@
     <!-- Nike Vintage Section -->
     <div id="nike-vintage" class="nike-vintage">
         <div class="product">
-            <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
+            <div class="image-carousel">
+                <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
+                <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
+                <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" alt="Jogging Nike Vintage 3">
+            </div>
             <h3>Jogging Nike Vintage</h3>
             <p>Un look rétro parfait pour toutes les occasions</p>
             <p class="price">30€ <span class="old-price">45€</span></p>
             <button>Ajouter au Panier</button>
         </div>
+
         <div class="product">
-            <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
+            <div class="image-carousel">
+                <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
+                <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
+                <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" alt="Jogging Nike Vintage 3">
+            </div>
             <h3>Jogging Nike Vintage</h3>
             <p>Confort et style dans un seul produit</p>
             <p class="price">30€ <span class="old-price">45€</span></p>
             <button>Ajouter au Panier</button>
         </div>
+
         <div class="product">
-            <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" alt="Jogging Nike Vintage 3">
+            <div class="image-carousel">
+                <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
+                <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
+                <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" alt="Jogging Nike Vintage 3">
+            </div>
             <h3>Jogging Nike Vintage</h3>
             <p>Le jogging classique qui ne se démode jamais</p>
             <p class="price">30€ <span class="old-price">45€</span></p>
