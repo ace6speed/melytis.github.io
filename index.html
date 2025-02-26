@@ -1,61 +1,124 @@
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { ShoppingCart } from "lucide-react";
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melytis - Boutique de Vêtements</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+            color: #333;
+            line-height: 1.6;
+        }
 
-export default function Home() {
-  const [cart, setCart] = useState([]);
-  
-  const products = [
-    { id: 1, name: "Vintage Camera", price: 120, image: "/camera.jpg" },
-    { id: 2, name: "Retro Radio", price: 90, image: "/radio.jpg" },
-    { id: 3, name: "Classic Typewriter", price: 150, image: "/typewriter.jpg" },
-    { id: 4, name: "Tracks Pants", price: 30, oldPrice: 45, images: [
-      "https://i.postimg.cc/wjkg5VqW/20250219-174143.avif",
-      "https://i.postimg.cc/RZmvn8B6/20250219-174544.avif",
-      "https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif"
-    ] }
-  ];
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin: 40px 0;
+            text-align: center;
+        }
 
-  const addToCart = (product) => {
-    setCart([...cart, product]);
-  };
+        h2 {
+            font-size: 24px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-  return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <nav className="flex justify-between items-center p-4 bg-white shadow-md">
-        <h1 className="text-2xl font-bold">Refined Retro</h1>
-        <Link href="/cart" className="relative">
-          <ShoppingCart size={24} />
-          {cart.length > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">{cart.length}</span>
-          )}
-        </Link>
-      </nav>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-        {products.map((product) => (
-          <div key={product.id} className="bg-white p-4 rounded-lg shadow-md">
-            {product.images ? (
-              <div className="flex space-x-2 overflow-x-scroll">
-                {product.images.map((img, index) => (
-                  <Image key={index} src={img} alt={product.name} width={150} height={150} className="rounded-lg" />
-                ))}
-              </div>
-            ) : (
-              <Image src={product.image} alt={product.name} width={300} height={200} className="rounded-lg" />
-            )}
-            <h2 className="text-lg font-semibold mt-2">{product.name}</h2>
-            {product.oldPrice && <p className="text-red-500 line-through">${product.oldPrice}</p>}
-            <p className="text-gray-600 font-bold">${product.price}</p>
-            <button
-              className="mt-2 bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800"
-              onClick={() => addToCart(product)}
-            >
-              Add to Cart
-            </button>
-          </div>
-        ))}
-      </div>
+        /* Navbar styles */
+        .navbar {
+            background-color: #111;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #007bff;
+            text-decoration: underline;
+        }
+
+        /* Banner Styles */
+        .banner {
+            background-image: url('https://via.placeholder.com/1500x600?text=Boutique+Melytis');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .banner h2 {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .banner p {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #222;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #111;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="index.html">Accueil</a>
+        <a href="boutique.html">Boutique</a>
+        <a href="#about">À propos</a>
+        <a href="https://wa.me/33612317014">Contact</a>
     </div>
-  );
-}
+
+    <!-- Banner -->
+    <div class="banner">
+        <h2>Bienvenue chez Melytis</h2>
+        <p>Découvrez notre collection de vêtements tendances pour chaque occasion</p>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" style="padding: 50px 20px; text-align: center;">
+        <h2>À propos de Melytis</h2>
+        <p>Chez Melytis, nous offrons une large gamme de vêtements modernes et stylés. Notre mission est de rendre la mode accessible à tous, avec des produits de qualité à des prix abordables.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
+    </div>
+
+</body>
+</html>
