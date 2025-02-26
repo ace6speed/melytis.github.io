@@ -1,133 +1,179 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Melytis - Boutique</title>
+    <title>Nike Vintage - Boutique en Ligne</title>
     <style>
         /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000;
-            color: #fff;
+            background-color: #f1f1f1;
+            color: #333;
+            line-height: 1.6;
         }
 
-        /* Navbar */
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Navbar styles */
         .navbar {
             background-color: #111;
-            padding: 15px;
+            color: white;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #444;
         }
 
         .navbar a {
+            color: white;
             text-decoration: none;
-            color: #fff;
+            font-size: 16px;
             padding: 10px 15px;
-            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
         .navbar a:hover {
-            color: #aaa;
+            background-color: #007bff;
+            text-decoration: underline;
         }
 
-        /* Banner */
-        .banner {
-            background: url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
-            text-align: center;
-            padding: 100px 20px;
-            color: #fff;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        /* Product Grid */
-        .container {
-            max-width: 1200px;
-            margin: auto;
+        /* Section Nike Vintage */
+        .nike-vintage {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
-            padding: 20px;
+            padding: 40px;
+            background-color: white;
         }
 
-        .product {
-            background-color: #111;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        .product img {
-            max-width: 100%;
-            border-radius: 10px;
-        }
-
-        .price {
-            font-size: 18px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .btn {
+        .nike-vintage .product {
             background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .nike-vintage .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .nike-vintage .product h3 {
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .nike-vintage .product p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .nike-vintage .product .price {
+            font-size: 20px;
+            font-weight: bold;
             color: #000;
-            padding: 10px 20px;
+        }
+
+        .nike-vintage .product .old-price {
+            text-decoration: line-through;
+            color: red;
+        }
+
+        .nike-vintage .product button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
-            font-weight: bold;
         }
 
-        .btn:hover {
-            background-color: #ddd;
+        .nike-vintage .product button:hover {
+            background-color: #0056b3;
         }
 
-        /* Footer */
+        /* Footer Styles */
         .footer {
             background-color: #111;
             color: white;
+            padding: 20px;
             text-align: center;
-            padding: 15px;
-            margin-top: 30px;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
+
+    <!-- Navbar -->
     <div class="navbar">
-        <a href="#">Accueil</a>
-        <a href="#">Boutique</a>
-        <a href="#">Contact</a>
+        <a href="index.html">Accueil</a>
+        <a href="boutique.html">Boutique</a>
+        <a href="#nike-vintage">Nike Vintage</a>
+        <a href="https://wa.me/33612317014">Contact</a>
     </div>
 
-    <div class="banner">
-        Bienvenue chez Melytis - Découvrez nos meilleures offres !
-    </div>
-
-    <div class="container">
+    <!-- Nike Vintage Section -->
+    <div id="nike-vintage" class="nike-vintage">
         <div class="product">
-            <img src="https://afrikapods.com/cdn/shop/files/rawImage.jpg?v=1699133292&width=1946" alt="Apple AirPods PRO 2ème génération">
-            <h2>Apple AirPods PRO 2ème génération</h2>
-            <p class="price">65€</p>
-            <button class="btn">Commander</button>
+            <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
+            <h3>Jogging Nike Vintage</h3>
+            <p>Un look rétro parfait pour toutes les occasions</p>
+            <p class="price">30€ <span class="old-price">45€</span></p>
+            <button>Ajouter au Panier</button>
         </div>
-
         <div class="product">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCISTelKRBf53QU99IUfs-_qHcjWwnLS4OcA&usqp=CAU" alt="Apple AirPods 4ème génération">
-            <h2>Apple AirPods 4ème génération</h2>
-            <p class="price">60€</p>
-            <button class="btn">Commander</button>
+            <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
+            <h3>Jogging Nike Vintage</h3>
+            <p>Confort et style dans un seul produit</p>
+            <p class="price">30€ <span class="old-price">45€</span></p>
+            <button>Ajouter au Panier</button>
+        </div>
+        <div class="product">
+            <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" alt="Jogging Nike Vintage 3">
+            <h3>Jogging Nike Vintage</h3>
+            <p>Le jogging classique qui ne se démode jamais</p>
+            <p class="price">30€ <span class="old-price">45€</span></p>
+            <button>Ajouter au Panier</button>
         </div>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
-        © 2025 Melytis - Tous droits réservés
+        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
+
 </body>
+
 </html>
