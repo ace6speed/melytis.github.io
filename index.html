@@ -1,60 +1,61 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Melytis - Boutique de Vêtements</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
-</head>
-<body>
-    <!-- Navbar -->
-    <header class="navbar">
-        <div class="logo">Melytis</div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="boutique.html">Boutique</a></li>
-                <li><a href="#about">À propos</a></li>
-                <li><a href="https://wa.me/33612317014">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <!-- Banner -->
-    <section class="banner">
-        <h2>Bienvenue chez Melytis</h2>
-        <p>Découvrez notre collection de vêtements tendances pour chaque occasion</p>
-    </section>
-    
-    <!-- Produit mis en avant -->
-    <main>
-        <section class="product">
-            <div class="product-images">
-                <img id="mainImage" src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Track Pants Nike Vintage">
-                <div class="thumbnails">
-                    <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" onclick="changeImage(this.src)">
-                    <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" onclick="changeImage(this.src)">
-                </div>
-            </div>
-            <div class="product-info">
-                <h1>Track Pants Nike Vintage</h1>
-                <p class="price"><span class="discount">45€</span> <span class="current-price">30€</span></p>
-                <p class="description">Un pantalon de sport vintage Nike au style rétro, parfait pour un look streetwear unique.</p>
-                <button class="buy-button">Ajouter au panier</button>
-            </div>
-        </section>
-    </main>
-    
-    <!-- À propos -->
-    <section id="about" class="about-section">
-        <h2>À propos de Melytis</h2>
-        <p>Chez Melytis, nous offrons une large gamme de vêtements modernes et stylés. Notre mission est de rendre la mode accessible à tous, avec des produits de qualité à des prix abordables.</p>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
-    </footer>
-</body>
-</html>
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ShoppingCart } from "lucide-react";
+
+export default function Home() {
+  const [cart, setCart] = useState([]);
+  
+  const products = [
+    { id: 1, name: "Vintage Camera", price: 120, image: "/camera.jpg" },
+    { id: 2, name: "Retro Radio", price: 90, image: "/radio.jpg" },
+    { id: 3, name: "Classic Typewriter", price: 150, image: "/typewriter.jpg" },
+    { id: 4, name: "Tracks Pants", price: 30, oldPrice: 45, images: [
+      "https://i.postimg.cc/wjkg5VqW/20250219-174143.avif",
+      "https://i.postimg.cc/RZmvn8B6/20250219-174544.avif",
+      "https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif"
+    ] }
+  ];
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-6">
+      <nav className="flex justify-between items-center p-4 bg-white shadow-md">
+        <h1 className="text-2xl font-bold">Refined Retro</h1>
+        <Link href="/cart" className="relative">
+          <ShoppingCart size={24} />
+          {cart.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">{cart.length}</span>
+          )}
+        </Link>
+      </nav>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        {products.map((product) => (
+          <div key={product.id} className="bg-white p-4 rounded-lg shadow-md">
+            {product.images ? (
+              <div className="flex space-x-2 overflow-x-scroll">
+                {product.images.map((img, index) => (
+                  <Image key={index} src={img} alt={product.name} width={150} height={150} className="rounded-lg" />
+                ))}
+              </div>
+            ) : (
+              <Image src={product.image} alt={product.name} width={300} height={200} className="rounded-lg" />
+            )}
+            <h2 className="text-lg font-semibold mt-2">{product.name}</h2>
+            {product.oldPrice && <p className="text-red-500 line-through">${product.oldPrice}</p>}
+            <p className="text-gray-600 font-bold">${product.price}</p>
+            <button
+              className="mt-2 bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800"
+              onClick={() => addToCart(product)}
+            >
+              Add to Cart
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
