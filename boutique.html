@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike Vintage - Boutique en Ligne</title>
     <style>
-        /* Global Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -16,26 +15,12 @@
             line-height: 1.6;
         }
 
-        h1 {
-            font-size: 36px;
-            color: #333;
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        h2 {
-            font-size: 24px;
-            color: #666;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        /* Navbar styles */
         .navbar {
             background-color: #222;
             color: white;
             padding: 15px 30px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -44,30 +29,26 @@
             text-decoration: none;
             font-size: 16px;
             padding: 10px 15px;
-            border-radius: 5px;
             transition: all 0.3s ease;
-            margin-left: 15px;
         }
 
         .navbar a:hover {
             background-color: #007bff;
-            transform: translateY(-3px);
+            border-radius: 5px;
         }
 
-        /* Logo */
         .logo {
             height: 40px;
             cursor: pointer;
         }
 
-        /* Section Nike Vintage */
         .nike-vintage {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
             padding: 50px 20px;
             background-color: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         .nike-vintage .product {
@@ -75,18 +56,18 @@
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            text-align: center;
-            transition: transform 0.3s ease;
+            padding: 20px;
         }
 
-        .nike-vintage .product:hover {
-            transform: translateY(-10px);
+        .nike-vintage .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
         }
 
         .nike-vintage .product h3 {
             font-size: 20px;
             color: #333;
-            margin-top: 15px;
         }
 
         .nike-vintage .product p {
@@ -98,15 +79,12 @@
             font-size: 24px;
             font-weight: bold;
             color: #000;
-            margin-top: 10px;
-            display: block;
         }
 
         .nike-vintage .product .old-price {
             font-size: 18px;
             color: #777;
             text-decoration: line-through;
-            margin-left: 10px;
         }
 
         .nike-vintage .product button {
@@ -118,49 +96,35 @@
             font-size: 16px;
             cursor: pointer;
             margin-top: 20px;
-            transition: all 0.3s ease;
         }
 
         .nike-vintage .product button:hover {
             background-color: #333;
-            transform: translateY(-3px);
         }
 
-        /* Footer Styles */
         .footer {
             background-color: #222;
             color: white;
             padding: 30px;
             text-align: center;
-            font-size: 14px;
-        }
-
-        .footer a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Navbar -->
     <div class="navbar">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Neues_Logo_Nike.svg/1200px-Neues_Logo_Nike.svg.png" alt="Logo Panier" class="logo" onclick="window.location.href='panier.html'">
-        <a href="index.html">Accueil</a>
-        <a href="boutique.html">Boutique</a>
-        <a href="#nike-vintage">Nike Vintage</a>
-        <a href="https://wa.me/33612317014">Contact</a>
+        <div>
+            <a href="index.html">Accueil</a>
+            <a href="boutique.html">Boutique</a>
+            <a href="#nike-vintage">Nike Vintage</a>
+            <a href="https://wa.me/33612317014">Contact</a>
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Shopping_cart_font_awesome.svg" alt="Panier" class="logo" onclick="window.location.href='panier.html'">
     </div>
 
-    <!-- Nike Vintage Section -->
     <div id="nike-vintage" class="nike-vintage">
         <div class="product">
+            <img src="https://via.placeholder.com/280" alt="Nike Vintage noir">
             <h3>Nike Vintage noir taille M</h3>
             <p>Grade A</p>
             <p class="price">30,79€ <span class="old-price">45,79€</span></p>
@@ -168,6 +132,7 @@
         </div>
 
         <div class="product">
+            <img src="https://via.placeholder.com/280" alt="Nike Vintage bleu/vert">
             <h3>Nike Vintage bleu/vert taille M</h3>
             <p>Grade A</p>
             <p class="price">30,79€ <span class="old-price">45,79€</span></p>
@@ -175,11 +140,9 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
         <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
-
 </body>
 
 </html>
