@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cart-container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        .cart-item img {
+            width: 50px;
+            height: auto;
+        }
+        .cart-item h3 {
+            margin: 0;
+        }
+        .cart-item .price {
+            font-weight: bold;
+        }
+        .empty-cart {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Mon Panier</h1>
+    <div class="cart-container" id="cart-container">
+        <!-- Panier sera rempli par JS -->
+    </div>
+
+    <div class="empty-cart" id="empty-cart">
+        <p>Votre panier est vide.</p>
+    </div>
+
+    <script>
+        // Récupérer les données du panier à partir du localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Élément où afficher les produits du panier
+        const cartContainer = document.getElementById('cart-container');
+        const emptyCartMessage = document.getElementById('empty-cart');
+
+        if (cart.length === 0) {
+            cartContainer.style.display = 'none';
+            emptyCartMessage.style.display = 'block';
+        } else {
+            // Afficher les produits du panier
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <h3>${item.name}</h3>
+                        <p class="price">${item.price}€</p>
+                    </div>
+                `;
+                cartContainer.appendChild(cartItem);
+            });
+        }
+    </script>
+
+</body>
+</html>
