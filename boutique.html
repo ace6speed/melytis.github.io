@@ -80,6 +80,19 @@
             flex: 0 0 auto;
         }
 
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #ccc;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
         button {
             background: #fff;
             color: #000;
@@ -129,7 +142,7 @@
             </div>
             <h3>Nike Vintage noir taille M</h3>
             <p>Grade A</p>
-            <p class="price">30,79€</p>
+            <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
             <button onclick="ajouterAuPanier('Nike Vintage noir', '30,79€', 'https://i.postimg.cc/wjkg5VqW/20250219-174143.avif')">Ajouter au Panier</button>
         </div>
 
@@ -141,7 +154,7 @@
             </div>
             <h3>Nike Vintage bleu/vert taille M</h3>
             <p>Grade A</p>
-            <p class="price">30,79€</p>
+            <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
             <button onclick="ajouterAuPanier('Nike Vintage bleu/vert', '30,79€', 'https://i.postimg.cc/TYGsjXK6/20250219-175030.avif')">Ajouter au Panier</button>
         </div>
     </div>
