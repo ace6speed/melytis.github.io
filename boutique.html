@@ -209,6 +209,27 @@
         <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
 
-</body>
+    <!-- SCRIPT POUR AJOUTER AU PANIER -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let panier = [];
 
+            function ajouterAuPanier(nom, prix) {
+                panier.push({ nom, prix });
+                alert(nom + " ajouté au panier !");
+                console.log("Panier actuel :", panier);
+            }
+
+            document.querySelectorAll(".product button").forEach((button, index) => {
+                button.addEventListener("click", function () {
+                    const produit = this.closest(".product");
+                    const nom = produit.querySelector("h3").innerText;
+                    const prix = produit.querySelector(".price").innerText;
+                    ajouterAuPanier(nom, prix);
+                });
+            });
+        });
+    </script>
+
+</body>
 </html>
