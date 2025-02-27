@@ -6,18 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike Vintage - Boutique en Ligne</title>
     <style>
+        /* Global Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f9f9f9;
             color: #333;
+            line-height: 1.6;
         }
 
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Navbar styles */
         .navbar {
             background-color: #222;
             color: white;
-            padding: 20px;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -26,82 +43,194 @@
         .navbar a {
             color: white;
             text-decoration: none;
+            font-size: 16px;
             padding: 10px 15px;
-            transition: all 0.3s;
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
 
         .navbar a:hover {
             background-color: #007bff;
+            transform: translateY(-3px);
         }
 
+        /* Section Nike Vintage */
         .nike-vintage {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            padding: 20px;
+            gap: 30px;
+            padding: 50px 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .product {
-            background: white;
-            padding: 15px;
-            text-align: center;
+        .nike-vintage .product {
+            background-color: #fff;
+            border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease;
         }
 
-        .product button {
-            background: black;
+        .nike-vintage .product:hover {
+            transform: translateY(-10px);
+        }
+
+        .nike-vintage .product h3 {
+            font-size: 20px;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .nike-vintage .product p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .nike-vintage .product .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .nike-vintage .product .old-price {
+            font-size: 18px;
+            color: #777;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .nike-vintage .product button {
+            background-color: #000;
             color: white;
-            padding: 10px;
+            padding: 15px 30px;
             border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nike-vintage .product button:hover {
+            background-color: #333;
+            transform: translateY(-3px);
+        }
+
+        /* Image Carousel Styles */
+        .image-carousel {
+            width: 100%;
+            display: flex;
+            overflow-x: scroll;
+            gap: 10px;
+            scroll-behavior: smooth;
+            margin-bottom: 20px;
+        }
+
+        .image-carousel img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
             cursor: pointer;
         }
 
+        .image-carousel img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer Styles */
         .footer {
-            background: #222;
+            background-color: #222;
             color: white;
+            padding: 30px;
             text-align: center;
-            padding: 20px;
-            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Navbar -->
     <div class="navbar">
         <a href="index.html">Accueil</a>
         <a href="boutique.html">Boutique</a>
-        <a href="panier.html">Panier 🛒</a>
+        <a href="#nike-vintage">Nike Vintage</a>
         <a href="https://wa.me/33612317014">Contact</a>
     </div>
 
+    <!-- Nike Vintage Section -->
     <div id="nike-vintage" class="nike-vintage">
+        <!-- First Product (Nike Vintage noir) -->
         <div class="product">
+            <div class="image-carousel">
+                <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
+                <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
+                <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" alt="Jogging Nike Vintage 3">
+                <img src="https://i.postimg.cc/zXKJvN9Y/20250219-174641.avif" alt="Jogging Nike Vintage 4">
+            </div>
             <h3>Nike Vintage noir taille M</h3>
             <p>Grade A</p>
-            <p class="price">30,79€</p>
-            <button onclick="ajouterAuPanier('Nike Vintage noir taille M', '30.79')">Ajouter au Panier</button>
+            <p class="price">30,79€ <span class="old-price">45,79€</span></p>
+            <button>Ajouter au Panier</button>
         </div>
 
+        <!-- Second Product (Nike Vintage bleu/vert) -->
         <div class="product">
+            <div class="image-carousel">
+                <img src="https://i.postimg.cc/TYGsjXK6/20250219-175030.avif" alt="Jogging Nike Vintage Bleu/Vert 1">
+                <img src="https://i.postimg.cc/wv826hJp/20250219-175150.avif" alt="Jogging Nike Vintage Bleu/Vert 2">
+                <img src="https://i.postimg.cc/tJbBzhC5/20250219-175231.avif" alt="Jogging Nike Vintage Bleu/Vert 3">
+            </div>
             <h3>Nike Vintage bleu/vert taille M</h3>
             <p>Grade A</p>
-            <p class="price">30,79€</p>
-            <button onclick="ajouterAuPanier('Nike Vintage bleu/vert taille M', '30.79')">Ajouter au Panier</button>
+            <p class="price">30,79€ <span class="old-price">45,79€</span></p>
+            <button>Ajouter au Panier</button>
         </div>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
-        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a></p>
+        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
 
+    <!-- SCRIPT POUR AJOUTER AU PANIER -->
     <script>
-        function ajouterAuPanier(nom, prix) {
-            let panier = JSON.parse(localStorage.getItem("panier")) || [];
-            panier.push({ nom, prix });
-            localStorage.setItem("panier", JSON.stringify(panier));
-            alert(nom + " ajouté au panier !");
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            let panier = [];
+
+            function ajouterAuPanier(nom, prix) {
+                panier.push({ nom, prix });
+                localStorage.setItem('panier', JSON.stringify(panier)); // Stocke le panier dans le localStorage
+                alert(nom + " ajouté au panier !");
+                window.location.href = "panier.html"; // Redirige vers la page du panier
+            }
+
+            document.querySelectorAll(".product button").forEach((button) => {
+                button.addEventListener("click", function () {
+                    const produit = this.closest(".product");
+                    const nom = produit.querySelector("h3").innerText;
+                    const prix = produit.querySelector(".price").innerText;
+                    ajouterAuPanier(nom, prix);
+                });
+            });
+        });
     </script>
+
 </body>
 </html>
