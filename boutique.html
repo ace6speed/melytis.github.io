@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike Vintage - Boutique en Ligne</title>
     <style>
-        /* Global Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -45,8 +44,9 @@
         }
 
         .nike-vintage {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 30px;
             padding: 50px 20px;
             background-color: #fff;
@@ -59,15 +59,29 @@
             overflow: hidden;
             text-align: center;
             transition: transform 0.3s ease;
+            width: 90%;
+            max-width: 400px;
         }
 
         .product:hover {
             transform: translateY(-10px);
         }
 
+        .image-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 10px;
+            padding: 10px;
+            white-space: nowrap;
+            scrollbar-width: none;
+        }
+
         .image-carousel img {
             width: 100%;
             border-radius: 10px;
+            scroll-snap-align: start;
+            flex: 0 0 auto;
         }
 
         .footer {
@@ -81,7 +95,6 @@
 </head>
 
 <body>
-    <!-- Navbar -->
     <div class="navbar">
         <div>
             <a href="index.html">Accueil</a>
@@ -94,9 +107,7 @@
         </a>
     </div>
 
-    <!-- Nike Vintage Section -->
     <div id="nike-vintage" class="nike-vintage">
-        <!-- Premier produit -->
         <div class="product">
             <div class="image-carousel">
                 <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
@@ -110,7 +121,6 @@
             <button onclick="ajouterAuPanier('Nike Vintage noir', '30,79€', 'https://i.postimg.cc/wjkg5VqW/20250219-174143.avif')">Ajouter au Panier</button>
         </div>
 
-        <!-- Deuxième produit -->
         <div class="product">
             <div class="image-carousel">
                 <img src="https://i.postimg.cc/TYGsjXK6/20250219-175030.avif" alt="Jogging Nike Vintage Bleu/Vert 1">
@@ -124,7 +134,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
         <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
