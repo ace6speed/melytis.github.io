@@ -1,54 +1,206 @@
-<!-- Ajout de boutons dans panier.html -->
-<div id="panier-container">
-    <h2>Votre Panier</h2>
-    <ul id="liste-panier"></ul>
-    <button id="commander">Commander</button>
-    <button id="retour-boutique">Retour à la Boutique</button>
-</div>
+<!DOCTYPE html>
+<html lang="fr">
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let panier = JSON.parse(localStorage.getItem('panier')) || [];
-        let panierContainer = document.getElementById("liste-panier");
-
-        function afficherPanier() {
-            panierContainer.innerHTML = "";
-            panier.forEach((article, index) => {
-                let li = document.createElement("li");
-                li.innerHTML = `
-                    ${article.nom} - ${article.prix} 
-                    <button class="retirer" data-index="${index}">Retirer</button>
-                `;
-                panierContainer.appendChild(li);
-            });
-
-            // Ajouter les événements aux boutons "Retirer"
-            document.querySelectorAll(".retirer").forEach(button => {
-                button.addEventListener("click", function () {
-                    let index = this.getAttribute("data-index");
-                    panier.splice(index, 1); // Supprime l'article du panier
-                    localStorage.setItem("panier", JSON.stringify(panier)); // Met à jour le localStorage
-                    afficherPanier(); // Recharge la liste
-                });
-            });
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Panier - Nike Vintage</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            text-align: center;
         }
 
-        afficherPanier();
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin: 40px 0;
+        }
 
-        // Bouton Commander
-        document.getElementById("commander").addEventListener("click", function () {
-            if (panier.length > 0) {
-                alert("Commande validée ! Merci pour votre achat.");
-                localStorage.removeItem("panier"); // Vide le panier
-                afficherPanier(); // Met à jour l'affichage
-            } else {
-                alert("Votre panier est vide !");
+        .panier-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+        }
+
+        .product img {
+            width: 80px;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .product .details {
+            flex: 1;
+            margin-left: 20px;
+            text-align: left;
+        }
+
+        .product .details h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .product .details .price {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .product .actions button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .product .actions button:hover {
+            background-color: darkred;
+        }
+
+        .buttons-container {
+            margin-top: 20px;
+        }
+
+        .buttons-container button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .buttons-container button:hover {
+            background-color: #333;
+        }
+
+        .footer {
+            background-color: #222;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Mon Panier</h1>
+
+    <div id="panier" class="panier-container">
+        <!-- Les produits du panier seront affichés ici -->
+    </div>
+
+    <div class="buttons-container">
+        <button id="commander">Commander</button>
+        <button id="retour-boutique">Retour à la Boutique</button>
+    </div>
+
+    <div class="footer">
+        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let panier = JSON.parse(localStorage.getItem('panier')) || [];
+            const panierContainer = document.getElementById('panier');
+
+            function afficherPanier() {
+                panierContainer.innerHTML = "";
+
+                if (panier.length === 0) {
+                    panierContainer.innerHTML = "<p>Votre panier est vide.</p>";
+                    return;
+                }
+
+                panier.forEach((produit, index) => {
+                    const produitDiv = document.createElement('div');
+                    produitDiv.classList.add('product');
+
+                    // Image du produit
+                    const image = document.createElement('img');
+                    image.src = produit.image;
+                    image.alt = produit.nom;
+
+                    // Détails
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.classList.add('details');
+                    const nom = document.createElement('h3');
+                    nom.textContent = produit.nom;
+                    const prix = document.createElement('p');
+                    prix.classList.add('price');
+                    prix.textContent = produit.prix;
+
+                    detailsDiv.appendChild(nom);
+                    detailsDiv.appendChild(prix);
+
+                    // Bouton "Retirer"
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.classList.add('actions');
+                    const retirerBtn = document.createElement('button');
+                    retirerBtn.textContent = "Retirer";
+                    retirerBtn.addEventListener("click", function () {
+                        panier.splice(index, 1); // Supprime l'article
+                        localStorage.setItem("panier", JSON.stringify(panier));
+                        afficherPanier();
+                    });
+
+                    actionsDiv.appendChild(retirerBtn);
+
+                    // Ajout des éléments à la div produit
+                    produitDiv.appendChild(image);
+                    produitDiv.appendChild(detailsDiv);
+                    produitDiv.appendChild(actionsDiv);
+
+                    panierContainer.appendChild(produitDiv);
+                });
             }
-        });
 
-        // Bouton Retour à la Boutique
-        document.getElementById("retour-boutique").addEventListener("click", function () {
-            window.location.href = "index.html"; // Redirige vers la boutique
+            afficherPanier();
+
+            // Bouton Commander
+            document.getElementById("commander").addEventListener("click", function () {
+                if (panier.length > 0) {
+                    alert("Commande validée ! Merci pour votre achat.");
+                    localStorage.removeItem("panier"); // Vide le panier
+                    afficherPanier();
+                } else {
+                    alert("Votre panier est vide !");
+                }
+            });
+
+            // Bouton Retour à la Boutique
+            document.getElementById("retour-boutique").addEventListener("click", function () {
+                window.location.href = "index.html";
+            });
         });
-    });
-</script>
+    </script>
+
+</body>
+
+</html>
