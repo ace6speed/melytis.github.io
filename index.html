@@ -74,61 +74,6 @@
             color: #222;
         }
 
-        /* Product Section */
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            justify-items: center;
-        }
-
-        .product {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .product img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .product h3 {
-            font-size: 20px;
-            color: #333;
-            margin: 10px 0;
-        }
-
-        .product p {
-            font-size: 16px;
-            color: #777;
-        }
-
-        .product .price {
-            font-size: 24px;
-            font-weight: bold;
-            color: #000;
-        }
-
-        .product button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .product button:hover {
-            background-color: #0056b3;
-        }
-
         /* Footer Styles */
         .footer {
             background-color: #111;
@@ -154,7 +99,7 @@
     <div class="navbar">
         <a href="index.html">Accueil</a>
         <a href="boutique.html">Boutique</a>
-        <a href="cart.html">Panier</a> <!-- Lien vers la page panier -->
+        <a href="#about">À propos</a>
         <a href="https://wa.me/33612317014">Contact</a>
     </div>
 
@@ -164,38 +109,16 @@
         <p>Découvrez notre collection de vêtements tendances pour chaque occasion</p>
     </div>
 
-    <!-- Products Section -->
-    <div class="products">
-        <div class="product">
-            <img src="https://via.placeholder.com/300" alt="Vêtement 1">
-            <h3>Vêtement A</h3>
-            <p>Description du produit</p>
-            <p class="price">25,00€</p>
-            <button onclick="addToCart({name: 'Vêtement A', price: 25.00})">Ajouter au Panier</button>
-        </div>
-        <div class="product">
-            <img src="https://via.placeholder.com/300" alt="Vêtement 2">
-            <h3>Vêtement B</h3>
-            <p>Description du produit</p>
-            <p class="price">30,00€</p>
-            <button onclick="addToCart({name: 'Vêtement B', price: 30.00})">Ajouter au Panier</button>
-        </div>
+    <!-- About Section -->
+    <div id="about" style="padding: 50px 20px; text-align: center;">
+        <h2>À propos de Melytis</h2>
+        <p>Chez Melytis, nous offrons une large gamme de vêtements modernes et stylés. Notre mission est de rendre la mode accessible à tous, avec des produits de qualité à des prix abordables.</p>
     </div>
 
     <!-- Footer -->
     <div class="footer">
         <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
-
-    <!-- JavaScript pour gérer le panier -->
-    <script>
-        // Fonction pour ajouter un produit au panier
-        function addToCart(product) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.push(product);
-            localStorage.setItem('cart', JSON.stringify(cart));
-        }
-    </script>
 
 </body>
 </html>
