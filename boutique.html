@@ -212,10 +212,10 @@
     <!-- SCRIPT POUR AJOUTER AU PANIER -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            let panier = [];
+            let panier = JSON.parse(localStorage.getItem('panier')) || [];
 
-            function ajouterAuPanier(nom, prix) {
-                panier.push({ nom, prix });
+            function ajouterAuPanier(nom, prix, image) {
+                panier.push({ nom, prix, image });
                 localStorage.setItem('panier', JSON.stringify(panier)); // Stocke le panier dans le localStorage
                 alert(nom + " ajouté au panier !");
                 window.location.href = "panier.html"; // Redirige vers la page du panier
@@ -226,7 +226,8 @@
                     const produit = this.closest(".product");
                     const nom = produit.querySelector("h3").innerText;
                     const prix = produit.querySelector(".price").innerText;
-                    ajouterAuPanier(nom, prix);
+                    const image = produit.querySelector("img").src; // Récupère l'URL de la première image
+                    ajouterAuPanier(nom, prix, image);
                 });
             });
         });
