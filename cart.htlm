@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panier - Melytis</title>
     <style>
+        /* Styles simplifiés pour le panier */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -70,7 +71,7 @@
 
     <h1>Mon Panier</h1>
     <div class="cart-container" id="cart-container">
-        <!-- Le panier sera rempli par JS -->
+        <!-- Panier sera rempli par JS -->
     </div>
 
     <div class="empty-cart" id="empty-cart">
@@ -81,7 +82,6 @@
 
     <a href="https://www.paypal.com" class="checkout-btn" id="checkout-btn" style="display: none;">Passer à la caisse</a>
 
-    <!-- Ajout du JavaScript en bas de la page -->
     <script>
         // Récupérer les données du panier à partir du localStorage
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
