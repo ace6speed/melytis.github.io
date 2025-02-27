@@ -4,78 +4,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Panier</title>
+    <title>Panier - Nike Vintage</title>
     <style>
+        /* Global Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f9f9f9;
             color: #333;
+            line-height: 1.6;
         }
 
         h1 {
+            font-size: 36px;
+            color: #333;
+            margin: 40px 0;
             text-align: center;
-            margin-bottom: 20px;
         }
 
-        .cart-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .cart-item {
+        .panier-container {
+            padding: 50px 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
         }
 
-        .cart-item button {
-            background-color: red;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
+        .panier-container .product {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
         }
 
-        .cart-item button:hover {
-            background-color: darkred;
+        .panier-container .product h3 {
+            font-size: 20px;
+            color: #333;
+            margin-top: 15px;
         }
 
-        .total {
-            text-align: right;
+        .panier-container .product p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .panier-container .product .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .panier-container .product .old-price {
             font-size: 18px;
+            color: #777;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .panier-container .total {
+            font-size: 24px;
             font-weight: bold;
             margin-top: 20px;
         }
 
-        .checkout {
-            display: block;
-            text-align: center;
-            background: black;
+        .panier-container button {
+            background-color: #000;
             color: white;
-            padding: 10px;
+            padding: 15px 30px;
+            border: none;
             border-radius: 5px;
-            text-decoration: none;
-            font-size: 18px;
-            margin-top: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
         }
 
-        .checkout:hover {
-            background: #333;
-        }
-
-        .empty {
-            text-align: center;
-            font-size: 18px;
-            color: #777;
+        .panier-container button:hover {
+            background-color: #333;
+            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -83,54 +96,43 @@
 <body>
 
     <h1>Mon Panier</h1>
-    <div class="cart-container">
-        <div id="cart-items"></div>
-        <p id="total" class="total"></p>
-        <a href="checkout.html" class="checkout">Passer la commande</a>
+
+    <div class="panier-container" id="panier-container">
+        <!-- Le panier sera rempli dynamiquement via JavaScript -->
+    </div>
+
+    <div class="panier-container">
+        <p class="total" id="total">Total : 0,00€</p>
+        <button>Valider la commande</button>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            let panier = JSON.parse(localStorage.getItem("panier")) || [];
-            let cartContainer = document.getElementById("cart-items");
-            let totalContainer = document.getElementById("total");
+            let panier = JSON.parse(localStorage.getItem('panier')) || [];
+            const panierContainer = document.getElementById("panier-container");
+            const totalElement = document.getElementById("total");
 
-            function afficherPanier() {
-                cartContainer.innerHTML = "";
+            if (panier.length === 0) {
+                panierContainer.innerHTML = "<p>Votre panier est vide.</p>";
+            } else {
                 let total = 0;
-
-                if (panier.length === 0) {
-                    cartContainer.innerHTML = '<p class="empty">Votre panier est vide.</p>';
-                    totalContainer.textContent = "";
-                    return;
-                }
-
-                panier.forEach((produit, index) => {
-                    let itemDiv = document.createElement("div");
-                    itemDiv.classList.add("cart-item");
-
-                    itemDiv.innerHTML = `
-                        <span>${produit.nom}</span>
-                        <span>${produit.prix}</span>
-                        <button onclick="supprimerArticle(${index})">❌</button>
+                panier.forEach((produit) => {
+                    const productElement = document.createElement("div");
+                    productElement.classList.add("product");
+                    productElement.innerHTML = `
+                        <h3>${produit.nom}</h3>
+                        <p>Grade A</p>
+                        <p class="price">${produit.prix}</p>
                     `;
-                    cartContainer.appendChild(itemDiv);
-
+                    panierContainer.appendChild(productElement);
                     total += parseFloat(produit.prix.replace("€", "").replace(",", "."));
                 });
 
-                totalContainer.textContent = "Total : " + total.toFixed(2) + "€";
+                totalElement.innerText = "Total : " + total.toFixed(2) + "€";
             }
-
-            window.supprimerArticle = function (index) {
-                panier.splice(index, 1);
-                localStorage.setItem("panier", JSON.stringify(panier));
-                afficherPanier();
-            };
-
-            afficherPanier();
         });
     </script>
 
 </body>
+
 </html>
