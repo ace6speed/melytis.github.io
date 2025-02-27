@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike Vintage - Boutique en Ligne</title>
     <style>
+        /* Global Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -18,7 +19,7 @@
         .navbar {
             background-color: #222;
             color: white;
-            padding: 15px 30px;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -29,17 +30,18 @@
             text-decoration: none;
             font-size: 16px;
             padding: 10px 15px;
+            border-radius: 5px;
             transition: all 0.3s ease;
         }
 
         .navbar a:hover {
             background-color: #007bff;
-            border-radius: 5px;
+            transform: translateY(-3px);
         }
 
-        .logo {
-            height: 40px;
-            cursor: pointer;
+        .cart-logo {
+            width: 40px;
+            height: auto;
         }
 
         .nike-vintage {
@@ -48,58 +50,24 @@
             gap: 30px;
             padding: 50px 20px;
             background-color: #fff;
-            text-align: center;
         }
 
-        .nike-vintage .product {
+        .product {
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
         }
 
-        .nike-vintage .product img {
+        .product:hover {
+            transform: translateY(-10px);
+        }
+
+        .image-carousel img {
             width: 100%;
-            height: auto;
             border-radius: 10px;
-        }
-
-        .nike-vintage .product h3 {
-            font-size: 20px;
-            color: #333;
-        }
-
-        .nike-vintage .product p {
-            font-size: 14px;
-            color: #777;
-        }
-
-        .nike-vintage .product .price {
-            font-size: 24px;
-            font-weight: bold;
-            color: #000;
-        }
-
-        .nike-vintage .product .old-price {
-            font-size: 18px;
-            color: #777;
-            text-decoration: line-through;
-        }
-
-        .nike-vintage .product button {
-            background-color: #000;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .nike-vintage .product button:hover {
-            background-color: #333;
         }
 
         .footer {
@@ -107,11 +75,13 @@
             color: white;
             padding: 30px;
             text-align: center;
+            font-size: 14px;
         }
     </style>
 </head>
 
 <body>
+    <!-- Navbar -->
     <div class="navbar">
         <div>
             <a href="index.html">Accueil</a>
@@ -119,30 +89,54 @@
             <a href="#nike-vintage">Nike Vintage</a>
             <a href="https://wa.me/33612317014">Contact</a>
         </div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Shopping_cart_font_awesome.svg" alt="Panier" class="logo" onclick="window.location.href='panier.html'">
+        <a href="panier.html">
+            <img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">
+        </a>
     </div>
 
+    <!-- Nike Vintage Section -->
     <div id="nike-vintage" class="nike-vintage">
+        <!-- Premier produit -->
         <div class="product">
-            <img src="https://via.placeholder.com/280" alt="Nike Vintage noir">
+            <div class="image-carousel">
+                <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
+                <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
+                <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" alt="Jogging Nike Vintage 3">
+                <img src="https://i.postimg.cc/zXKJvN9Y/20250219-174641.avif" alt="Jogging Nike Vintage 4">
+            </div>
             <h3>Nike Vintage noir taille M</h3>
             <p>Grade A</p>
-            <p class="price">30,79€ <span class="old-price">45,79€</span></p>
-            <button>Ajouter au Panier</button>
+            <p class="price">30,79€</p>
+            <button onclick="ajouterAuPanier('Nike Vintage noir', '30,79€', 'https://i.postimg.cc/wjkg5VqW/20250219-174143.avif')">Ajouter au Panier</button>
         </div>
 
+        <!-- Deuxième produit -->
         <div class="product">
-            <img src="https://via.placeholder.com/280" alt="Nike Vintage bleu/vert">
+            <div class="image-carousel">
+                <img src="https://i.postimg.cc/TYGsjXK6/20250219-175030.avif" alt="Jogging Nike Vintage Bleu/Vert 1">
+                <img src="https://i.postimg.cc/wv826hJp/20250219-175150.avif" alt="Jogging Nike Vintage Bleu/Vert 2">
+                <img src="https://i.postimg.cc/tJbBzhC5/20250219-175231.avif" alt="Jogging Nike Vintage Bleu/Vert 3">
+            </div>
             <h3>Nike Vintage bleu/vert taille M</h3>
             <p>Grade A</p>
-            <p class="price">30,79€ <span class="old-price">45,79€</span></p>
-            <button>Ajouter au Panier</button>
+            <p class="price">30,79€</p>
+            <button onclick="ajouterAuPanier('Nike Vintage bleu/vert', '30,79€', 'https://i.postimg.cc/TYGsjXK6/20250219-175030.avif')">Ajouter au Panier</button>
         </div>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
         <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
-</body>
 
+    <script>
+        function ajouterAuPanier(nom, prix, image) {
+            let panier = JSON.parse(localStorage.getItem('panier')) || [];
+            panier.push({ nom, prix, image });
+            localStorage.setItem('panier', JSON.stringify(panier));
+            alert(nom + " ajouté au panier !");
+            window.location.href = "panier.html";
+        }
+    </script>
+</body>
 </html>
