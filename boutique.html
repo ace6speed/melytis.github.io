@@ -42,11 +42,11 @@
         }
 
         .nike-vintage {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            display: flex;
+            flex-wrap: wrap; /* Permet de faire en sorte que les produits se déplacent sur la ligne suivante */
+            justify-content: space-between;
+            gap: 20px;
             padding: 60px 20px;
-            justify-content: center;
         }
 
         .product {
@@ -55,12 +55,8 @@
             box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
             text-align: center;
             transition: transform 0.3s ease;
+            width: 48%; /* Prend 48% de la largeur de son conteneur, laissant 2 éléments par ligne */
             padding: 20px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 450px;
         }
 
         .product:hover {
@@ -81,8 +77,6 @@
             border-radius: 10px;
             scroll-snap-align: start;
             flex: 0 0 auto;
-            object-fit: cover;
-            height: 200px;
         }
 
         .price {
