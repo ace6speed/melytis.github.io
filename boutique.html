@@ -37,13 +37,18 @@
             color: #ccc;
         }
 
+        .navbar .links {
+            display: flex;
+            gap: 20px; /* Espacement entre les liens */
+        }
+
         .cart-logo {
             width: 40px;
         }
 
         .nike-vintage {
-            display: grid; /* Utilisation d'une grille CSS */
-            grid-template-columns: repeat(2, 1fr); /* Créer deux colonnes de taille égale */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             padding: 60px 20px;
         }
@@ -118,11 +123,11 @@
 
 <body>
     <div class="navbar">
-        <div>
+        <div class="links">
             <a href="index.html">Accueil</a>
             <a href="#nike-vintage">Nike Vintage</a>
-            <a href="https://wa.me/33612317014">Contact</a>
         </div>
+        <a href="https://wa.me/33612317014" style="margin-right: 30px;">Contact</a>
         <a href="panier.html">
             <img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">
         </a>
