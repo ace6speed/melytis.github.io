@@ -42,8 +42,8 @@
         }
 
         .nike-vintage {
-            display: grid; /* Utilisation d'une grille CSS */
-            grid-template-columns: repeat(2, 1fr); /* Créer deux colonnes de taille égale */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 produits par ligne */
             gap: 20px;
             padding: 60px 20px;
         }
@@ -55,6 +55,8 @@
             text-align: center;
             transition: transform 0.3s ease;
             padding: 20px;
+            cursor: pointer;
+            text-decoration: none; /* Empêche les soulignements sur le lien */
         }
 
         .product:hover {
@@ -130,7 +132,8 @@
     </div>
 
     <div id="nike-vintage" class="nike-vintage">
-        <div class="product">
+        <!-- Premier produit -->
+        <a href="produit1.html" class="product"> <!-- Lien vers la page du premier produit -->
             <div class="image-carousel">
                 <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
                 <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
@@ -140,10 +143,10 @@
             <h3>Nike Vintage noir taille M</h3>
             <p>Grade A</p>
             <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
-            <button onclick="ajouterAuPanier('Nike Vintage noir', '30,79€', 'https://i.postimg.cc/wjkg5VqW/20250219-174143.avif')">Ajouter au Panier</button>
-        </div>
+        </a>
 
-        <div class="product">
+        <!-- Deuxième produit -->
+        <a href="produit2.html" class="product"> <!-- Lien vers la page du deuxième produit -->
             <div class="image-carousel">
                 <img src="https://i.postimg.cc/TYGsjXK6/20250219-175030.avif" alt="Jogging Nike Vintage Bleu/Vert 1">
                 <img src="https://i.postimg.cc/wv826hJp/20250219-175150.avif" alt="Jogging Nike Vintage Bleu/Vert 2">
@@ -152,30 +155,7 @@
             <h3>Nike Vintage bleu/vert taille M</h3>
             <p>Grade A</p>
             <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
-            <button onclick="ajouterAuPanier('Nike Vintage bleu/vert', '30,79€', 'https://i.postimg.cc/TYGsjXK6/20250219-175030.avif')">Ajouter au Panier</button>
-        </div>
-
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/FK8mrR74/20250219-175530.avif" alt="Jogging Nike Vintage Rouge/Noir 1">
-                <img src="https://i.postimg.cc/sD8fQR2B/20250219-175608.avif" alt="Jogging Nike Vintage Rouge/Noir 2">
-            </div>
-            <h3>Nike Vintage rouge/noir taille M</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
-            <button onclick="ajouterAuPanier('Nike Vintage rouge/noir', '30,79€', 'https://i.postimg.cc/FK8mrR74/20250219-175530.avif')">Ajouter au Panier</button>
-        </div>
-
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/sDDNGJt1/20250219-175927.avif" alt="Jogging Nike Vintage Gris/Blanc 1">
-                <img src="https://i.postimg.cc/mGqg7cFZ/20250219-180030.avif" alt="Jogging Nike Vintage Gris/Blanc 2">
-            </div>
-            <h3>Nike Vintage gris/blanc taille M</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
-            <button onclick="ajouterAuPanier('Nike Vintage gris/blanc', '30,79€', 'https://i.postimg.cc/sDDNGJt1/20250219-175927.avif')">Ajouter au Panier</button>
-        </div>
+        </a>
     </div>
 
     <div class="footer">
