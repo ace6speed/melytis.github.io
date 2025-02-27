@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,6 +51,67 @@
         .navbar a:hover {
             background-color: #007bff;
             transform: translateY(-3px);
+        }
+
+        .cart {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart:hover {
+            background-color: #0056b3;
+        }
+
+        /* Panier Modal */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .cart-modal .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-modal .modal-content h3 {
+            margin-top: 0;
+        }
+
+        .cart-modal .modal-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .cart-modal .modal-content ul li {
+            margin-bottom: 10px;
+        }
+
+        .cart-modal .modal-content .close {
+            background-color: #ff0000;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .cart-modal .modal-content .close:hover {
+            background-color: #cc0000;
         }
 
         /* Section Nike Vintage */
@@ -120,47 +180,6 @@
             transform: translateY(-3px);
         }
 
-        /* Image Carousel Styles */
-        .image-carousel {
-            width: 100%;
-            display: flex;
-            overflow-x: scroll;
-            gap: 10px;
-            scroll-behavior: smooth;
-            margin-bottom: 20px;
-        }
-
-        .image-carousel img {
-            width: 100%;
-            height: auto;
-            max-width: 100%;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-
-        .image-carousel img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Footer Styles */
-        .footer {
-            background-color: #222;
-            color: white;
-            padding: 30px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .footer a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 
@@ -172,6 +191,19 @@
         <a href="boutique.html">Boutique</a>
         <a href="#nike-vintage">Nike Vintage</a>
         <a href="https://wa.me/33612317014">Contact</a>
+        <button class="cart" onclick="toggleCart()">Panier (0)</button>
+    </div>
+
+    <!-- Panier Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="modal-content">
+            <h3>Mon Panier</h3>
+            <ul id="cartItems">
+                <!-- Les articles du panier seront ajoutés ici -->
+            </ul>
+            <p id="cartTotal">Total: 0€</p>
+            <button class="close" onclick="toggleCart()">Fermer</button>
+        </div>
     </div>
 
     <!-- Nike Vintage Section -->
@@ -187,7 +219,7 @@
             <h3>Nike Vintage noir taille M</h3>
             <p>Grade A</p>
             <p class="price">30,79€ <span class="old-price">45,79€</span></p>
-            <button>Ajouter au Panier</button>
+            <button onclick="addToCart('Nike Vintage noir taille M', 30.79)">Ajouter au Panier</button>
         </div>
 
         <!-- Second Product (Nike Vintage bleu/vert) -->
@@ -200,7 +232,7 @@
             <h3>Nike Vintage bleu/vert taille M</h3>
             <p>Grade A</p>
             <p class="price">30,79€ <span class="old-price">45,79€</span></p>
-            <button>Ajouter au Panier</button>
+            <button onclick="addToCart('Nike Vintage bleu/vert taille M', 30.79)">Ajouter au Panier</button>
         </div>
     </div>
 
@@ -209,6 +241,35 @@
         <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
 
-</body>
+    <script>
+        let cart = [];
+        
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            updateCart();
+        }
 
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            cartItems.innerHTML = ''; // Clear cart list
+            let total = 0;
+            
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.product} - ${item.price}€`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+            
+            cartTotal.textContent = `Total: ${total.toFixed(2)}€`;
+            document.querySelector('.cart').textContent = `Panier (${cart.length})`;
+        }
+
+        function toggleCart() {
+            const cartModal = document.getElementById('cartModal');
+            cartModal.style.display = cartModal.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
 </html>
