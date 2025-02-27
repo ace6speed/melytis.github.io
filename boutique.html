@@ -120,6 +120,29 @@
             transform: translateY(-3px);
         }
 
+        /* Image Carousel Styles */
+        .image-carousel {
+            width: 100%;
+            display: flex;
+            overflow-x: scroll;
+            gap: 10px;
+            scroll-behavior: smooth;
+            margin-bottom: 20px;
+        }
+
+        .image-carousel img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-carousel img:hover {
+            transform: scale(1.05);
+        }
+
         /* Footer Styles */
         .footer {
             background-color: #222;
@@ -164,7 +187,7 @@
             <h3>Nike Vintage noir taille M</h3>
             <p>Grade A</p>
             <p class="price">30,79€ <span class="old-price">45,79€</span></p>
-            <button onclick="addToCart('Nike Vintage noir taille M', 30.79, 'https://i.postimg.cc/wjkg5VqW/20250219-174143.avif')">Ajouter au Panier</button>
+            <button>Ajouter au Panier</button>
         </div>
 
         <!-- Second Product (Nike Vintage bleu/vert) -->
@@ -177,7 +200,7 @@
             <h3>Nike Vintage bleu/vert taille M</h3>
             <p>Grade A</p>
             <p class="price">30,79€ <span class="old-price">45,79€</span></p>
-            <button onclick="addToCart('Nike Vintage bleu/vert taille M', 30.79, 'https://i.postimg.cc/TYGsjXK6/20250219-175030.avif')">Ajouter au Panier</button>
+            <button>Ajouter au Panier</button>
         </div>
     </div>
 
@@ -185,29 +208,6 @@
     <div class="footer">
         <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
-
-    <script>
-        // Fonction pour ajouter un produit au panier et rediriger vers la page du panier
-        function addToCart(productName, productPrice, productImage) {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-            // Créer un objet produit
-            const product = {
-                name: productName,
-                price: productPrice,
-                image: productImage
-            };
-
-            // Ajouter le produit au panier
-            cart.push(product);
-
-            // Sauvegarder le panier dans le localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            // Rediriger vers la page du panier
-            window.location.href = "panier.html"; // Redirige vers la page panier
-        }
-    </script>
 
 </body>
 
