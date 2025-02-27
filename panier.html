@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panier - Nike Vintage</title>
+    <title>Mon Panier - Nike Vintage</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -15,74 +15,44 @@
             line-height: 1.6;
         }
 
-        .navbar {
-            background-color: #222;
-            color: white;
-            padding: 20px 30px;
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .product {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .navbar a:hover {
-            background-color: #007bff;
-            transform: translateY(-3px);
-        }
-
-        .panier-container {
-            padding: 50px 20px;
+            margin: 20px;
             background-color: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
         }
 
-        .product-panier {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .product-panier img {
+        .product img {
             width: 80px;
             height: auto;
-            margin-right: 20px;
+            border-radius: 5px;
         }
 
-        .product-panier h3 {
-            font-size: 18px;
+        .product .details {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .product .details h3 {
             margin: 0;
-        }
-
-        .product-panier .price {
             font-size: 20px;
-            font-weight: bold;
-            margin-left: auto;
             color: #333;
         }
 
-        .product-panier button {
-            background-color: #f44336;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-left: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .product-panier button:hover {
-            background-color: #d32f2f;
+        .product .details .price {
+            font-size: 18px;
+            font-weight: bold;
         }
 
         .footer {
@@ -92,79 +62,56 @@
             text-align: center;
             font-size: 14px;
         }
-
-        .footer a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <a href="index.html">Accueil</a>
-        <a href="boutique.html">Boutique</a>
-        <a href="panier.html">Panier</a>
-        <a href="https://wa.me/33612317014">Contact</a>
+    <h1>Mon Panier</h1>
+
+    <div id="panier" class="panier-container">
+        <!-- Les produits du panier seront affichés ici -->
     </div>
 
-    <!-- Panier Section -->
-    <div class="panier-container" id="panier-container">
-        <h1>Votre Panier</h1>
-        <div id="panier-items">
-            <!-- Les produits du panier seront ajoutés ici -->
-        </div>
-    </div>
-
-    <!-- Footer -->
     <div class="footer">
         <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Récupère le panier stocké dans localStorage
             const panier = JSON.parse(localStorage.getItem('panier')) || [];
-            const panierContainer = document.getElementById('panier-items');
+            const panierContainer = document.getElementById('panier');
 
             if (panier.length === 0) {
                 panierContainer.innerHTML = "<p>Votre panier est vide.</p>";
             } else {
-                panier.forEach((produit, index) => {
-                    const productDiv = document.createElement('div');
-                    productDiv.classList.add('product-panier');
+                panier.forEach(produit => {
+                    const produitDiv = document.createElement('div');
+                    produitDiv.classList.add('product');
 
-                    const productImage = document.createElement('img');
-                    productImage.src = produit.image; // Ajoute l'image du produit
-                    productDiv.appendChild(productImage);
+                    // Création de l'image
+                    const image = document.createElement('img');
+                    image.src = produit.image; // Utilisation de l'URL de l'image
+                    image.alt = produit.nom;
 
-                    const productName = document.createElement('h3');
-                    productName.innerText = produit.nom;
-                    productDiv.appendChild(productName);
+                    // Création des détails du produit
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.classList.add('details');
+                    const nom = document.createElement('h3');
+                    nom.textContent = produit.nom;
+                    const prix = document.createElement('p');
+                    prix.classList.add('price');
+                    prix.textContent = produit.prix;
 
-                    const productPrice = document.createElement('span');
-                    productPrice.classList.add('price');
-                    productPrice.innerText = produit.prix;
-                    productDiv.appendChild(productPrice);
+                    detailsDiv.appendChild(nom);
+                    detailsDiv.appendChild(prix);
 
-                    const removeButton = document.createElement('button');
-                    removeButton.innerText = "Retirer";
-                    removeButton.addEventListener("click", function () {
-                        panier.splice(index, 1); // Retirer le produit du panier
-                        localStorage.setItem('panier', JSON.stringify(panier)); // Sauvegarder le panier mis à jour
-                        window.location.reload(); // Recharger la page pour afficher les changements
-                    });
-                    productDiv.appendChild(removeButton);
+                    // Ajout de l'image et des détails à la div du produit
+                    produitDiv.appendChild(image);
+                    produitDiv.appendChild(detailsDiv);
 
-                    // Ajoute le produit au panier
-                    panierContainer.appendChild(productDiv);
+                    // Ajout du produit à la page
+                    panierContainer.appendChild(produitDiv);
                 });
             }
         });
