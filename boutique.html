@@ -42,9 +42,8 @@
         }
 
         .nike-vintage {
-            display: flex;
-            flex-wrap: wrap; /* Permet de faire en sorte que les produits se déplacent sur la ligne suivante */
-            justify-content: space-between;
+            display: grid; /* Utilisation d'une grille CSS */
+            grid-template-columns: repeat(2, 1fr); /* Créer deux colonnes de taille égale */
             gap: 20px;
             padding: 60px 20px;
         }
@@ -55,7 +54,6 @@
             box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
             text-align: center;
             transition: transform 0.3s ease;
-            width: 48%; /* Prend 48% de la largeur de son conteneur, laissant 2 éléments par ligne */
             padding: 20px;
         }
 
@@ -155,6 +153,28 @@
             <p>Grade A</p>
             <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
             <button onclick="ajouterAuPanier('Nike Vintage bleu/vert', '30,79€', 'https://i.postimg.cc/TYGsjXK6/20250219-175030.avif')">Ajouter au Panier</button>
+        </div>
+
+        <div class="product">
+            <div class="image-carousel">
+                <img src="https://i.postimg.cc/FK8mrR74/20250219-175530.avif" alt="Jogging Nike Vintage Rouge/Noir 1">
+                <img src="https://i.postimg.cc/sD8fQR2B/20250219-175608.avif" alt="Jogging Nike Vintage Rouge/Noir 2">
+            </div>
+            <h3>Nike Vintage rouge/noir taille M</h3>
+            <p>Grade A</p>
+            <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
+            <button onclick="ajouterAuPanier('Nike Vintage rouge/noir', '30,79€', 'https://i.postimg.cc/FK8mrR74/20250219-175530.avif')">Ajouter au Panier</button>
+        </div>
+
+        <div class="product">
+            <div class="image-carousel">
+                <img src="https://i.postimg.cc/sDDNGJt1/20250219-175927.avif" alt="Jogging Nike Vintage Gris/Blanc 1">
+                <img src="https://i.postimg.cc/mGqg7cFZ/20250219-180030.avif" alt="Jogging Nike Vintage Gris/Blanc 2">
+            </div>
+            <h3>Nike Vintage gris/blanc taille M</h3>
+            <p>Grade A</p>
+            <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
+            <button onclick="ajouterAuPanier('Nike Vintage gris/blanc', '30,79€', 'https://i.postimg.cc/sDDNGJt1/20250219-175927.avif')">Ajouter au Panier</button>
         </div>
     </div>
 
