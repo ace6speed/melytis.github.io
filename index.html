@@ -13,19 +13,18 @@
             background-color: #f1f1f1;
             color: #333;
             line-height: 1.6;
+            text-align: center;
         }
 
         h1 {
             font-size: 36px;
             color: #333;
             margin: 40px 0;
-            text-align: center;
         }
 
         h2 {
             font-size: 24px;
             color: #666;
-            text-align: center;
             margin-bottom: 40px;
         }
 
@@ -53,25 +52,30 @@
             text-decoration: underline;
         }
 
-        /* Banner Styles */
-        .banner {
-            background-image: url('https://via.placeholder.com/1500x600?text=Boutique+Melytis');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
+        /* Grade Section */
+        .grade-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 50px 20px;
         }
 
-        .banner h2 {
-            font-size: 48px;
-            font-weight: bold;
+        .grade-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
         }
 
-        .banner p {
-            font-size: 20px;
-            margin-top: 10px;
+        .grade-box h3 {
+            font-size: 22px;
             color: #222;
+        }
+
+        .grade-box p {
+            font-size: 16px;
+            color: #555;
         }
 
         /* Footer Styles */
@@ -79,7 +83,6 @@
             background-color: #111;
             color: white;
             padding: 20px;
-            text-align: center;
             font-size: 14px;
         }
 
@@ -103,16 +106,21 @@
         <a href="https://wa.me/33612317014">Contact</a>
     </div>
 
-    <!-- Banner -->
-    <div class="banner">
-        <h2>Bienvenue chez Melytis</h2>
-        <p>Découvrez notre collection de vêtements tendances pour chaque occasion</p>
-    </div>
-
-    <!-- About Section -->
-    <div id="about" style="padding: 50px 20px; text-align: center;">
-        <h2>À propos de Melytis</h2>
-        <p>Chez Melytis, nous offrons une large gamme de vêtements modernes et stylés. Notre mission est de rendre la mode accessible à tous, avec des produits de qualité à des prix abordables.</p>
+    <!-- Grade Section -->
+    <h1>Nos Classifications de Produits</h1>
+    <div class="grade-section">
+        <div class="grade-box">
+            <h3>Grade A</h3>
+            <p>Les articles classés <b>Grade A</b> sont en excellent état, presque comme neufs. Ils ne présentent aucun signe de trous, de taches ou de décoloration.</p>
+        </div>
+        <div class="grade-box">
+            <h3>Grade B</h3>
+            <p>Les articles classés <b>Grade B</b> peuvent présenter des défauts mineurs, tels que des très petites taches, une légère décoloration ou de très petits trous qui sont (pratiquement) imperceptibles lorsqu'ils sont portés.</p>
+        </div>
+        <div class="grade-box">
+            <h3>Grade C</h3>
+            <p>Les articles classés <b>Grade C</b> présentent des défauts plus importants, tels que de grosses taches, des trous plus visibles ou une décoloration importante. Ces imperfections sont visibles lorsqu'ils sont portés.</p>
+        </div>
     </div>
 
     <!-- Footer -->
