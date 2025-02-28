@@ -48,7 +48,7 @@
 
         .nike-vintage {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Changer pour avoir 3 colonnes au lieu de 2 */
+            grid-template-columns: repeat(2, 1fr); /* Garder 2 colonnes */
             gap: 20px;
             padding: 60px 20px;
         }
@@ -66,20 +66,10 @@
             transform: translateY(-5px);
         }
 
-        .image-carousel {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 10px;
-            padding: 10px;
-            scrollbar-width: none;
-        }
-
-        .image-carousel img {
+        .product-images img {
             width: 100%;
             border-radius: 10px;
-            scroll-snap-align: start;
-            flex: 0 0 auto;
+            margin-bottom: 10px;
         }
 
         .price {
@@ -134,8 +124,23 @@
     </div>
 
     <div id="nike-vintage" class="nike-vintage">
+        <!-- Jogging Vintage noir taille S -->
         <div class="product">
-            <div class="image-carousel">
+            <div class="product-images">
+                <img src="https://i.postimg.cc/wMHpZfkR/20250224-210119.avif" alt="Jogging Vintage noir 1">
+                <img src="https://i.postimg.cc/7PTJkfnx/20250224-210344.avif" alt="Jogging Vintage noir 2">
+                <img src="https://i.postimg.cc/63CKHJCN/20250224-210353.avif" alt="Jogging Vintage noir 3">
+                <img src="https://i.postimg.cc/63CKHJCN/20250224-210353.avif" alt="Jogging Vintage noir 4">
+            </div>
+            <h3>Jogging Vintage noir taille S</h3>
+            <p>Grade C</p>
+            <p class="price"><span class="old-price">34,79€</span> 21,79€</p>
+        </div>
+
+        <!-- Ajoutez d'autres produits ici -->
+        <!-- Exemple pour un autre produit -->
+        <div class="product">
+            <div class="product-images">
                 <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
                 <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
                 <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" alt="Jogging Nike Vintage 3">
@@ -146,52 +151,7 @@
             <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
         </div>
 
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/TYGsjXK6/20250219-175030.avif" alt="Jogging Nike Vintage Bleu/Vert 1">
-                <img src="https://i.postimg.cc/wv826hJp/20250219-175150.avif" alt="Jogging Nike Vintage Bleu/Vert 2">
-                <img src="https://i.postimg.cc/tJbBzhC5/20250219-175231.avif" alt="Jogging Nike Vintage Bleu/Vert 3">
-            </div>
-            <h3>Nike Vintage bleu/vert taille S</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
-        </div>
-
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/nzhz9WqY/20250219-180045.avif" alt="Nike Tracks Pants Bleu 1">
-                <img src="https://i.postimg.cc/15wqQLBf/20250219-180110.jpg" alt="Nike Tracks Pants Bleu 2">
-                <img src="https://i.postimg.cc/mgZ25q5x/20250219-180134.jpg" alt="Nike Tracks Pants Bleu 3">
-                <img src="https://i.postimg.cc/6Qy69ZKY/20250219-180233.jpg" alt="Nike Tracks Pants Bleu 4">
-            </div>
-            <h3>Nike Vintage Tracks Pants Bleu taille M</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">65,59€</span> 42,59€</p>
-        </div>
-
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/x1XB83kJ/20250224-202106.avif" alt="Nike Vintage Blanc 1">
-                <img src="https://i.postimg.cc/t48wxnPr/20250224-202143.avif" alt="Nike Vintage Blanc 2">
-                <img src="https://i.postimg.cc/8CW3BkmT/20250224-202202.avif" alt="Nike Vintage Blanc 3">
-            </div>
-            <h3>Nike Vintage blanc taille XL</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">54,79€</span> 38,79€</p>
-        </div>
-
-        <!-- Nouvelle case ajoutée pour Jogging Vintage noir taille S -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/wMHpZfkR/20250224-210119.avif" alt="Jogging Vintage noir 1">
-                <img src="https://i.postimg.cc/7PTJkfnx/20250224-210344.avif" alt="Jogging Vintage noir 2">
-                <img src="https://i.postimg.cc/63CKHJCN/20250224-210353.avif" alt="Jogging Vintage noir 3">
-                <img src="https://i.postimg.cc/63CKHJCN/20250224-210353.avif" alt="Jogging Vintage noir 4">
-            </div>
-            <h3>Jogging Vintage noir taille S</h3>
-            <p>Grade C</p>
-            <p class="price"><span class="old-price">34,79€</span> 21,79€</p>
-        </div>
     </div>
 </body>
+
 </html>
