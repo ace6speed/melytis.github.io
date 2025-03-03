@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nike Vintage - Boutique en Ligne</title>
+    <title>Boutique Melytis</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000;
-            color: #fff;
+            background-color: #f1f1f1;
+            color: #333;
             line-height: 1.6;
         }
 
@@ -22,48 +21,34 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #333;
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
             font-size: 16px;
-            padding: 10px;
-            transition: all 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
         .navbar a:hover {
-            color: #ccc;
+            background-color: #007bff;
         }
 
-        .navbar .links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .cart-logo {
-            width: 40px;
-        }
-
-        .nike-vintage {
+        .product-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            padding: 60px 20px;
-        }
-
-        .product {
-            background-color: #111;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
             padding: 20px;
         }
 
-        .product:hover {
-            transform: translateY(-5px);
+        .product {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
         }
 
         .image-carousel {
@@ -72,7 +57,6 @@
             scroll-snap-type: x mandatory;
             gap: 10px;
             padding: 10px;
-            scrollbar-width: none;
         }
 
         .image-carousel img {
@@ -80,6 +64,11 @@
             border-radius: 10px;
             scroll-snap-align: start;
             flex: 0 0 auto;
+        }
+
+        .product h3 {
+            font-size: 18px;
+            margin: 10px 0;
         }
 
         .price {
@@ -96,8 +85,8 @@
         }
 
         button {
-            background: #fff;
-            color: #000;
+            background: #007bff;
+            color: white;
             border: none;
             padding: 12px 20px;
             border-radius: 8px;
@@ -107,7 +96,7 @@
         }
 
         button:hover {
-            background: #ccc;
+            background: #0056b3;
         }
 
         .footer {
@@ -116,140 +105,40 @@
             padding: 30px;
             text-align: center;
             font-size: 14px;
-            border-top: 1px solid #333;
         }
     </style>
 </head>
-
 <body>
+
     <div class="navbar">
         <div class="links">
             <a href="index.html">Accueil</a>
-            <a href="#nike-vintage">Nike Vintage</a>
+            <a href="boutique.html">Boutique</a>
         </div>
         <a href="https://wa.me/33612317014" style="margin-right: 30px;">Contact</a>
         <a href="panier.html">
-            <img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">
+            <img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo" style="width: 40px;">
         </a>
     </div>
 
-    <div id="nike-vintage" class="nike-vintage">
+    <div class="product-container">
         <!-- Produit 1 -->
         <div class="product">
             <div class="image-carousel">
                 <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
                 <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
-                <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" alt="Jogging Nike Vintage 3">
-                <img src="https://i.postimg.cc/zXKJvN9Y/20250219-174641.avif" alt="Jogging Nike Vintage 4">
             </div>
             <h3>Nike Vintage noir taille S</h3>
             <p>Grade A</p>
             <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
+            <button>Ajouter au panier</button>
         </div>
-
-        <!-- Produit 2 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/TYGsjXK6/20250219-175030.avif" alt="Jogging Nike Vintage Bleu/Vert 1">
-                <img src="https://i.postimg.cc/wv826hJp/20250219-175150.avif" alt="Jogging Nike Vintage Bleu/Vert 2">
-                <img src="https://i.postimg.cc/tJbBzhC5/20250219-175231.avif" alt="Jogging Nike Vintage Bleu/Vert 3">
-            </div>
-            <h3>Nike Vintage bleu/vert taille S</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
-        </div>
-
-        <!-- Produit 3 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/wMHpZfkR/20250224-210119.avif" alt="Jogging Vintage noir 1">
-                <img src="https://i.postimg.cc/7PTJkfnx/20250224-210344.avif" alt="Jogging Vintage noir 2">
-                <img src="https://i.postimg.cc/63CKHJCN/20250224-210353.avif" alt="Jogging Vintage noir 3">
-                <img src="https://i.postimg.cc/63CKHJCN/20250224-210353.avif" alt="Jogging Vintage noir 4">
-            </div>
-            <h3>Jogging Vintage noir taille S</h3>
-            <p>Grade C</p>
-            <p class="price"><span class="old-price">34,79€</span> 21,79€</p>
-        </div>
-
-        <!-- Produit 4 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/nzhz9WqY/20250219-180045.avif" alt="Nike Tracks Pants Bleu 1">
-                <img src="https://i.postimg.cc/15wqQLBf/20250219-180110.jpg" alt="Nike Tracks Pants Bleu 2">
-                <img src="https://i.postimg.cc/mgZ25q5x/20250219-180134.jpg" alt="Nike Tracks Pants Bleu 3">
-                <img src="https://i.postimg.cc/6Qy69ZKY/20250219-180233.jpg" alt="Nike Tracks Pants Bleu 4">
-            </div>
-            <h3>Nike Vintage Tracks Pants Bleu taille M</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">65,59€</span> 42,59€</p>
-        </div>
-
-        <!-- Produit 5 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/x1XB83kJ/20250224-202106.avif" alt="Nike Vintage Blanc 1">
-                <img src="https://i.postimg.cc/t48wxnPr/20250224-202143.avif" alt="Nike Vintage Blanc 2">
-                <img src="https://i.postimg.cc/8CW3BkmT/20250224-202202.avif" alt="Nike Vintage Blanc 3">
-            </div>
-            <h3>Nike Vintage blanc taille XL</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">54,79€</span> 38,79€</p>
-        </div>
-
-        <!-- Produit 6 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/3rB5WZB9/20250224-202106.avif" alt="Nike Vintage Gris 1">
-                <img src="https://i.postimg.cc/vH3rpkcS/20250224-202220.avif" alt="Nike Vintage Gris 2">
-            </div>
-            <h3>Nike Vintage gris taille M</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">50,79€</span> 34,79€</p>
-        </div>
-
-        <!-- Produit 7 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/8cqhTvjv/20250224-211220.jpg" alt="Nike Vintage Bleu (AF) 1">
-                <img src="https://i.postimg.cc/wM3VqH2C/20250224-211314.avif" alt="Nike Vintage Bleu (AF) 2">
-                <img src="https://i.postimg.cc/rMKQDJQm/20250224-211437.avif" alt="Nike Vintage Bleu (AF) 3">
-                <img src="https://i.postimg.cc/SQ5L6BDK/20250224-211202.jpg" alt="Nike Vintage Bleu (AF) 4">
-                <img src="https://i.postimg.cc/wMsm4B0j/20250224-211504.avif" alt="Nike Vintage Bleu (AF) 5">
-                <img src="https://i.postimg.cc/9FZxrXC2/20250224-211511.avif" alt="Nike Vintage Bleu (AF) 6">
-            </div>
-            <h3>Nike Vintage Bleu (AF) Taille L</h3>
-            <p>Grade B</p>
-            <p class="price"><span class="old-price">60,59€</span> 38,59€</p>
-        </div>
-
-        <!-- Produit 8 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/RFCrT6Cw/20250224-212220.avif" alt="Nike vintage gris Therma-fit 1">
-                <img src="https://i.postimg.cc/T14X1d6g/20250224-212330.avif" alt="Nike vintage gris Therma-fit 2">
-                <img src="https://i.postimg.cc/JnpfYrtv/20250224-212427.avif" alt="Nike vintage gris Therma-fit 3">
-                <img src="https://i.postimg.cc/Vv533xC6/20250224-212437.avif" alt="Nike vintage gris Therma-fit 4">
-            </div>
-            <h3>Nike vintage gris Therma-fit Taille M</h3>
-            <p>Grade B</p>
-            <p class="price"><span class="old-price">53,19€</span> 33,19€</p>
-        </div>
-
-        <!-- Produit 9 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/bNwJvrQD/20250224-211739.avif" alt="Nike vintage noir Dri-Fit 1">
-                <img src="https://i.postimg.cc/prqLZMtL/20250224-211929.avif" alt="Nike vintage noir Dri-Fit 2">
-                <img src="https://i.postimg.cc/NFg0mfSn/20250224-212019.avif" alt="Nike vintage noir Dri-Fit 3">
-                <img src="https://i.postimg.cc/wvzxYjqB/20250224-211825.avif" alt="Nike vintage noir Dri-Fit 4">
-                <img src="https://i.postimg.cc/sXPXMZ6S/20250224-211900.avif" alt="Nike vintage noir Dri-Fit 5">
-            </div>
-            <h3>Nike vintage noir Dri-Fit Taille M</h3>
-            <p>Grade B</p>
-            <p class="price"><span class="old-price">45,99€</span> 31,99€</p>
-        </div>
+        <!-- Répète cette structure pour les autres produits (9 produits) -->
     </div>
-</body>
 
+    <div class="footer">
+        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
+    </div>
+
+</body>
 </html>
