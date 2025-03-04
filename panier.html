@@ -12,7 +12,6 @@
             padding: 0;
             background-color: #f9f9f9;
             color: #333;
-            line-height: 1.6;
             text-align: center;
         }
 
@@ -36,7 +35,7 @@
             align-items: center;
             justify-content: space-between;
             margin: 20px 0;
-            padding: 10px;
+            padding: 15px;
             background-color: #f1f1f1;
             border-radius: 8px;
         }
@@ -64,6 +63,18 @@
             font-weight: bold;
         }
 
+        .quantity-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-container input {
+            width: 40px;
+            text-align: center;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+
         .product .actions button {
             background-color: red;
             color: white;
@@ -78,6 +89,12 @@
             background-color: darkred;
         }
 
+        .subtotal {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
         .buttons-container {
             margin-top: 20px;
         }
@@ -86,11 +103,12 @@
             background-color: black;
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 12px 20px;
             margin: 5px;
             border-radius: 5px;
             cursor: pointer;
             transition: 0.3s;
+            font-size: 16px;
         }
 
         .buttons-container button:hover {
@@ -116,6 +134,10 @@
         <!-- Les produits du panier seront affichés ici -->
     </div>
 
+    <div class="subtotal">
+        Total: <span id="total-prix">0€</span>
+    </div>
+
     <div class="buttons-container">
         <button id="commander">Commander</button>
         <button id="retour-boutique">Retour à la Boutique</button>
@@ -129,14 +151,18 @@
         document.addEventListener("DOMContentLoaded", function () {
             let panier = JSON.parse(localStorage.getItem('panier')) || [];
             const panierContainer = document.getElementById('panier');
+            const totalPrix = document.getElementById('total-prix');
 
             function afficherPanier() {
                 panierContainer.innerHTML = "";
 
                 if (panier.length === 0) {
                     panierContainer.innerHTML = "<p>Votre panier est vide.</p>";
+                    totalPrix.textContent = "0€";
                     return;
                 }
+
+                let total = 0;
 
                 panier.forEach((produit, index) => {
                     const produitDiv = document.createElement('div');
@@ -154,47 +180,90 @@
                     nom.textContent = produit.nom;
                     const prix = document.createElement('p');
                     prix.classList.add('price');
-                    prix.textContent = produit.prix;
+                    prix.textContent = produit.prix + "€";
 
                     detailsDiv.appendChild(nom);
                     detailsDiv.appendChild(prix);
 
-                    // Bouton "Retirer"
+                    // Sélecteur de quantité
+                    const quantityDiv = document.createElement('div');
+                    quantityDiv.classList.add('quantity-container');
+
+                    const minusBtn = document.createElement('button');
+                    minusBtn.textContent = "-";
+                    minusBtn.addEventListener("click", function () {
+                        if (produit.quantite > 1) {
+                            produit.quantite--;
+                        } else {
+                            panier.splice(index, 1);
+                        }
+                        localStorage.setItem("panier", JSON.stringify(panier));
+                        afficherPanier();
+                    });
+
+                    const quantiteInput = document.createElement('input');
+                    quantiteInput.type = "number";
+                    quantiteInput.value = produit.quantite;
+                    quantiteInput.min = 1;
+                    quantiteInput.addEventListener("change", function () {
+                        produit.quantite = parseInt(quantiteInput.value);
+                        localStorage.setItem("panier", JSON.stringify(panier));
+                        afficherPanier();
+                    });
+
+                    const plusBtn = document.createElement('button');
+                    plusBtn.textContent = "+";
+                    plusBtn.addEventListener("click", function () {
+                        produit.quantite++;
+                        localStorage.setItem("panier", JSON.stringify(panier));
+                        afficherPanier();
+                    });
+
+                    quantityDiv.appendChild(minusBtn);
+                    quantityDiv.appendChild(quantiteInput);
+                    quantityDiv.appendChild(plusBtn);
+
+                    // Suppression
                     const actionsDiv = document.createElement('div');
                     actionsDiv.classList.add('actions');
                     const retirerBtn = document.createElement('button');
                     retirerBtn.textContent = "Retirer";
                     retirerBtn.addEventListener("click", function () {
-                        panier.splice(index, 1); // Supprime l'article
+                        panier.splice(index, 1);
                         localStorage.setItem("panier", JSON.stringify(panier));
                         afficherPanier();
                     });
 
                     actionsDiv.appendChild(retirerBtn);
 
-                    // Ajout des éléments à la div produit
+                    // Ajout des éléments
                     produitDiv.appendChild(image);
                     produitDiv.appendChild(detailsDiv);
+                    produitDiv.appendChild(quantityDiv);
                     produitDiv.appendChild(actionsDiv);
 
                     panierContainer.appendChild(produitDiv);
+
+                    total += produit.prix * produit.quantite;
                 });
+
+                totalPrix.textContent = total.toFixed(2) + "€";
             }
 
             afficherPanier();
 
-            // Bouton Commander
+            // Commander
             document.getElementById("commander").addEventListener("click", function () {
                 if (panier.length > 0) {
                     alert("Commande validée ! Merci pour votre achat.");
-                    localStorage.removeItem("panier"); // Vide le panier
+                    localStorage.removeItem("panier");
                     afficherPanier();
                 } else {
                     alert("Votre panier est vide !");
                 }
             });
 
-            // Bouton Retour à la Boutique
+            // Retour à la Boutique
             document.getElementById("retour-boutique").addEventListener("click", function () {
                 window.location.href = "index.html";
             });
