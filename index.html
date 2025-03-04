@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,34 +74,30 @@
             color: #222;
         }
 
-        /* Grade Section */
-        .grade-section {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 50px 20px;
-            flex-wrap: wrap;
+        /* Grades Section */
+        .grades-section {
+            background-color: #fff;
+            padding: 40px 20px;
+            text-align: center;
         }
 
-        .grade-box {
-            background: white;
-            padding: 20px;
+        .grades-section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .grade-item {
+            font-size: 20px;
+            margin: 10px;
+            display: inline-block;
+            width: 250px;
+            background-color: #f9f9f9;
+            padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
-        .grade-box h3 {
-            font-size: 22px;
-            color: #222;
-        }
-
-        .grade-box p {
-            font-size: 16px;
-            color: #555;
-        }
-
-        /* Footer Styles */
         .footer {
             background-color: #111;
             color: white;
@@ -118,6 +115,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Navbar -->
@@ -134,20 +132,20 @@
         <p>Découvrez notre collection de vêtements tendances pour chaque occasion</p>
     </div>
 
-    <!-- Grade Section -->
-    <h1>Nos Classifications de Produits</h1>
-    <div class="grade-section">
-        <div class="grade-box">
+    <!-- Grades Section -->
+    <div class="grades-section">
+        <h2>Nos Grades</h2>
+        <div class="grade-item">
             <h3>Grade A</h3>
-            <p>Les articles classés <b>Grade A</b> sont en excellent état, presque comme neufs. Ils ne présentent aucun signe de trous, de taches ou de décoloration.</p>
+            <p>Vêtements en excellent état, quasiment neufs. Aucune usure visible.</p>
         </div>
-        <div class="grade-box">
+        <div class="grade-item">
             <h3>Grade B</h3>
-            <p>Les articles classés <b>Grade B</b> peuvent présenter des défauts mineurs, tels que des très petites taches, une légère décoloration ou de très petits trous qui sont (pratiquement) imperceptibles lorsqu'ils sont portés.</p>
+            <p>Vêtements en bon état, avec quelques signes d'usure mineure.</p>
         </div>
-        <div class="grade-box">
+        <div class="grade-item">
             <h3>Grade C</h3>
-            <p>Les articles classés <b>Grade C</b> présentent des défauts plus importants, tels que de grosses taches, des trous plus visibles ou une décoloration importante. Ces imperfections sont visibles lorsqu'ils sont portés.</p>
+            <p>Vêtements avec des signes d'usure visibles mais encore en bon état pour être portés.</p>
         </div>
     </div>
 
@@ -157,4 +155,5 @@
     </div>
 
 </body>
+
 </html>
