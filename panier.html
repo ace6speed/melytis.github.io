@@ -121,86 +121,155 @@
             padding: 30px;
             text-align: center;
             font-size: 14px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+            margin-top: 30px;
         }
     </style>
 </head>
 
 <body>
+
     <h1>Mon Panier</h1>
-    <div class="panier-container" id="panier-container">
-        <!-- Les produits seront ajoutés ici par le script -->
+
+    <div id="panier" class="panier-container">
+        <!-- Les produits du panier seront affichés ici -->
     </div>
 
     <div class="subtotal">
-        Total : <span id="total">0,00€</span>
+        Total: <span id="total-prix">0€</span>
     </div>
 
     <div class="buttons-container">
-        <button onclick="window.location.href='index.html'">Continuer mes achats</button>
-        <button>Commander</button>
+        <button id="commander">Commander</button>
+        <button id="retour-boutique">Retour à la Boutique</button>
     </div>
 
     <div class="footer">
-        &copy; 2025 Nike Vintage. Tous droits réservés.
+        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
 
     <script>
-        function afficherPanier() {
+        document.addEventListener("DOMContentLoaded", function () {
             let panier = JSON.parse(localStorage.getItem('panier')) || [];
-            let total = 0;
-            let panierContainer = document.getElementById('panier-container');
-            panierContainer.innerHTML = '';
+            const panierContainer = document.getElementById('panier');
+            const totalPrix = document.getElementById('total-prix');
 
-            panier.forEach((produit, index) => {
-                total += parseFloat(produit.prix) * produit.quantite;
+            function afficherPanier() {
+                panierContainer.innerHTML = "";
 
-                let productElement = document.createElement('div');
-                productElement.classList.add('product');
+                if (panier.length === 0) {
+                    panierContainer.innerHTML = "<p>Votre panier est vide.</p>";
+                    totalPrix.textContent = "0€";
+                    return;
+                }
 
-                productElement.innerHTML = `
-                    <img src="${produit.image}" alt="${produit.nom}">
-                    <div class="details">
-                        <h3>${produit.nom}</h3>
-                        <div class="price">${produit.prix}€</div>
-                    </div>
-                    <div class="quantity-container">
-                        <button onclick="changerQuantite(${index}, -1)">-</button>
-                        <input type="text" value="${produit.quantite}" readonly>
-                        <button onclick="changerQuantite(${index}, 1)">+</button>
-                    </div>
-                    <div class="actions">
-                        <button onclick="retirerProduit(${index})">Retirer</button>
-                    </div>
-                `;
-                panierContainer.appendChild(productElement);
+                let total = 0;
+
+                panier.forEach((produit, index) => {
+                    const produitDiv = document.createElement('div');
+                    produitDiv.classList.add('product');
+
+                    // Image du produit
+                    const image = document.createElement('img');
+                    image.src = produit.image;
+                    image.alt = produit.nom;
+
+                    // Détails
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.classList.add('details');
+                    const nom = document.createElement('h3');
+                    nom.textContent = produit.nom;
+                    const prix = document.createElement('p');
+                    prix.classList.add('price');
+                    prix.textContent = produit.prix + "€";
+
+                    detailsDiv.appendChild(nom);
+                    detailsDiv.appendChild(prix);
+
+                    // Sélecteur de quantité
+                    const quantityDiv = document.createElement('div');
+                    quantityDiv.classList.add('quantity-container');
+
+                    const minusBtn = document.createElement('button');
+                    minusBtn.textContent = "-";
+                    minusBtn.addEventListener("click", function () {
+                        if (produit.quantite > 1) {
+                            produit.quantite--;
+                        } else {
+                            panier.splice(index, 1);
+                        }
+                        localStorage.setItem("panier", JSON.stringify(panier));
+                        afficherPanier();
+                    });
+
+                    const quantiteInput = document.createElement('input');
+                    quantiteInput.type = "number";
+                    quantiteInput.value = produit.quantite;
+                    quantiteInput.min = 1;
+                    quantiteInput.addEventListener("change", function () {
+                        produit.quantite = parseInt(quantiteInput.value);
+                        localStorage.setItem("panier", JSON.stringify(panier));
+                        afficherPanier();
+                    });
+
+                    const plusBtn = document.createElement('button');
+                    plusBtn.textContent = "+";
+                    plusBtn.addEventListener("click", function () {
+                        produit.quantite++;
+                        localStorage.setItem("panier", JSON.stringify(panier));
+                        afficherPanier();
+                    });
+
+                    quantityDiv.appendChild(minusBtn);
+                    quantityDiv.appendChild(quantiteInput);
+                    quantityDiv.appendChild(plusBtn);
+
+                    // Suppression
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.classList.add('actions');
+                    const retirerBtn = document.createElement('button');
+                    retirerBtn.textContent = "Retirer";
+                    retirerBtn.addEventListener("click", function () {
+                        panier.splice(index, 1);
+                        localStorage.setItem("panier", JSON.stringify(panier));
+                        afficherPanier();
+                    });
+
+                    actionsDiv.appendChild(retirerBtn);
+
+                    // Ajout des éléments
+                    produitDiv.appendChild(image);
+                    produitDiv.appendChild(detailsDiv);
+                    produitDiv.appendChild(quantityDiv);
+                    produitDiv.appendChild(actionsDiv);
+
+                    panierContainer.appendChild(produitDiv);
+
+                    total += produit.prix * produit.quantite;
+                });
+
+                totalPrix.textContent = total.toFixed(2) + "€";
+            }
+
+            afficherPanier();
+
+            // Commander
+            document.getElementById("commander").addEventListener("click", function () {
+                if (panier.length > 0) {
+                    alert("Commande validée ! Merci pour votre achat.");
+                    localStorage.removeItem("panier");
+                    afficherPanier();
+                } else {
+                    alert("Votre panier est vide !");
+                }
             });
 
-            document.getElementById('total').textContent = total.toFixed(2) + '€';
-        }
-
-        function changerQuantite(index, change) {
-            let panier = JSON.parse(localStorage.getItem('panier')) || [];
-            panier[index].quantite += change;
-
-            if (panier[index].quantite <= 0) panier[index].quantite = 1;
-            
-            localStorage.setItem('panier', JSON.stringify(panier));
-            afficherPanier();
-        }
-
-        function retirerProduit(index) {
-            let panier = JSON.parse(localStorage.getItem('panier')) || [];
-            panier.splice(index, 1);
-
-            localStorage.setItem('panier', JSON.stringify(panier));
-            afficherPanier();
-        }
-
-        window.onload = afficherPanier;
+            // Retour à la Boutique
+            document.getElementById("retour-boutique").addEventListener("click", function () {
+                window.location.href = "index.html";
+            });
+        });
     </script>
+
 </body>
 
 </html>
