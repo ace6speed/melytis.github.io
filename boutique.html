@@ -275,6 +275,39 @@
             alert(productName + " a été ajouté au panier !");
         }
     </script>
+<!-- Sélecteur de langue -->
+<div style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
+    <label for="languageSelect" style="color: white;">Langue :</label>
+    <select id="languageSelect" onchange="changeLanguage()">
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="de">🇩🇪 Deutsch</option>
+    </select>
+</div>
+
+<!-- Script pour la traduction -->
+<script>
+    function changeLanguage() {
+        var lang = document.getElementById("languageSelect").value;
+        var googleTranslateElement = document.createElement("script");
+        googleTranslateElement.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
+        document.body.appendChild(googleTranslateElement);
+
+        window.googleTranslateInit = function () {
+            new google.translate.TranslateElement({ pageLanguage: 'fr', includedLanguages: 'fr,en,es,de' }, 'google_translate_element');
+        };
+
+        setTimeout(() => {
+            var select = document.querySelector(".goog-te-combo");
+            if (select) {
+                select.value = lang;
+                select.dispatchEvent(new Event("change"));
+            }
+        }, 1000);
+    }
+</script>
+
 </body>
 
 </html>
