@@ -156,8 +156,8 @@
         <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
 <!-- Sélecteur de langue -->
-<div style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
-    <label for="languageSelect" style="color: white;">Langue :</label>
+<div id="language-container" style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
+    <label for="languageSelect" style="color: white;">🌍 Langue :</label>
     <select id="languageSelect" onchange="changeLanguage()">
         <option value="fr">🇫🇷 Français</option>
         <option value="en">🇬🇧 English</option>
@@ -166,48 +166,43 @@
     </select>
 </div>
 
-<!-- Sélecteur de langue -->
-<div style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
-    <label for="languageSelect" style="color: white;">Langue :</label>
-    <select id="languageSelect" onchange="changeLanguage()">
-        <option value="fr">🇫🇷 Français</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="es">🇪🇸 Español</option>
-        <option value="de">🇩🇪 Deutsch</option>
-    </select>
-</div>
+<!-- Google Translate (élément invisible) -->
+<div id="google_translate_element" style="display: none;"></div>
+
 <script>
+    function googleTranslateInit() {
+        new google.translate.TranslateElement({ pageLanguage: 'fr', includedLanguages: 'fr,en,es,de' }, 'google_translate_element');
+    }
+
     function changeLanguage() {
         var lang = document.getElementById("languageSelect").value;
-        localStorage.setItem("selectedLanguage", lang); // Sauvegarde la langue choisie
+        localStorage.setItem("selectedLanguage", lang); // Sauvegarde la langue
         applyLanguage(lang);
     }
 
     function applyLanguage(lang) {
-        var googleTranslateElement = document.createElement("script");
-        googleTranslateElement.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
-        document.body.appendChild(googleTranslateElement);
-
-        window.googleTranslateInit = function () {
-            new google.translate.TranslateElement({ pageLanguage: 'fr', includedLanguages: 'fr,en,es,de' }, 'google_translate_element');
-        };
-
-        setTimeout(() => {
-            var select = document.querySelector(".goog-te-combo");
-            if (select) {
-                select.value = lang;
-                select.dispatchEvent(new Event("change"));
-            }
-        }, 1000);
+        var select = document.querySelector(".goog-te-combo");
+        if (select) {
+            select.value = lang;
+            select.dispatchEvent(new Event("change"));
+        }
     }
 
-    // Appliquer la langue enregistrée au chargement de la page
+    // Charge Google Translate et applique la langue au chargement
     window.onload = function () {
-        var savedLang = localStorage.getItem("selectedLanguage") || "fr"; // Langue par défaut = français
+        var script = document.createElement("script");
+        script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
+        document.body.appendChild(script);
+
+        var savedLang = localStorage.getItem("selectedLanguage") || "fr"; // Langue par défaut
         document.getElementById("languageSelect").value = savedLang;
-        applyLanguage(savedLang);
+
+        setTimeout(() => {
+            applyLanguage(savedLang);
+        }, 2000); // Délai pour s'assurer que Google Translate est chargé
     };
 </script>
+
 
 
 </body>
