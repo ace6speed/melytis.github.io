@@ -166,10 +166,24 @@
     </select>
 </div>
 
-<!-- Script pour la traduction -->
+<!-- Sélecteur de langue -->
+<div style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
+    <label for="languageSelect" style="color: white;">Langue :</label>
+    <select id="languageSelect" onchange="changeLanguage()">
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="de">🇩🇪 Deutsch</option>
+    </select>
+</div>
 <script>
     function changeLanguage() {
         var lang = document.getElementById("languageSelect").value;
+        localStorage.setItem("selectedLanguage", lang); // Sauvegarde la langue choisie
+        applyLanguage(lang);
+    }
+
+    function applyLanguage(lang) {
         var googleTranslateElement = document.createElement("script");
         googleTranslateElement.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
         document.body.appendChild(googleTranslateElement);
@@ -186,6 +200,13 @@
             }
         }, 1000);
     }
+
+    // Appliquer la langue enregistrée au chargement de la page
+    window.onload = function () {
+        var savedLang = localStorage.getItem("selectedLanguage") || "fr"; // Langue par défaut = français
+        document.getElementById("languageSelect").value = savedLang;
+        applyLanguage(savedLang);
+    };
 </script>
 
 
