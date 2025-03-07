@@ -159,19 +159,58 @@
 <div id="language-container" style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
     <label for="languageSelect" style="color: white;">🌍 Langue :</label>
     <select id="languageSelect" onchange="changeLanguage()">
-        <option value="fr">🇫🇷 Français</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="es">🇪🇸 Español</option>
-        <option value="de">🇩🇪 Deutsch</option>
+        <option value="af">🇿🇦 Afrikaans</option>
+        <option value="ar">🇩🇿🇸🇦🇪🇬🇮🇶 Arabe</option>
+        <option value="bg">🇧🇬 Bulgare</option>
+        <option value="cs">🇨🇿 Tchèque</option>
+        <option value="da">🇩🇰 Danois</option>
+        <option value="de">🇩🇪🇦🇹🇨🇭🇱🇮 Allemand</option>
+        <option value="el">🇬🇷 Grec</option>
+        <option value="en">🇦🇺🇬🇧🇺🇸🇮🇪 Anglais</option>
+        <option value="es">🇦🇷🇪🇸🇨🇴🇲🇽 Espagnol</option>
+        <option value="et">🇪🇪 Estonien</option>
+        <option value="fa">🇮🇷 Persan</option>
+        <option value="fi">🇫🇮 Finnois</option>
+        <option value="fr">🇧🇪🇨🇦🇫🇷🇸🇳🇨🇭 Français</option>
+        <option value="hi">🇮🇳 Hindi</option>
+        <option value="hr">🇭🇷 Croate</option>
+        <option value="hu">🇭🇺 Hongrois</option>
+        <option value="id">🇮🇩 Indonésien</option>
+        <option value="is">🇮🇸 Islandais</option>
+        <option value="it">🇮🇹 Italien</option>
+        <option value="ja">🇯🇵 Japonais</option>
+        <option value="ko">🇰🇷 Coréen</option>
+        <option value="lt">🇱🇹 Lituanien</option>
+        <option value="lv">🇱🇻 Letton</option>
+        <option value="mt">🇲🇹 Maltais</option>
+        <option value="nl">🇳🇱🇧🇪 Néerlandais</option>
+        <option value="no">🇳🇴 Norvégien</option>
+        <option value="pl">🇵🇱 Polonais</option>
+        <option value="pt">🇧🇷🇵🇹 Portugais</option>
+        <option value="ro">🇷🇴 Roumain</option>
+        <option value="ru">🇷🇺 Russe</option>
+        <option value="sk">🇸🇰 Slovaque</option>
+        <option value="sl">🇸🇮 Slovène</option>
+        <option value="sr">🇷🇸 Serbe</option>
+        <option value="sv">🇸🇪 Suédois</option>
+        <option value="th">🇹🇭 Thaï</option>
+        <option value="tl">🇵🇭 Tagalog</option>
+        <option value="tr">🇹🇷 Turc</option>
+        <option value="uk">🇺🇦 Ukrainien</option>
+        <option value="vi">🇻🇳 Vietnamien</option>
+        <option value="yo">🇳🇬 Yoruba</option>
+        <option value="zh-CN">🇨🇳 Chinois</option>
     </select>
 </div>
-
 <!-- Google Translate (élément invisible) -->
 <div id="google_translate_element" style="display: none;"></div>
 
 <script>
     function googleTranslateInit() {
-        new google.translate.TranslateElement({ pageLanguage: 'fr', includedLanguages: 'fr,en,es,de' }, 'google_translate_element');
+        new google.translate.TranslateElement({ 
+            pageLanguage: 'fr', 
+            includedLanguages: 'af,ar,bg,cs,da,de,el,en,es,et,fa,fi,fr,hi,hr,hu,id,is,it,ja,ko,lt,lv,mt,nl,no,pl,pt,ro,ru,sk,sl,sr,sv,th,tl,tr,uk,vi,yo,zh-CN' 
+        }, 'google_translate_element');
     }
 
     function changeLanguage() {
@@ -202,6 +241,7 @@
         }, 2000); // Délai pour s'assurer que Google Translate est chargé
     };
 </script>
+
 
 
 
