@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Votre Panier</title>
     <style>
-        /* Style général pour la page du panier */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -14,7 +12,6 @@
             background-color: #f4f4f4;
         }
 
-        /* Conteneur principal du panier */
         .cart-container {
             max-width: 900px;
             margin: 50px auto;
@@ -22,22 +19,121 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
         }
 
         h2 {
             font-size: 24px;
             margin-bottom: 20px;
+            text-align: center;
         }
 
-        /* Message de panier vide */
-        .empty-cart-message {
+        .cart-items {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
             gap: 20px;
-            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .item-details {
+            flex-grow: 1;
+            padding-left: 15px;
+        }
+
+        .item-details h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .item-details p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .item-details .price {
+            font-size: 16px;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-actions button {
+            padding: 8px 12px;
+            font-size: 14px;
+            color: white;
+            background-color: #ff4d4d;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .item-actions button:hover {
+            background-color: #e60000;
+        }
+
+        .cart-total {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .action-buttons button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .continue-shopping-btn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .checkout-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .continue-shopping-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
+
+        .empty-cart-message {
+            display: none;
+            text-align: center;
+            margin-top: 50px;
         }
 
         .empty-cart-message img {
@@ -46,43 +142,97 @@
             object-fit: cover;
             border-radius: 8px;
         }
-
-        .empty-cart-message h3 {
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        .empty-cart-message p {
-            font-size: 16px;
-            color: #777;
-        }
-
-        .continue-shopping-btn {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .continue-shopping-btn:hover {
-            background-color: #0056b3;
-        }
     </style>
 </head>
 <body>
     <div class="cart-container">
         <h2>Votre Panier</h2>
+        
+        <!-- Section contenant les articles du panier -->
+        <div id="cart-items" class="cart-items"></div>
 
-        <!-- Message panier vide -->
-        <div class="empty-cart-message">
+        <!-- Message lorsque le panier est vide -->
+        <div id="empty-cart-message" class="empty-cart-message">
             <img src="https://via.placeholder.com/150" alt="Panier vide">
             <h3>Votre panier est vide</h3>
             <p>Ajoutez des produits à votre panier pour commencer vos achats.</p>
-            <button class="continue-shopping-btn">Continuer vos achats</button>
+            <button class="continue-shopping-btn" onclick="goToShop()">Continuer vos achats</button>
+        </div>
+
+        <!-- Total du panier -->
+        <div id="cart-total" class="cart-total"></div>
+
+        <!-- Boutons d'action -->
+        <div class="action-buttons">
+            <button class="continue-shopping-btn" onclick="goToShop()">Retourner à la boutique</button>
+            <button id="checkout-btn" class="checkout-btn" onclick="checkout()">Passer à la caisse</button>
         </div>
     </div>
+
+    <script>
+        // Exemple d'articles dans le panier (dans une vraie application, ce serait dynamiquement récupéré)
+        let cart = [
+            { id: 1, name: "Article 1", price: 29.99, image: "https://via.placeholder.com/80", quantity: 1 },
+            { id: 2, name: "Article 2", price: 15.49, image: "https://via.placeholder.com/80", quantity: 1 }
+        ];
+
+        function renderCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                cartTotal.style.display = 'none';
+            } else {
+                emptyCartMessage.style.display = 'none';
+                cartTotal.style.display = 'block';
+
+                cart.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('cart-item');
+                    itemDiv.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="item-details">
+                            <h3>${item.name}</h3>
+                            <p>Quantité: ${item.quantity}</p>
+                            <p class="price">€${(item.price * item.quantity).toFixed(2)}</p>
+                        </div>
+                        <div class="item-actions">
+                            <button onclick="removeItem(${item.id})">Retirer</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemDiv);
+                    total += item.price * item.quantity;
+                });
+
+                cartTotal.innerHTML = `Total: €${total.toFixed(2)}`;
+            }
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            renderCart();
+        }
+
+        function goToShop() {
+            // Simuler la redirection vers la boutique
+            alert("Vous êtes redirigé vers la boutique");
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Votre panier est vide, impossible de passer à la caisse.");
+            } else {
+                alert("Passage à la caisse...");
+            }
+        }
+
+        // Initialiser le panier
+        renderCart();
+    </script>
 </body>
 </html>
