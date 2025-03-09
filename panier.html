@@ -1,188 +1,112 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panier - Nike Vintage</title>
     <style>
+        /* Ajoutez votre CSS ici */
         body {
             font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #000;
-            color: #fff;
-        }
-
-        .navbar {
-            background-color: #111;
             color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .navbar a:hover {
-            color: #ccc;
-        }
-
-        .cart-logo {
-            width: 40px;
-        }
-
-        .cart-container {
-            padding: 40px;
+            padding: 20px;
         }
 
         .cart-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
             margin-bottom: 20px;
+            padding: 10px;
             background-color: #111;
-            padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
         }
 
         .cart-item img {
-            width: 80px;
-            border-radius: 8px;
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
         }
 
-        .cart-item-details {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .cart-item-name {
+        .cart-item h3 {
             font-size: 18px;
+            margin: 0;
         }
 
-        .cart-item-price {
+        .cart-item p {
+            margin: 0;
             font-size: 16px;
-            font-weight: bold;
         }
 
-        .remove-button {
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s ease;
-        }
-
-        .remove-button:hover {
-            background: #ccc;
-        }
-
-        .total-price {
-            margin-top: 30px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .return-btn {
-            background: #fff;
-            color: #000;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
+        .cart-summary {
+            background-color: #111;
+            padding: 20px;
             margin-top: 20px;
-            font-size: 16px;
-            text-align: center;
+            border-radius: 10px;
         }
 
-        .return-btn:hover {
-            background: #ccc;
+        .cart-summary p {
+            font-size: 18px;
         }
     </style>
 </head>
 
 <body>
+    <h1>Votre Panier</h1>
+    <div id="cart-items"></div>
 
-    <div class="navbar">
-        <div class="links">
-            <a href="index.html">Accueil</a>
-            <a href="index.html#nike-vintage">Nike Vintage</a>
-        </div>
-        <a href="panier.html" id="cart-link">
-            <img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">
-        </a>
-    </div>
-
-    <div class="cart-container">
-        <h2>Mon Panier</h2>
-        
-        <div id="cart-items-container">
-            <!-- Articles du panier s'affichent ici -->
-        </div>
-        
-        <div class="total-price">
-            Total : <span id="total-price">0,00€</span>
-        </div>
-
-        <a href="index.html" class="return-btn">Retour à la Boutique</a>
+    <div class="cart-summary">
+        <p id="total-price">Total: 0€</p>
+        <button onclick="checkout()">Procéder au paiement</button>
     </div>
 
     <script>
-        // Fonction pour charger les produits du panier depuis le localStorage
-        function loadCart() {
+        // Fonction pour afficher les articles du panier
+        function displayCart() {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let cartContainer = document.getElementById('cart-items-container');
+            let cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = ''; // Réinitialiser le contenu du panier
+
             let totalPrice = 0;
 
-            cartContainer.innerHTML = ''; // Réinitialiser le contenu
+            cart.forEach(product => {
+                totalPrice += product.price;
 
-            // Si le panier est vide
-            if (cart.length === 0) {
-                cartContainer.innerHTML = '<p>Votre panier est vide.</p>';
-            }
+                let cartItemDiv = document.createElement('div');
+                cartItemDiv.classList.add('cart-item');
 
-            // Afficher les articles du panier
-            cart.forEach((item, index) => {
-                totalPrice += item.price;
-                cartContainer.innerHTML += `
-                    <div class="cart-item">
-                        <img src="${item.image}" alt="${item.name}">
-                        <div class="cart-item-details">
-                            <div class="cart-item-name">${item.name}</div>
-                            <div class="cart-item-price">${item.price.toFixed(2)}€</div>
-                        </div>
-                        <button class="remove-button" onclick="removeFromCart(${index})">Supprimer</button>
-                    </div>
-                `;
+                // Créer l'image du produit
+                let productImage = document.createElement('img');
+                productImage.src = product.image;
+                cartItemDiv.appendChild(productImage);
+
+                // Créer le nom du produit
+                let productName = document.createElement('h3');
+                productName.textContent = product.name;
+                cartItemDiv.appendChild(productName);
+
+                // Créer le prix du produit
+                let productPrice = document.createElement('p');
+                productPrice.textContent = product.price.toFixed(2) + '€';
+                cartItemDiv.appendChild(productPrice);
+
+                cartItemsContainer.appendChild(cartItemDiv);
             });
 
             // Mettre à jour le total
-            document.getElementById('total-price').innerText = totalPrice.toFixed(2) + '€';
+            document.getElementById('total-price').textContent = 'Total: ' + totalPrice.toFixed(2) + '€';
         }
 
-        // Fonction pour supprimer un produit du panier
-        function removeFromCart(index) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.splice(index, 1); // Supprime l'élément à l'index spécifié
-            localStorage.setItem('cart', JSON.stringify(cart)); // Sauvegarde le panier mis à jour
-            loadCart(); // Recharge le panier après suppression
+        // Fonction pour effectuer le paiement
+        function checkout() {
+            alert('Le paiement est en cours...');
         }
 
-        // Charger le panier au chargement de la page
-        window.onload = loadCart;
+        // Charger le panier au démarrage
+        window.onload = displayCart;
     </script>
 
 </body>
+
 </html>
