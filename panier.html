@@ -140,49 +140,49 @@
     </div>
 
     <script>
-        // Fonction pour charger les produits du panier depuis le localStorage
-        function loadCart() {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let cartContainer = document.getElementById('cart-items-container');
-            let totalPrice = 0;
+    // Fonction pour charger les produits du panier depuis le localStorage
+    function loadCart() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartContainer = document.getElementById('cart-items-container');
+        let totalPrice = 0;
+        cartContainer.innerHTML = ''; // Réinitialiser le contenu
 
-            cartContainer.innerHTML = ''; // Réinitialiser le contenu
+        // Si le panier est vide
+        if (cart.length === 0) {
+            cartContainer.innerHTML = '<p>Votre panier est vide.</p>';
+        }
 
-            // Si le panier est vide
-            if (cart.length === 0) {
-                cartContainer.innerHTML = '<p>Votre panier est vide.</p>';
-            }
-
-            // Afficher les articles du panier
-            cart.forEach((item, index) => {
-                totalPrice += item.price;
-                cartContainer.innerHTML += `
-                    <div class="cart-item">
-                        <img src="${item.image}" alt="${item.name}">
-                        <div class="cart-item-details">
-                            <div class="cart-item-name">${item.name}</div>
-                            <div class="cart-item-price">${item.price.toFixed(2)}€</div>
-                        </div>
-                        <button class="remove-button" onclick="removeFromCart(${index})">Supprimer</button>
+        // Afficher les articles du panier
+        cart.forEach((item, index) => {
+            totalPrice += item.price;
+            cartContainer.innerHTML += `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${item.price.toFixed(2)}€</div>
                     </div>
-                `;
-            });
+                    <button class="remove-button" onclick="removeFromCart(${index})">Supprimer</button>
+                </div>
+            `;
+        });
 
-            // Mettre à jour le total
-            document.getElementById('total-price').innerText = totalPrice.toFixed(2) + '€';
-        }
+        // Mettre à jour le total
+        document.getElementById('total-price').innerText = totalPrice.toFixed(2) + '€';
+    }
 
-        // Fonction pour supprimer un produit du panier
-        function removeFromCart(index) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.splice(index, 1); // Supprime l'élément à l'index spécifié
-            localStorage.setItem('cart', JSON.stringify(cart)); // Sauvegarde le panier mis à jour
-            loadCart(); // Recharge le panier après suppression
-        }
+    // Fonction pour supprimer un produit du panier
+    function removeFromCart(index) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.splice(index, 1); // Supprime l'élément à l'index spécifié
+        localStorage.setItem('cart', JSON.stringify(cart)); // Sauvegarde le panier mis à jour
+        loadCart(); // Recharge le panier après suppression
+    }
 
-        // Charger le panier au chargement de la page
-        window.onload = loadCart;
-    </script>
+    // Charger le panier au chargement de la page
+    window.onload = loadCart;
+</script>
+
 
 </body>
 </html>
