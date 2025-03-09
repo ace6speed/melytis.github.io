@@ -141,8 +141,37 @@
 <div class="total-price">
     Total : <span id="total-price">0,00€</span>
 </div>
-<button id="order-btn" class="return-btn" style="margin-left: 20px;">Commander</button>
-<a href="index.html" class="return-btn">Retour à la Boutique</a>
+<div style="display: flex; gap: 20px; margin-top: 20px;">
+    <a href="index.html" class="return-btn">Retour à la Boutique</a>
+    <button id="order-btn" class="return-btn">Commander</button>
+</div>
+
+<!-- Modal de commande -->
+<div id="order-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Informations de livraison</h2>
+        <p style="color: #ccc; margin-bottom: 20px;">Livraison uniquement en Europe</p>
+        <form id="order-form">
+            <input type="text" id="name" placeholder="Nom et Prénom" required>
+            <input type="text" id="address" placeholder="Adresse" required>
+            <input type="text" id="city" placeholder="Ville" required>
+            <input type="text" id="postal" placeholder="Code Postal" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <select id="country" required>
+                <option value="">Sélectionnez un pays</option>
+                <option value="France">France</option>
+                <option value="Germany">Allemagne</option>
+                <option value="Spain">Espagne</option>
+                <option value="Italy">Italie</option>
+                <option value="Netherlands">Pays-Bas</option>
+            </select>
+            <div id="shipping-info" style="margin: 10px 0; color: #ccc;"></div>
+            <a href="https://www.paypal.me/Meslissahb" target="_blank" class="paypal-btn">Payer avec PayPal</a>
+        </form>
+    </div>
+</div>
+
 
 <!-- Modal de commande -->
 <div id="order-modal" class="modal">
