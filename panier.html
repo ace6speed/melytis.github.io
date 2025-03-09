@@ -1,219 +1,88 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panier Nike Vintage</title>
+    <title>Votre Panier</title>
     <style>
+        /* Style général pour la page du panier */
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000;
-            color: #fff;
+            background-color: #f4f4f4;
         }
 
-        .navbar {
-            background-color: #111;
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .navbar a:hover {
-            color: #ccc;
-        }
-
-        .cart-items {
-            padding: 20px;
+        /* Conteneur principal du panier */
+        .cart-container {
             max-width: 900px;
             margin: 50px auto;
-            background-color: #222;
-            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
+        h2 {
+            font-size: 24px;
             margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #333;
         }
 
-        .cart-item img {
-            width: 60px;
-            height: 60px;
+        /* Message de panier vide */
+        .empty-cart-message {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .empty-cart-message img {
+            width: 150px;
+            height: 150px;
             object-fit: cover;
             border-radius: 8px;
         }
 
-        .cart-item-details {
-            flex: 1;
-            margin-left: 15px;
-        }
-
-        .cart-item-name {
-            font-size: 18px;
+        .empty-cart-message h3 {
+            font-size: 22px;
             font-weight: bold;
         }
 
-        .cart-item-price,
-        .cart-item-quantity,
-        .cart-item-total {
+        .empty-cart-message p {
             font-size: 16px;
-            color: #ccc;
+            color: #777;
         }
 
-        .cart-item-actions {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .cart-item-actions button {
-            background: #333;
-            color: #fff;
+        .continue-shopping-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
             border: none;
-            padding: 5px 10px;
             border-radius: 5px;
+            font-size: 16px;
             cursor: pointer;
         }
 
-        .cart-item-actions button:hover {
-            background: #666;
-        }
-
-        .cart-total {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
-        .clear-cart {
-            display: block;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f44336;
-            color: white;
-            text-align: center;
-            border-radius: 8px;
-            text-decoration: none;
-        }
-
-        .clear-cart:hover {
-            background-color: #d32f2f;
+        .continue-shopping-btn:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-
-    <div class="navbar">
-        <a href="index.html">Accueil</a>
-        <a href="panier.html">Panier</a>
-    </div>
-
-    <div class="cart-items">
+    <div class="cart-container">
         <h2>Votre Panier</h2>
-        <div id="cart-content"></div>
-        <div id="cart-total" class="cart-total">Total: 0,00€</div>
-        <a href="#" class="clear-cart" onclick="clearCart()">Vider le Panier</a>
+
+        <!-- Message panier vide -->
+        <div class="empty-cart-message">
+            <img src="https://via.placeholder.com/150" alt="Panier vide">
+            <h3>Votre panier est vide</h3>
+            <p>Ajoutez des produits à votre panier pour commencer vos achats.</p>
+            <button class="continue-shopping-btn">Continuer vos achats</button>
+        </div>
     </div>
-
-    <script>
-        // Fonction pour ajouter un produit au panier
-        function addToCart(productName, productPrice, productImage) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let product = { name: productName, price: productPrice, image: productImage, quantity: 1 };
-
-            // Vérifier si le produit est déjà dans le panier
-            let productIndex = cart.findIndex(item => item.name === productName);
-            if (productIndex > -1) {
-                cart[productIndex].quantity += 1; // Si oui, augmenter la quantité
-            } else {
-                cart.push(product); // Sinon, ajouter un nouveau produit
-            }
-
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartPage(); // Mettre à jour le panier affiché
-        }
-
-        // Fonction pour afficher le panier et calculer le total
-        function updateCartPage() {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let cartContent = document.getElementById('cart-content');
-            let totalPrice = 0;
-            cartContent.innerHTML = ''; // Réinitialiser le contenu du panier
-
-            // Ajouter les articles dans le panier
-            cart.forEach(item => {
-                let cartItem = document.createElement('div');
-                cartItem.classList.add('cart-item');
-                cartItem.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="cart-item-details">
-                        <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">${item.price}€</div>
-                    </div>
-                    <div class="cart-item-actions">
-                        <button onclick="changeQuantity('${item.name}', -1)">-</button>
-                        <div class="cart-item-quantity">${item.quantity}</div>
-                        <button onclick="changeQuantity('${item.name}', 1)">+</button>
-                        <button onclick="removeItem('${item.name}')">Supprimer</button>
-                    </div>
-                    <div class="cart-item-total">${(item.price * item.quantity).toFixed(2)}€</div>
-                `;
-                cartContent.appendChild(cartItem);
-                totalPrice += item.price * item.quantity;
-            });
-
-            // Mettre à jour le total du panier
-            document.getElementById('cart-total').innerText = "Total : " + totalPrice.toFixed(2) + "€";
-        }
-
-        // Fonction pour changer la quantité d'un produit
-        function changeQuantity(productName, delta) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let productIndex = cart.findIndex(item => item.name === productName);
-            if (productIndex > -1) {
-                cart[productIndex].quantity += delta;
-                if (cart[productIndex].quantity <= 0) {
-                    cart[productIndex].quantity = 1; // Assurer une quantité minimale de 1
-                }
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartPage(); // Mettre à jour la page
-            }
-        }
-
-        // Fonction pour supprimer un produit du panier
-        function removeItem(productName) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart = cart.filter(item => item.name !== productName); // Filtrer les produits pour supprimer celui spécifié
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartPage(); // Mettre à jour la page
-        }
-
-        // Fonction pour vider le panier
-        function clearCart() {
-            localStorage.removeItem('cart');
-            updateCartPage(); // Mettre à jour la page
-        }
-
-        // Mettre à jour le panier au chargement de la page
-        window.onload = function() {
-            updateCartPage(); // Afficher les articles du panier
-        }
-    </script>
-
 </body>
 </html>
