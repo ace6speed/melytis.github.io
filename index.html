@@ -127,7 +127,17 @@
             display: none !important;
         }
 
+        /* Hide the language selector and combo box */
+        .goog-te-combo {
+            display: none !important;
+        }
+
         .goog-te-gadget {
+            display: none !important;
+        }
+
+        /* Hide Google Translate interface */
+        .goog-te-gadget-simple {
             display: none !important;
         }
     </style>
@@ -220,45 +230,4 @@
     </div>
 
     <!-- Google Translate element (hidden) -->
-    <div id="google_translate_element" style="display: none;"></div>
-
-    <script>
-        // Initialisation du script Google Translate
-        function googleTranslateInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'fr',
-                includedLanguages: 'fr,en,es,de,it,pt,nl,pl,ro,hu,cz,sk,bg,hr,se,no,fi,dk,gr,tr,ua,mk,ar,hi,zh,ja,ko,ru,id,th,vi,bn,sw,he,fa,ta,mr,ms,ne,pa,gu,te'
-            }, 'google_translate_element');
-        }
-
-        function changeLanguage() {
-            var lang = document.getElementById("languageSelect").value;
-            localStorage.setItem("selectedLanguage", lang); // Sauvegarde la langue
-            applyLanguage(lang);
-        }
-
-        function applyLanguage(lang) {
-            var select = document.querySelector(".goog-te-combo");
-            if (select) {
-                select.value = lang;
-                select.dispatchEvent(new Event("change"));
-            }
-        }
-
-        window.onload = function () {
-            var script = document.createElement("script");
-            script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
-            document.body.appendChild(script);
-
-            // Charger la langue sauvegardée ou la langue par défaut (fr)
-            var savedLang = localStorage.getItem("selectedLanguage") || "fr";
-            document.getElementById("languageSelect").value = savedLang;
-
-            setTimeout(() => {
-                applyLanguage(savedLang);
-            }, 2000); // Delai pour assurer un chargement correct
-        };
-    </script>
-
-</body>
-</html>
+    <div id="google_translate_element" style
