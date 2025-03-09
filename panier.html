@@ -1,362 +1,129 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Panier - Nike Vintage</title>
+    <title>Panier - Nike Vintage</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-            text-align: center;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
         }
 
-        h1 {
-            font-size: 36px;
-            color: #333;
-            margin: 40px 0;
-        }
-
-        .panier-container {
-            max-width: 800px;
-            margin: auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .product {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #f1f1f1;
-            border-radius: 8px;
-        }
-
-        .product img {
-            width: 80px;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        .product .details {
-            flex: 1;
-            margin-left: 20px;
-            text-align: left;
-        }
-
-        .product .details h3 {
-            margin: 0;
-            font-size: 20px;
-            color: #333;
-        }
-
-        .product .details .price {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .quantity-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .quantity-container input {
-            width: 40px;
-            text-align: center;
-            margin: 0 10px;
-            font-size: 16px;
-        }
-
-        .product .actions button {
-            background-color: red;
+        .navbar {
+            background-color: #111;
             color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
         }
 
-        .product .actions button:hover {
-            background-color: darkred;
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px;
+            transition: all 0.3s ease;
         }
 
-        .subtotal {
+        .navbar a:hover {
+            color: #ccc;
+        }
+
+        .cart-logo {
+            width: 40px;
+        }
+
+        .cart-items {
+            padding: 60px 20px;
+        }
+
+        .cart-item {
+            background-color: #111;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        .cart-item h4 {
+            margin: 0;
+        }
+
+        .cart-item p {
+            margin: 10px 0;
+        }
+
+        .total {
             font-size: 20px;
             font-weight: bold;
-            margin: 20px 0;
-        }
-
-        .buttons-container {
             margin-top: 20px;
         }
 
-        .buttons-container button {
-            background-color: black;
-            color: white;
+        button {
+            background: #fff;
+            color: #000;
             border: none;
             padding: 12px 20px;
-            margin: 5px;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: 0.3s;
             font-size: 16px;
+            transition: background 0.3s ease;
         }
 
-        .buttons-container button:hover {
-            background-color: #333;
-        }
-
-        .footer {
-            background-color: #222;
-            color: white;
-            padding: 30px;
-            text-align: center;
-            font-size: 14px;
-            margin-top: 30px;
+        button:hover {
+            background: #ccc;
         }
     </style>
 </head>
-
 <body>
 
-    <h1>Mon Panier</h1>
-
-    <div id="panier" class="panier-container">
-        <!-- Les produits du panier seront affichés ici -->
-    </div>
-
-    <div class="subtotal">
-        Total: <span id="total-prix">0€</span>
-    </div>
-
-    <div class="buttons-container">
-        <button id="commander">Commander</button>
-        <button id="retour-boutique">Retour à la Boutique</button>
-    </div>
-
-    <div class="footer">
-        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let panier = JSON.parse(localStorage.getItem('panier')) || [];
-            const panierContainer = document.getElementById('panier');
-            const totalPrix = document.getElementById('total-prix');
-
-            function afficherPanier() {
-                panierContainer.innerHTML = "";
-
-                if (panier.length === 0) {
-                    panierContainer.innerHTML = "<p>Votre panier est vide.</p>";
-                    totalPrix.textContent = "0€";
-                    return;
-                }
-
-                let total = 0;
-
-                panier.forEach((produit, index) => {
-                    const produitDiv = document.createElement('div');
-                    produitDiv.classList.add('product');
-
-                    // Image du produit
-                    const image = document.createElement('img');
-                    image.src = produit.image;
-                    image.alt = produit.nom;
-
-                    // Détails
-                    const detailsDiv = document.createElement('div');
-                    detailsDiv.classList.add('details');
-                    const nom = document.createElement('h3');
-                    nom.textContent = produit.nom;
-                    const prix = document.createElement('p');
-                    prix.classList.add('price');
-                    prix.textContent = produit.prix + "€";
-
-                    detailsDiv.appendChild(nom);
-                    detailsDiv.appendChild(prix);
-
-                    // Sélecteur de quantité
-                    const quantityDiv = document.createElement('div');
-                    quantityDiv.classList.add('quantity-container');
-
-                    const minusBtn = document.createElement('button');
-                    minusBtn.textContent = "-";
-                    minusBtn.addEventListener("click", function () {
-                        if (produit.quantite > 1) {
-                            produit.quantite--;
-                        } else {
-                            panier.splice(index, 1);
-                        }
-                        localStorage.setItem("panier", JSON.stringify(panier));
-                        afficherPanier();
-                    });
-
-                    const quantiteInput = document.createElement('input');
-                    quantiteInput.type = "number";
-                    quantiteInput.value = produit.quantite;
-                    quantiteInput.min = 1;
-                    quantiteInput.addEventListener("change", function () {
-                        produit.quantite = parseInt(quantiteInput.value);
-                        localStorage.setItem("panier", JSON.stringify(panier));
-                        afficherPanier();
-                    });
-
-                    const plusBtn = document.createElement('button');
-                    plusBtn.textContent = "+";
-                    plusBtn.addEventListener("click", function () {
-                        produit.quantite++;
-                        localStorage.setItem("panier", JSON.stringify(panier));
-                        afficherPanier();
-                    });
-
-                    quantityDiv.appendChild(minusBtn);
-                    quantityDiv.appendChild(quantiteInput);
-                    quantityDiv.appendChild(plusBtn);
-
-                    // Suppression
-                    const actionsDiv = document.createElement('div');
-                    actionsDiv.classList.add('actions');
-                    const retirerBtn = document.createElement('button');
-                    retirerBtn.textContent = "Retirer";
-                    retirerBtn.addEventListener("click", function () {
-                        panier.splice(index, 1);
-                        localStorage.setItem("panier", JSON.stringify(panier));
-                        afficherPanier();
-                    });
-
-                    actionsDiv.appendChild(retirerBtn);
-
-                    // Ajout des éléments
-                    produitDiv.appendChild(image);
-                    produitDiv.appendChild(detailsDiv);
-                    produitDiv.appendChild(quantityDiv);
-                    produitDiv.appendChild(actionsDiv);
-
-                    panierContainer.appendChild(produitDiv);
-
-                    total += produit.prix * produit.quantite;
-                });
-
-                totalPrix.textContent = total.toFixed(2) + "€";
-            }
-
-            afficherPanier();
-
-            // Commander
-            document.getElementById("commander").addEventListener("click", function () {
-                if (panier.length > 0) {
-                    alert("Commande validée ! Merci pour votre achat.");
-                    localStorage.removeItem("panier");
-                    afficherPanier();
-                } else {
-                    alert("Votre panier est vide !");
-                }
-            });
-
-            // Retour à la Boutique
-            document.getElementById("retour-boutique").addEventListener("click", function () {
-                window.location.href = "index.html";
-            });
-        });
-    </script>
-<!-- Sélecteur de langue -->
-<div id="language-container" style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
-    <label for="languageSelect" style="color: white;">🌍 Langue :</label>
-    <select id="languageSelect" onchange="changeLanguage()">
-        <option value="fr">🇫🇷 Français</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="es">🇪🇸 Español</option>
-        <option value="de">🇩🇪 Deutsch</option>
-        <option value="it">🇮🇹 Italiano</option>
-        <option value="pt">🇵🇹 Português</option>
-        <option value="nl">🇳🇱 Nederlands</option>
-        <option value="pl">🇵🇱 Polski</option>
-        <option value="ro">🇷🇴 Română</option>
-        <option value="hu">🇭🇺 Magyar</option>
-        <option value="cz">🇨🇿 Čeština</option>
-        <option value="sk">🇸🇰 Slovenčina</option>
-        <option value="bg">🇧🇬 Български</option>
-        <option value="hr">🇭🇷 Hrvatski</option>
-        <option value="se">🇸🇪 Svenska</option>
-        <option value="no">🇳🇴 Norsk</option>
-        <option value="fi">🇫🇮 Suomi</option>
-        <option value="dk">🇩🇰 Dansk</option>
-        <option value="gr">🇬🇷 Ελληνικά</option>
-        <option value="tr">🇹🇷 Türkçe</option>
-        <option value="ua">🇺🇦 Українська</option>
-        <option value="mk">🇲🇰 Македонски</option>
-        <option value="ar">🇸🇦 العربية</option>
-        <option value="hi">🇮🇳 हिंदी</option>
-        <option value="zh">🇨🇳 中文</option>
-        <option value="ja">🇯🇵 日本語</option>
-        <option value="ko">🇰🇷 한국어</option>
-        <option value="ru">🇷🇺 Русский</option>
-        <option value="id">🇮🇩 Bahasa Indonesia</option>
-        <option value="th">🇹🇭 ภาษาไทย</option>
-        <option value="vi">🇻🇳 Tiếng Việt</option>
-        <option value="bn">🇧🇩 বাংলা</option>
-        <option value="sw">🇰🇪 Kiswahili</option>
-        <option value="he">🇮🇱 עברית</option>
-        <option value="fa">🇮🇷 فارسی</option>
-        <option value="ta">🇮🇳 தமிழ்</option>
-        <option value="mr">🇮🇳 मराठी</option>
-        <option value="ms">🇲🇾 Bahasa Melayu</option>
-        <option value="ne">🇳🇵 नेपाली</option>
-        <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-        <option value="gu">🇮🇳 ગુજરાતી</option>
-        <option value="te">🇮🇳 తెలుగు</option>
-    </select>
+<div class="navbar">
+    <a href="index.html">Accueil</a>
+    <a href="boutique.html">Boutique</a>
+    <a href="panier.html" id="cart-link">
+        <img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">
+    </a>
 </div>
 
-<!-- Google Translate (élément invisible) -->
-<div id="google_translate_element" style="display: none;"></div>
+<div class="cart-items" id="cart-items">
+    <!-- Les articles seront insérés ici par JavaScript -->
+</div>
+
 <script>
-    function googleTranslateInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'fr',
-            includedLanguages: 'fr,en,es,de,it,pt,nl,pl,ro,hu,cz,sk,bg,hr,se,no,fi,dk,gr,tr,ua,mk,ar,hi,zh,ja,ko,ru,id,th,vi,bn,sw,he,fa,ta,mr,ms,ne,pa,gu,te'
-        }, 'google_translate_element');
-    }
+    // Fonction pour afficher le contenu du panier
+    function displayCart() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartContainer = document.getElementById('cart-items');
 
-    function changeLanguage() {
-        var lang = document.getElementById("languageSelect").value;
-        localStorage.setItem("selectedLanguage", lang); // Sauvegarde la langue
-        applyLanguage(lang);
-    }
+        if (cart.length === 0) {
+            cartContainer.innerHTML = '<p>Votre panier est vide.</p>';
+        } else {
+            let total = 0;
+            cartContainer.innerHTML = ''; // Clear the container
 
-    function applyLanguage(lang) {
-        var select = document.querySelector(".goog-te-combo");
-        if (select) {
-            select.value = lang;
-            select.dispatchEvent(new Event("change"));
+            cart.forEach(item => {
+                total += item.price;
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <h4>${item.name}</h4>
+                        <p>Prix : ${item.price.toFixed(2)}€</p>
+                    </div>
+                `;
+            });
+
+            cartContainer.innerHTML += `<p class="total">Total : ${total.toFixed(2)}€</p>`;
         }
     }
 
-    // Charge Google Translate et applique la langue au chargement
-    window.onload = function () {
-        var script = document.createElement("script");
-        script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
-        document.body.appendChild(script);
-
-        var savedLang = localStorage.getItem("selectedLanguage") || "fr"; // Langue par défaut
-        document.getElementById("languageSelect").value = savedLang;
-
-        setTimeout(() => {
-            applyLanguage(savedLang);
-        }, 2000); // Délai pour s'assurer que Google Translate est chargé
-    };
+    window.onload = displayCart;
 </script>
 
 </body>
-
 </html>
