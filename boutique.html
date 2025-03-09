@@ -275,6 +275,37 @@
             alert(productName + " a été ajouté au panier !");
         }
     </script>
+<script>
+    // Fonction pour ajouter un produit au panier
+    function addToCart(productName, productPrice) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let product = { name: productName, price: productPrice };
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // Mettre à jour le nombre d'articles dans le panier
+        updateCartCount();
+        alert(productName + " a été ajouté au panier !");
+    }
+
+    // Fonction pour mettre à jour le nombre d'articles dans le panier
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartCount = cart.length;
+        
+        // Met à jour le texte ou l'icône du panier
+        let cartLink = document.getElementById('cart-link');
+        if (cartCount > 0) {
+            cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo"><span>${cartCount}</span>`;
+        } else {
+            cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">`;
+        }
+    }
+
+    // Mettre à jour le compteur au chargement de la page
+    window.onload = updateCartCount;
+</script>
+
 <!-- Sélecteur de langue -->
 <div id="language-container" style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
     <label for="languageSelect" style="color: white;">🌍 Langue :</label>
