@@ -269,6 +269,93 @@
             });
         });
     </script>
+<!-- Sélecteur de langue -->
+<div id="language-container" style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
+    <label for="languageSelect" style="color: white;">🌍 Langue :</label>
+    <select id="languageSelect" onchange="changeLanguage()">
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="pt">🇵🇹 Português</option>
+        <option value="nl">🇳🇱 Nederlands</option>
+        <option value="pl">🇵🇱 Polski</option>
+        <option value="ro">🇷🇴 Română</option>
+        <option value="hu">🇭🇺 Magyar</option>
+        <option value="cz">🇨🇿 Čeština</option>
+        <option value="sk">🇸🇰 Slovenčina</option>
+        <option value="bg">🇧🇬 Български</option>
+        <option value="hr">🇭🇷 Hrvatski</option>
+        <option value="se">🇸🇪 Svenska</option>
+        <option value="no">🇳🇴 Norsk</option>
+        <option value="fi">🇫🇮 Suomi</option>
+        <option value="dk">🇩🇰 Dansk</option>
+        <option value="gr">🇬🇷 Ελληνικά</option>
+        <option value="tr">🇹🇷 Türkçe</option>
+        <option value="ua">🇺🇦 Українська</option>
+        <option value="mk">🇲🇰 Македонски</option>
+        <option value="ar">🇸🇦 العربية</option>
+        <option value="hi">🇮🇳 हिंदी</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="ko">🇰🇷 한국어</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="id">🇮🇩 Bahasa Indonesia</option>
+        <option value="th">🇹🇭 ภาษาไทย</option>
+        <option value="vi">🇻🇳 Tiếng Việt</option>
+        <option value="bn">🇧🇩 বাংলা</option>
+        <option value="sw">🇰🇪 Kiswahili</option>
+        <option value="he">🇮🇱 עברית</option>
+        <option value="fa">🇮🇷 فارسی</option>
+        <option value="ta">🇮🇳 தமிழ்</option>
+        <option value="mr">🇮🇳 मराठी</option>
+        <option value="ms">🇲🇾 Bahasa Melayu</option>
+        <option value="ne">🇳🇵 नेपाली</option>
+        <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+        <option value="gu">🇮🇳 ગુજરાતી</option>
+        <option value="te">🇮🇳 తెలుగు</option>
+    </select>
+</div>
+
+<!-- Google Translate (élément invisible) -->
+<div id="google_translate_element" style="display: none;"></div>
+<script>
+    function googleTranslateInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'fr',
+            includedLanguages: 'fr,en,es,de,it,pt,nl,pl,ro,hu,cz,sk,bg,hr,se,no,fi,dk,gr,tr,ua,mk,ar,hi,zh,ja,ko,ru,id,th,vi,bn,sw,he,fa,ta,mr,ms,ne,pa,gu,te'
+        }, 'google_translate_element');
+    }
+
+    function changeLanguage() {
+        var lang = document.getElementById("languageSelect").value;
+        localStorage.setItem("selectedLanguage", lang); // Sauvegarde la langue
+        applyLanguage(lang);
+    }
+
+    function applyLanguage(lang) {
+        var select = document.querySelector(".goog-te-combo");
+        if (select) {
+            select.value = lang;
+            select.dispatchEvent(new Event("change"));
+        }
+    }
+
+    // Charge Google Translate et applique la langue au chargement
+    window.onload = function () {
+        var script = document.createElement("script");
+        script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
+        document.body.appendChild(script);
+
+        var savedLang = localStorage.getItem("selectedLanguage") || "fr"; // Langue par défaut
+        document.getElementById("languageSelect").value = savedLang;
+
+        setTimeout(() => {
+            applyLanguage(savedLang);
+        }, 2000); // Délai pour s'assurer que Google Translate est chargé
+    };
+</script>
 
 </body>
 
