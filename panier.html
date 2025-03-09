@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panier - Boutique en ligne</title>
+    <title>Panier - Nike Vintage</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -11,8 +11,8 @@
             padding: 0;
             background-color: #000;
             color: #fff;
-            line-height: 1.6;
         }
+
         .navbar {
             background-color: #111;
             color: white;
@@ -22,6 +22,7 @@
             align-items: center;
             border-bottom: 1px solid #333;
         }
+
         .navbar a {
             color: white;
             text-decoration: none;
@@ -29,129 +30,159 @@
             padding: 10px;
             transition: all 0.3s ease;
         }
+
         .navbar a:hover {
             color: #ccc;
         }
+
+        .cart-logo {
+            width: 40px;
+        }
+
         .cart-container {
             padding: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
         }
+
         .cart-item {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            background-color: #222;
-            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #111;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-item img {
+            width: 80px;
             border-radius: 8px;
-            border: 1px solid #444;
         }
-        .cart-item span {
+
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .cart-item-name {
+            font-size: 18px;
+        }
+
+        .cart-item-price {
             font-size: 16px;
+            font-weight: bold;
         }
-        .cart-item .remove {
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .cart-item .remove:hover {
-            background-color: #555;
-        }
-        .checkout-btn {
-            background-color: #fff;
+
+        .remove-button {
+            background: #fff;
             color: #000;
-            padding: 12px;
             border: none;
+            padding: 8px 15px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             transition: background 0.3s ease;
         }
-        .checkout-btn:hover {
+
+        .remove-button:hover {
             background: #ccc;
         }
-        .total {
-            font-size: 20px;
+
+        .total-price {
+            margin-top: 30px;
+            font-size: 24px;
             font-weight: bold;
-            text-align: right;
+        }
+
+        .return-btn {
+            background: #fff;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .return-btn:hover {
+            background: #ccc;
         }
     </style>
 </head>
+
 <body>
 
-<div class="navbar">
-    <a href="index.html">Retour à la Boutique</a>
-    <a href="index.html">Accueil</a>
-</div>
-
-<div class="cart-container">
-    <h2>Votre Panier</h2>
-
-    <div id="cart-items">
-        <!-- Les articles du panier seront ajoutés ici dynamiquement -->
+    <div class="navbar">
+        <div class="links">
+            <a href="index.html">Accueil</a>
+            <a href="index.html#nike-vintage">Nike Vintage</a>
+        </div>
+        <a href="panier.html" id="cart-link">
+            <img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">
+        </a>
     </div>
 
-    <div class="total">
-        <span>Total: </span><span id="total-amount">0,00€</span>
+    <div class="cart-container">
+        <h2>Mon Panier</h2>
+        
+        <div id="cart-items-container">
+            <!-- Articles du panier s'affichent ici -->
+        </div>
+        
+        <div class="total-price">
+            Total : <span id="total-price">0,00€</span>
+        </div>
+
+        <a href="index.html" class="return-btn">Retour à la Boutique</a>
     </div>
 
-    <button class="checkout-btn" onclick="checkout()">Passer à la Commande</button>
-</div>
+    <script>
+        // Fonction pour charger les produits du panier depuis le localStorage
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartContainer = document.getElementById('cart-items-container');
+            let totalPrice = 0;
 
-<script>
-// Fonction pour charger les articles du panier depuis localStorage
-function loadCart() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let cartItemsContainer = document.getElementById('cart-items');
-    cartItemsContainer.innerHTML = ''; // Réinitialiser les articles dans le panier
+            cartContainer.innerHTML = ''; // Réinitialiser le contenu
 
-    let totalAmount = 0;
+            // Si le panier est vide
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<p>Votre panier est vide.</p>';
+            }
 
-    cart.forEach((item, index) => {
-        totalAmount += item.price;
+            // Afficher les articles du panier
+            cart.forEach((item, index) => {
+                totalPrice += item.price;
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="https://i.postimg.cc/4N5s9rJw/20250219-174143.avif" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">${item.price.toFixed(2)}€</div>
+                        </div>
+                        <button class="remove-button" onclick="removeFromCart(${index})">Supprimer</button>
+                    </div>
+                `;
+            });
 
-        // Création d'un élément d'article dans le panier
-        let cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-            <span>${item.name}</span>
-            <span>${item.price.toFixed(2)}€</span>
-            <button class="remove" onclick="removeFromCart(${index})">Retirer</button>
-        `;
+            // Mettre à jour le total
+            document.getElementById('total-price').innerText = totalPrice.toFixed(2) + '€';
+        }
 
-        cartItemsContainer.appendChild(cartItem);
-    });
+        // Fonction pour supprimer un produit du panier
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1); // Supprime l'élément à l'index spécifié
+            localStorage.setItem('cart', JSON.stringify(cart)); // Sauvegarde le panier mis à jour
+            loadCart(); // Recharge le panier après suppression
+        }
 
-    // Mettre à jour le total
-    document.getElementById('total-amount').textContent = totalAmount.toFixed(2) + '€';
-}
-
-// Fonction pour retirer un article du panier
-function removeFromCart(index) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.splice(index, 1); // Supprimer l'élément du tableau
-    localStorage.setItem('cart', JSON.stringify(cart)); // Sauvegarder dans le localStorage
-    loadCart(); // Recharger les articles du panier
-}
-
-// Fonction de commande
-function checkout() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    if (cart.length > 0) {
-        alert('Passage à la commande...');
-        // Vous pouvez rediriger l'utilisateur vers une page de commande ici, par exemple:
-        // window.location.href = "commande.html";
-    } else {
-        alert('Votre panier est vide !');
-    }
-}
-
-// Charger le panier au chargement de la page
-window.onload = loadCart;
-</script>
+        // Charger le panier au chargement de la page
+        window.onload = loadCart;
+    </script>
 
 </body>
 </html>
