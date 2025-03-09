@@ -182,47 +182,6 @@
     // Charger le panier au chargement de la page
     window.onload = loadCart;
 </script>
-<script>
-// Fonction pour ajouter un produit au panier
-function addToCart(productName, productPrice) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Trouver l'élément du produit cliqué
-    let productElement = event.target.closest('.product');
-    // Obtenir la première image du carousel du produit
-    let productImage = productElement.querySelector('.image-carousel img').src;
-    
-    let product = {
-        name: productName,
-        price: productPrice,
-        image: productImage
-    };
-    
-    cart.push(product);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Mettre à jour le nombre d'articles dans le panier
-    updateCartCount();
-    alert(productName + " a été ajouté au panier !");
-}
-
-// Fonction pour mettre à jour le nombre d'articles dans le panier
-function updateCartCount() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let cartCount = cart.length;
-    
-    // Met à jour le texte ou l'icône du panier
-    let cartLink = document.getElementById('cart-link');
-    if (cartCount > 0) {
-        cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo"><span>${cartCount}</span>`;
-    } else {
-        cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">`;
-    }
-}
-
-// Mettre à jour le compteur au chargement de la page
-window.onload = updateCartCount;
-</script>
 
 
 </body>
