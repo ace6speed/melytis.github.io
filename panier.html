@@ -138,6 +138,37 @@
 
         <a href="index.html" class="return-btn">Retour à la Boutique</a>
     </div>
+<div class="total-price">
+    Total : <span id="total-price">0,00€</span>
+</div>
+<button id="order-btn" class="return-btn" style="margin-left: 20px;">Commander</button>
+<a href="index.html" class="return-btn">Retour à la Boutique</a>
+
+<!-- Modal de commande -->
+<div id="order-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Informations de livraison</h2>
+        <p style="color: #ccc; margin-bottom: 20px;">Livraison uniquement en Europe</p>
+        <form id="order-form">
+            <input type="text" id="name" placeholder="Nom et Prénom" required>
+            <input type="text" id="address" placeholder="Adresse" required>
+            <input type="text" id="city" placeholder="Ville" required>
+            <input type="text" id="postal" placeholder="Code Postal" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <select id="country" required>
+                <option value="">Sélectionnez un pays</option>
+                <option value="France">France</option>
+                <option value="Germany">Allemagne</option>
+                <option value="Spain">Espagne</option>
+                <option value="Italy">Italie</option>
+                <option value="Netherlands">Pays-Bas</option>
+            </select>
+            <div id="shipping-info" style="margin: 10px 0; color: #ccc;"></div>
+            <a href="https://www.paypal.me/Meslissahb" target="_blank" class="paypal-btn">Payer avec PayPal</a>
+        </form>
+    </div>
+</div>
 
     <script>
     // Fonction pour charger les produits du panier depuis le localStorage
@@ -181,6 +212,55 @@
 
     // Charger le panier au chargement de la page
     window.onload = loadCart;
+</script>
+<script>
+    document.getElementById('order-btn').addEventListener('click', function() {
+        document.getElementById('order-modal').style.display = 'block';
+        updateShippingInfo();
+    });
+
+    document.querySelector('.close').addEventListener('click', function() {
+        document.getElementById('order-modal').style.display = 'none';
+    });
+
+    function updateShippingInfo() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let itemCount = cart.length;
+        let shippingCost = itemCount >= 2 ? 0 : itemCount * 6.5;
+        let shippingText = shippingCost === 0 ? 'Frais de port offerts!' : `Frais de port: ${shippingCost.toFixed(2)}€`;
+        document.getElementById('shipping-info').textContent = shippingText;
+    }
+
+    document.getElementById('order-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let itemCount = cart.length;
+        let shippingCost = itemCount >= 2 ? 0 : itemCount * 6.5;
+        let totalPrice = cart.reduce((sum, item) => sum + item.price, 0) + shippingCost;
+
+        let formData = {
+            name: document.getElementById('name').value,
+            address: document.getElementById('address').value,
+            city: document.getElementById('city').value,
+            postal: document.getElementById('postal').value,
+            email: document.getElementById('email').value,
+            country: document.getElementById('country').value,
+            total: totalPrice.toFixed(2),
+            shipping: shippingCost.toFixed(2)
+        };
+
+        let mailBody = `
+Commande de: ${formData.name}
+Adresse: ${formData.address}
+Ville: ${formData.city}
+Code Postal: ${formData.postal}
+Email: ${formData.email}
+Pays: ${formData.country}
+Total: ${formData.total}€
+Frais de port: ${formData.shipping}€`;
+
+        window.location.href = `mailto:melytis593@gmail.com?subject=Nouvelle Commande&body=${encodeURIComponent(mailBody)}`;
+    });
 </script>
 
 
