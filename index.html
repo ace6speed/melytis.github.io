@@ -219,17 +219,17 @@
         </select>
     </div>
 
-    <!-- Removed Google Translate element (hidden) -->
-    <!-- <div id="google_translate_element" style="display: none;"></div> -->
-    
+    <!-- Google Translate element (hidden) -->
+    <div id="google_translate_element" style="display: none;"></div>
+
     <script>
-        // Removed Google Translate initialization
-        // function googleTranslateInit() {
-        //     new google.translate.TranslateElement({
-        //         pageLanguage: 'fr',
-        //         includedLanguages: 'fr,en,es,de,it,pt,nl,pl,ro,hu,cz,sk,bg,hr,se,no,fi,dk,gr,tr,ua,mk,ar,hi,zh,ja,ko,ru,id,th,vi,bn,sw,he,fa,ta,mr,ms,ne,pa,gu,te'
-        //     }, 'google_translate_element');
-        // }
+        // Initialisation du script Google Translate
+        function googleTranslateInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'fr',
+                includedLanguages: 'fr,en,es,de,it,pt,nl,pl,ro,hu,cz,sk,bg,hr,se,no,fi,dk,gr,tr,ua,mk,ar,hi,zh,ja,ko,ru,id,th,vi,bn,sw,he,fa,ta,mr,ms,ne,pa,gu,te'
+            }, 'google_translate_element');
+        }
 
         function changeLanguage() {
             var lang = document.getElementById("languageSelect").value;
@@ -246,18 +246,17 @@
         }
 
         window.onload = function () {
-            // Remove the Google Translate script loading
-            // var script = document.createElement("script");
-            // script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
-            // document.body.appendChild(script);
+            var script = document.createElement("script");
+            script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
+            document.body.appendChild(script);
 
-            // Load the saved language or default to 'fr'
+            // Charger la langue sauvegardée ou la langue par défaut (fr)
             var savedLang = localStorage.getItem("selectedLanguage") || "fr";
             document.getElementById("languageSelect").value = savedLang;
 
             setTimeout(() => {
                 applyLanguage(savedLang);
-            }, 2000); // Delay to ensure proper loading
+            }, 2000); // Delai pour assurer un chargement correct
         };
     </script>
 
