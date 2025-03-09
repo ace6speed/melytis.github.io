@@ -117,17 +117,16 @@
             text-decoration: underline;
         }
 
-        /* Hide Google Translate element only */
+        /* Hide Google Translate elements */
         #google_translate_element {
-            display: none !important; /* Cache l'élément de Google Translate */
+            display: none !important;
         }
 
-        /* Cacher le widget Google Traduction */
+        /* Hide the translation bar completely */
         .goog-te-banner-frame {
             display: none !important;
         }
 
-        /* Cacher la barre de traduction Google en haut */
         .goog-te-gadget {
             display: none !important;
         }
@@ -171,7 +170,7 @@
         <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
 
-    <!-- Sélecteur de langue -->
+    <!-- Language Selector -->
     <div id="language-container" style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
         <label for="languageSelect" style="color: white;">🌍 Langue :</label>
         <select id="languageSelect" onchange="changeLanguage()">
@@ -220,7 +219,7 @@
         </select>
     </div>
 
-    <!-- Google Translate (élément invisible) -->
+    <!-- Google Translate element (hidden) -->
     <div id="google_translate_element" style="display: none;"></div>
     
     <script>
@@ -250,13 +249,13 @@
             script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
             document.body.appendChild(script);
 
-            // Charge la langue sauvegardée ou 'fr' par défaut
+            // Load the saved language or default to 'fr'
             var savedLang = localStorage.getItem("selectedLanguage") || "fr";
             document.getElementById("languageSelect").value = savedLang;
 
             setTimeout(() => {
                 applyLanguage(savedLang);
-            }, 2000); // Délai pour s'assurer que Google Translate est chargé
+            }, 2000); // Delay to ensure Google Translate loads properly
         };
     </script>
 
