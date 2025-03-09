@@ -3,61 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panier - Nike Vintage</title>
+    <title>Panier</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: #fff;
-            line-height: 1.6;
-        }
-
-        .navbar {
-            background-color: #111;
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .navbar a:hover {
-            color: #ccc;
-        }
-
-        .cart-logo {
-            width: 40px;
-        }
-
-        .cart-items {
-            padding: 60px 20px;
-        }
-
-        .cart-item {
-            background-color: #111;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
             padding: 20px;
         }
 
-        .cart-item h4 {
-            margin: 0;
+        .cart-items {
+            margin-top: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
         }
 
         .cart-item p {
-            margin: 10px 0;
+            margin: 0;
         }
 
         .total {
@@ -66,64 +30,56 @@
             margin-top: 20px;
         }
 
-        button {
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
-        }
-
-        button:hover {
-            background: #ccc;
+        .empty {
+            color: red;
         }
     </style>
 </head>
 <body>
+    <h1>Votre Panier</h1>
+    
+    <!-- Liste des produits dans le panier -->
+    <div class="cart-items" id="cart-items">
+        <!-- Les éléments seront ajoutés dynamiquement ici -->
+    </div>
 
-<div class="navbar">
-    <a href="index.html">Accueil</a>
-    <a href="boutique.html">Boutique</a>
-    <a href="panier.html" id="cart-link">
-        <img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">
-    </a>
-</div>
+    <div class="total" id="total">
+        <!-- Le total sera ajouté ici -->
+    </div>
 
-<div class="cart-items" id="cart-items">
-    <!-- Les articles seront insérés ici par JavaScript -->
-</div>
+    <script>
+        // Fonction pour afficher les produits dans le panier
+        function displayCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsDiv = document.getElementById('cart-items');
+            let totalDiv = document.getElementById('total');
 
-<script>
-    // Fonction pour afficher le contenu du panier
-    function displayCart() {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let cartContainer = document.getElementById('cart-items');
+            // Si le panier est vide
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p class="empty">Votre panier est vide.</p>';
+                totalDiv.innerHTML = '';
+                return;
+            }
 
-        if (cart.length === 0) {
-            cartContainer.innerHTML = '<p>Votre panier est vide.</p>';
-        } else {
             let total = 0;
-            cartContainer.innerHTML = ''; // Clear the container
+            cartItemsDiv.innerHTML = ''; // Réinitialise la liste des articles
 
+            // Affichage de chaque produit dans le panier
             cart.forEach(item => {
+                let cartItemDiv = document.createElement('div');
+                cartItemDiv.classList.add('cart-item');
+                cartItemDiv.innerHTML = `<p>${item.name} - ${item.price}€</p>`;
+                cartItemsDiv.appendChild(cartItemDiv);
+
                 total += item.price;
-                cartContainer.innerHTML += `
-                    <div class="cart-item">
-                        <h4>${item.name}</h4>
-                        <p>Prix : ${item.price.toFixed(2)}€</p>
-                    </div>
-                `;
             });
 
-            cartContainer.innerHTML += `<p class="total">Total : ${total.toFixed(2)}€</p>`;
+            // Affichage du total
+            totalDiv.innerHTML = `Total : ${total.toFixed(2)}€`;
         }
-    }
 
-    window.onload = displayCart;
-</script>
-
+        // Afficher le panier lors du chargement de la page
+        window.onload = displayCart;
+    </script>
 </body>
 </html>
