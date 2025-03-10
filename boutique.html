@@ -6,47 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike Vintage - Boutique en Ligne</title>
     <style>
-        body 
-<!-- Dans index.html -->
-<body>
-    <!-- AJOUTEZ LE SCRIPT 5 ICI -->
-    <script>
-        let productStock = JSON.parse(localStorage.getItem('productStock')) || {};
-
-        function initializeStock() {
-            document.querySelectorAll('.product').forEach(product => {
-                let productId = product.querySelector('button').getAttribute('onclick').match(/'([^']+)'/)[1];
-                if (!(productId in productStock)) {
-                    productStock[productId] = true;
-                }
-                updateProductAvailability(product, productId);
-            });
-            localStorage.setItem('productStock', JSON.stringify(productStock));
-        }
-
-        function updateProductAvailability(productElement, productId) {
-            let button = productElement.querySelector('button');
-            if (!productStock[productId]) {
-                button.disabled = true;
-                button.textContent = 'Vendu';
-                productElement.classList.add('sold');
-            }
-        }
-
-        window.onload = function() {
-            initializeStock();
-            updateCartCount();
-        };
-    </script>
-
-    <!-- Votre contenu HTML existant -->
-    <div class="navbar">
-        <!-- ... -->
-    </div>
-    <!-- ... reste de votre code ... -->
-</body>
-</html>
-{
+        body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
@@ -159,24 +119,6 @@
             border-top: 1px solid #333;
         }
     </style>
-<style>
-.cart-item-image {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.sold {
-    opacity: 0.7;
-}
-
-.sold button {
-    background-color: #ccc !important;
-    cursor: not-allowed;
-}
-</style>
-
 </head>
 
 <body>
@@ -326,22 +268,36 @@
     <script>
         // Fonction pour ajouter un produit au panier
         function addToCart(productName, productPrice) {
-    // Récupérer l'image du produit
-    let productElement = event.target.closest('.product');
-    let productImage = productElement.querySelector('.image-carousel img').src;
-    
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let product = {
-        name: productName,
-        price: productPrice,
-        image: productImage
-    };
-    
-    cart.push(product);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    alert(productName + " a été ajouté au panier !");
-}
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let product = { name: productName, price: productPrice };
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(productName + " a été ajouté au panier !");
+        }
+    </script>
+<script>
+    // Fonction pour ajouter un produit au panier
+    function addToCart(productName, productPrice) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Trouver l'élément du produit cliqué
+        let productElement = event.target.closest('.product');
+        // Obtenir la première image du carousel du produit
+        let productImage = productElement.querySelector('.image-carousel img').src;
+        
+        let product = {
+            name: productName,
+            price: productPrice,
+            image: productImage
+        };
+        
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Mettre à jour le nombre d'articles dans le panier
+        updateCartCount();
+        alert(productName + " a été ajouté au panier !");
+    }
 
     // Fonction pour mettre à jour le nombre d'articles dans le panier
     function updateCartCount() {
