@@ -223,6 +223,48 @@ Frais de port: ${formData.shipping}€`;
     });
 </script>
 
+<script>
+function displayCartItems() {
+    let cartContainer = document.getElementById('cart-items-container');
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalPrice = 0;
+    
+    cartContainer.innerHTML = '';
+    
+    cart.forEach((item, index) => {
+        totalPrice += item.price;
+        
+        let cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-details">
+                <h3 class="cart-item-name">${item.name}</h3>
+                <p class="cart-item-price">${item.price.toFixed(2)}€</p>
+            </div>
+            <button onclick="removeFromCart(${index})" class="remove-button">Supprimer</button>
+        `;
+        
+        cartContainer.appendChild(cartItem);
+    });
+    
+    document.getElementById('total-price').textContent = totalPrice.toFixed(2) + '€';
+}
+
+function removeFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    displayCartItems();
+    updateCartCount();
+}
+
+// Afficher les articles au chargement de la page
+window.onload = function() {
+    displayCartItems();
+    updateCartCount();
+};
+</script>
 
 </body>
 </html>
