@@ -119,24 +119,6 @@
             border-top: 1px solid #333;
         }
     </style>
-<style>
-.cart-item-image {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.sold {
-    opacity: 0.7;
-}
-
-.sold button {
-    background-color: #ccc !important;
-    cursor: not-allowed;
-}
-</style>
-
 </head>
 
 <body>
@@ -284,40 +266,56 @@
     </div>
 
     <script>
-function displayCartItems() {
-    let cartContainer = document.getElementById('cart-items-container');
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let totalPrice = 0;
-    
-    cartContainer.innerHTML = '';
-    
-    cart.forEach((item, index) => {
-        totalPrice += item.price;
+        // Fonction pour ajouter un produit au panier
+        function addToCart(productName, productPrice) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let product = { name: productName, price: productPrice };
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(productName + " a été ajouté au panier !");
+        }
+    </script>
+<script>
+    // Fonction pour ajouter un produit au panier
+    function addToCart(productName, productPrice) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
         
-        let cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.innerHTML = `
-            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-            <div class="cart-item-details">
-                <h3 class="cart-item-name">${item.name}</h3>
-                <p class="cart-item-price">${item.price.toFixed(2)}€</p>
-            </div>
-            <button onclick="removeFromCart(${index})" class="remove-button">Supprimer</button>
-        `;
+        // Trouver l'élément du produit cliqué
+        let productElement = event.target.closest('.product');
+        // Obtenir la première image du carousel du produit
+        let productImage = productElement.querySelector('.image-carousel img').src;
         
-        cartContainer.appendChild(cartItem);
-    });
-    
-    document.getElementById('total-price').textContent = totalPrice.toFixed(2) + '€';
-}
+        let product = {
+            name: productName,
+            price: productPrice,
+            image: productImage
+        };
+        
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Mettre à jour le nombre d'articles dans le panier
+        updateCartCount();
+        alert(productName + " a été ajouté au panier !");
+    }
 
-// Appeler la fonction au chargement de la page
-window.onload = function() {
-    displayCartItems();
-    updateCartCount();
-};
+    // Fonction pour mettre à jour le nombre d'articles dans le panier
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartCount = cart.length;
+        
+        // Met à jour le texte ou l'icône du panier
+        let cartLink = document.getElementById('cart-link');
+        if (cartCount > 0) {
+            cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo"><span>${cartCount}</span>`;
+        } else {
+            cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">`;
+        }
+    }
+
+    // Mettre à jour le compteur au chargement de la page
+    window.onload = updateCartCount;
 </script>
-
 
 
 <!-- Sélecteur de langue -->
