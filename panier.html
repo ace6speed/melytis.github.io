@@ -174,54 +174,40 @@
 
 
    <script>
-    document.getElementById('order-btn').addEventListener('click', function() {
-        document.getElementById('order-modal').style.display = 'block';
-        updateShippingInfo();
+function displayCartItems() {
+    let cartContainer = document.getElementById('cart-items-container');
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalPrice = 0;
+    
+    cartContainer.innerHTML = '';
+    
+    cart.forEach((item, index) => {
+        totalPrice += item.price;
+        
+        let cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-item-details">
+                <h3 class="cart-item-name">${item.name}</h3>
+                <p class="cart-item-price">${item.price.toFixed(2)}€</p>
+            </div>
+            <button onclick="removeFromCart(${index})" class="remove-button">Supprimer</button>
+        `;
+        
+        cartContainer.appendChild(cartItem);
     });
+    
+    document.getElementById('total-price').textContent = totalPrice.toFixed(2) + '€';
+}
 
-    document.querySelector('.close').addEventListener('click', function() {
-        document.getElementById('order-modal').style.display = 'none';
-    });
-
-    function updateShippingInfo() {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let itemCount = cart.length;
-        let shippingCost = itemCount >= 2 ? 0 : itemCount * 6.5;
-        let shippingText = shippingCost === 0 ? 'Frais de port offerts!' : `Frais de port: ${shippingCost.toFixed(2)}€`;
-        document.getElementById('shipping-info').textContent = shippingText;
-    }
-
-    document.getElementById('order-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let itemCount = cart.length;
-        let shippingCost = itemCount >= 2 ? 0 : itemCount * 6.5;
-        let totalPrice = cart.reduce((sum, item) => sum + item.price, 0) + shippingCost;
-
-        let formData = {
-            name: document.getElementById('name').value,
-            address: document.getElementById('address').value,
-            city: document.getElementById('city').value,
-            postal: document.getElementById('postal').value,
-            email: document.getElementById('email').value,
-            country: document.getElementById('country').value,
-            total: totalPrice.toFixed(2),
-            shipping: shippingCost.toFixed(2)
-        };
-
-        let mailBody = `
-Commande de: ${formData.name}
-Adresse: ${formData.address}
-Ville: ${formData.city}
-Code Postal: ${formData.postal}
-Email: ${formData.email}
-Pays: ${formData.country}
-Total: ${formData.total}€
-Frais de port: ${formData.shipping}€`;
-
-        window.location.href = `mailto:melytis593@gmail.com?subject=Nouvelle Commande&body=${encodeURIComponent(mailBody)}`;
-    });
+// Appeler la fonction au chargement de la page
+window.onload = function() {
+    displayCartItems();
+    updateCartCount();
+};
 </script>
+
 
 
 </body>
