@@ -6,7 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike Vintage - Boutique en Ligne</title>
     <style>
-        body {
+        body 
+<!-- Dans index.html -->
+<body>
+    <!-- AJOUTEZ LE SCRIPT 5 ICI -->
+    <script>
+        let productStock = JSON.parse(localStorage.getItem('productStock')) || {};
+
+        function initializeStock() {
+            document.querySelectorAll('.product').forEach(product => {
+                let productId = product.querySelector('button').getAttribute('onclick').match(/'([^']+)'/)[1];
+                if (!(productId in productStock)) {
+                    productStock[productId] = true;
+                }
+                updateProductAvailability(product, productId);
+            });
+            localStorage.setItem('productStock', JSON.stringify(productStock));
+        }
+
+        function updateProductAvailability(productElement, productId) {
+            let button = productElement.querySelector('button');
+            if (!productStock[productId]) {
+                button.disabled = true;
+                button.textContent = 'Vendu';
+                productElement.classList.add('sold');
+            }
+        }
+
+        window.onload = function() {
+            initializeStock();
+            updateCartCount();
+        };
+    </script>
+
+    <!-- Votre contenu HTML existant -->
+    <div class="navbar">
+        <!-- ... -->
+    </div>
+    <!-- ... reste de votre code ... -->
+</body>
+</html>
+{
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
