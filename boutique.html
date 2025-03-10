@@ -284,44 +284,40 @@
     </div>
 
     <script>
-        // Fonction pour ajouter un produit au panier
-        function addToCart(productName, productPrice) {
-    // Récupérer l'image du produit
-    let productElement = event.target.closest('.product');
-    let productImage = productElement.querySelector('.image-carousel img').src;
-    
+function displayCartItems() {
+    let cartContainer = document.getElementById('cart-items-container');
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let product = {
-        name: productName,
-        price: productPrice,
-        image: productImage
-    };
+    let totalPrice = 0;
     
-    cart.push(product);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    alert(productName + " a été ajouté au panier !");
+    cartContainer.innerHTML = '';
+    
+    cart.forEach((item, index) => {
+        totalPrice += item.price;
+        
+        let cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-item-details">
+                <h3 class="cart-item-name">${item.name}</h3>
+                <p class="cart-item-price">${item.price.toFixed(2)}€</p>
+            </div>
+            <button onclick="removeFromCart(${index})" class="remove-button">Supprimer</button>
+        `;
+        
+        cartContainer.appendChild(cartItem);
+    });
+    
+    document.getElementById('total-price').textContent = totalPrice.toFixed(2) + '€';
 }
 
-    }
-
-    // Fonction pour mettre à jour le nombre d'articles dans le panier
-    function updateCartCount() {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let cartCount = cart.length;
-        
-        // Met à jour le texte ou l'icône du panier
-        let cartLink = document.getElementById('cart-link');
-        if (cartCount > 0) {
-            cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo"><span>${cartCount}</span>`;
-        } else {
-            cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">`;
-        }
-    }
-
-    // Mettre à jour le compteur au chargement de la page
-    window.onload = updateCartCount;
+// Appeler la fonction au chargement de la page
+window.onload = function() {
+    displayCartItems();
+    updateCartCount();
+};
 </script>
+
 
 
 <!-- Sélecteur de langue -->
