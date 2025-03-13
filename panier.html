@@ -5,10 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panier - Nike Vintage</title>
     <style>
-        /* Styles inchangés, vous pouvez ajouter ou modifier selon vos préférences */
-    </style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
 
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR"></script> <!-- PayPal SDK -->
+        .navbar {
+            background-color: #111;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #ccc;
+        }
+
+        .cart-logo {
+            width: 40px;
+        }
+
+        .cart-container {
+            padding: 40px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background-color: #111;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-item img {
+            width: 80px;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .cart-item-name {
+            font-size: 18px;
+        }
+
+        .cart-item-price {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .remove-button {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .remove-button:hover {
+            background: #ccc;
+        }
+
+        .total-price {
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .return-btn {
+            background: #fff;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .return-btn:hover {
+            background: #ccc;
+        }
+    </style>
 
 </head>
 
@@ -39,37 +141,7 @@
         <button id="order-btn" class="return-btn">Commander</button>
     </div>
 
-    <!-- Modal de commande (une seule fois) -->
-    <div id="order-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Informations de livraison</h2>
-            <p style="color: #ccc; margin-bottom: 20px;">Livraison uniquement en Europe</p>
-            <form id="order-form">
-                <input type="text" id="name" placeholder="Nom et Prénom" required>
-                <input type="text" id="address" placeholder="Adresse" required>
-                <input type="text" id="city" placeholder="Ville" required>
-                <input type="text" id="postal" placeholder="Code Postal" required>
-                <input type="email" id="email" placeholder="Email" required>
-                <select id="country" required>
-                    <option value="">Sélectionnez un pays</option>
-                    <option value="France">France</option>
-                    <option value="Germany">Allemagne</option>
-                    <option value="Spain">Espagne</option>
-                    <option value="Italy">Italie</option>
-                    <option value="Netherlands">Pays-Bas</option>
-                </select>
-                <div id="shipping-info" style="margin: 10px 0; color: #ccc;"></div>
-            </form>
-
-            <!-- Intégration PayPal -->
-            <div id="paypal-button-container"></div>
-
-        </div>
-    </div>
-</div>
-
-<script>
+    <script>
     function displayCartItems() {
         let cartContainer = document.getElementById('cart-items-container');
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -102,14 +174,39 @@
         cart.splice(index, 1);
         localStorage.setItem('cart', JSON.stringify(cart));
         displayCartItems();
-        updateCartCount();
     }
+
+    document.getElementById('order-btn').addEventListener('click', function() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+
+        if (totalPrice === 0) {
+            alert("Votre panier est vide.");
+            return;
+        }
+
+        let paypalUrl = `https://www.paypal.com/paypalme/Meslissahb/${totalPrice.toFixed(2)}`;
+        window.open(paypalUrl, "_blank");
+
+        let mailBody = `
+Commande Payée !
+Total: ${totalPrice.toFixed(2)}€
+
+Détails des articles:
+${cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n")}
+        `;
+
+        setTimeout(() => {
+            window.location.href = `mailto:melytis593@gmail.com?subject=Commande Payée&body=${encodeURIComponent(mailBody)}`;
+            localStorage.removeItem('cart');
+            displayCartItems();
+        }, 3000);
+    });
 
     window.onload = function() {
         displayCartItems();
-        updateCartCount();
     };
-</script>
+    </script>
 
 </body>
 </html>
