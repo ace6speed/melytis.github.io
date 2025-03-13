@@ -35,10 +35,6 @@
             color: #ccc;
         }
 
-        .cart-logo {
-            width: 40px;
-        }
-
         .cart-container {
             padding: 40px;
         }
@@ -110,6 +106,20 @@
         .return-btn:hover {
             background: #ccc;
         }
+
+        .order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .order-form input, .order-form select {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
     </style>
 
 </head>
@@ -121,24 +131,35 @@
             <a href="index.html">Accueil</a>
             <a href="index.html#nike-vintage">Nike Vintage</a>
         </div>
-        <a href="panier.html" id="cart-link">
-            <img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">
-        </a>
     </div>
 
     <div class="cart-container">
-    <h2>Mon Panier</h2>
-    
-    <div id="cart-items-container">
-        <!-- Articles du panier s'affichent ici -->
-    </div>
-    
-    <div class="total-price">
-        Total : <span id="total-price">0,00€</span>
-    </div>
-    <div style="display: flex; gap: 20px; margin-top: 20px;">
-        <a href="index.html" class="return-btn">Retour à la Boutique</a>
-        <button id="order-btn" class="return-btn">Commander</button>
+        <h2>Mon Panier</h2>
+        
+        <div id="cart-items-container">
+            <!-- Articles du panier -->
+        </div>
+        
+        <div class="total-price">
+            Total : <span id="total-price">0,00€</span>
+        </div>
+
+        <form id="order-form" class="order-form">
+            <input type="text" id="name" placeholder="Nom et Prénom" required>
+            <input type="text" id="address" placeholder="Adresse" required>
+            <input type="text" id="city" placeholder="Ville" required>
+            <input type="text" id="postal" placeholder="Code Postal" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <select id="country" required>
+                <option value="">Sélectionnez un pays</option>
+                <option value="France">France</option>
+                <option value="Germany">Allemagne</option>
+                <option value="Spain">Espagne</option>
+                <option value="Italy">Italie</option>
+                <option value="Netherlands">Pays-Bas</option>
+            </select>
+            <button type="submit" class="return-btn">Payer avec PayPal</button>
+        </form>
     </div>
 
     <script>
@@ -176,7 +197,9 @@
         displayCartItems();
     }
 
-    document.getElementById('order-btn').addEventListener('click', function() {
+    document.getElementById('order-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
 
@@ -185,11 +208,23 @@
             return;
         }
 
+        let formData = {
+            name: document.getElementById('name').value,
+            address: document.getElementById('address').value,
+            city: document.getElementById('city').value,
+            postal: document.getElementById('postal').value,
+            email: document.getElementById('email').value,
+            country: document.getElementById('country').value,
+        };
+
         let paypalUrl = `https://www.paypal.com/paypalme/Meslissahb/${totalPrice.toFixed(2)}`;
         window.open(paypalUrl, "_blank");
 
         let mailBody = `
 Commande Payée !
+Nom: ${formData.name}
+Adresse: ${formData.address}, ${formData.city}, ${formData.postal}, ${formData.country}
+Email: ${formData.email}
 Total: ${totalPrice.toFixed(2)}€
 
 Détails des articles:
