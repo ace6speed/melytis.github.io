@@ -270,8 +270,14 @@ ${cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n")}
     });
 
     window.onload = function() {
-        displayCartItems();
-    };
+    displayCartItems();
+    observeCartChanges(); // 👈 Ajoute l'observateur pour détecter les changements
+    setTimeout(() => {
+        let savedLang = localStorage.getItem("selectedLanguage") || "fr";
+        applyLanguage(savedLang);
+    }, 1000); // 👈 Applique la traduction après 1s
+};
+
     </script>
 function observeCartChanges() {
     let cartContainer = document.getElementById("cart-items-container");
