@@ -197,6 +197,16 @@
     <script>
     function displayCartItems() {
         let cartContainer = document.getElementById('cart-items-container');
+function observeCartChanges() {
+    let cartContainer = document.getElementById("cart-items-container");
+    let observer = new MutationObserver(() => {
+        let savedLang = localStorage.getItem("selectedLanguage") || "fr";
+        applyLanguage(savedLang);
+    });
+
+    observer.observe(cartContainer, { childList: true, subtree: true });
+}
+
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let totalPrice = 0;
         
