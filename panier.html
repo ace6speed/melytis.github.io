@@ -273,6 +273,15 @@ ${cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n")}
         displayCartItems();
     };
     </script>
+function observeCartChanges() {
+    let cartContainer = document.getElementById("cart-items-container");
+    let observer = new MutationObserver(() => {
+        let savedLang = localStorage.getItem("selectedLanguage") || "fr";
+        applyLanguage(savedLang);
+    });
+
+    observer.observe(cartContainer, { childList: true, subtree: true });
+}
 
 </body>
 </html>
