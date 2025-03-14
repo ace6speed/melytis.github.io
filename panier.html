@@ -161,6 +161,37 @@
             <button type="submit" class="return-btn">Payer avec PayPal</button>
         </form>
     </div>
+<!-- Sélecteur de langue -->
+<div id="language-container" style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
+    <label for="languageSelect" style="color: white;">🌍 Langue :</label>
+    <select id="languageSelect" onchange="changeLanguage()">
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="pt">🇵🇹 Português</option>
+        <option value="nl">🇳🇱 Nederlands</option>
+        <option value="pl">🇵🇱 Polski</option>
+        <option value="ro">🇷🇴 Română</option>
+        <option value="hu">🇭🇺 Magyar</option>
+        <option value="cs">🇨🇿 Čeština</option>
+        <option value="sk">🇸🇰 Slovenčina</option>
+        <option value="bg">🇧🇬 Български</option>
+        <option value="hr">🇭🇷 Hrvatski</option>
+        <option value="sv">🇸🇪 Svenska</option>
+        <option value="no">🇳🇴 Norsk</option>
+        <option value="fi">🇫🇮 Suomi</option>
+        <option value="da">🇩🇰 Dansk</option>
+        <option value="el">🇬🇷 Ελληνικά</option>
+        <option value="tr">🇹🇷 Türkçe</option>
+        <option value="uk">🇺🇦 Українська</option>
+        <option value="mk">🇲🇰 Македонски</option>
+    </select>
+</div>
+
+<!-- Élément Google Translate (caché) -->
+<div id="google_translate_element" style="display: none;"></div>
 
     <script>
     function displayCartItems() {
