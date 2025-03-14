@@ -278,6 +278,68 @@ ${cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n")}
             displayCartItems();
         }, 3000);
     });
+function applyLanguage(lang) {
+    let translations = {
+        "fr": {
+            "Mon Panier": "Mon Panier",
+            "Total :": "Total :",
+            "Nom et Prénom": "Nom et Prénom",
+            "Adresse": "Adresse",
+            "Ville": "Ville",
+            "Code Postal": "Code Postal",
+            "Email": "Email",
+            "Sélectionnez un pays": "Sélectionnez un pays",
+            "Payer avec PayPal": "Payer avec PayPal"
+        },
+        "en": {
+            "Mon Panier": "My Cart",
+            "Total :": "Total:",
+            "Nom et Prénom": "Full Name",
+            "Adresse": "Address",
+            "Ville": "City",
+            "Code Postal": "Postal Code",
+            "Email": "Email",
+            "Sélectionnez un pays": "Select a country",
+            "Payer avec PayPal": "Pay with PayPal"
+        },
+        "es": {
+            "Mon Panier": "Mi Carrito",
+            "Total :": "Total:",
+            "Nom et Prénom": "Nombre y Apellido",
+            "Adresse": "Dirección",
+            "Ville": "Ciudad",
+            "Code Postal": "Código Postal",
+            "Email": "Correo Electrónico",
+            "Sélectionnez un pays": "Selecciona un país",
+            "Payer avec PayPal": "Pagar con PayPal"
+        }
+    };
+
+    let elements = {
+        "h2": "Mon Panier",
+        ".total-price": "Total :",
+        "#name": "Nom et Prénom",
+        "#address": "Adresse",
+        "#city": "Ville",
+        "#postal": "Code Postal",
+        "#email": "Email",
+        "#order-form select option:first-child": "Sélectionnez un pays",
+        ".return-btn": "Payer avec PayPal"
+    };
+
+    document.querySelectorAll("h2, .total-price, .return-btn").forEach(el => {
+        if (translations[lang] && translations[lang][el.textContent.trim()]) {
+            el.textContent = translations[lang][el.textContent.trim()];
+        }
+    });
+
+    document.querySelector("#name").placeholder = translations[lang]["Nom et Prénom"];
+    document.querySelector("#address").placeholder = translations[lang]["Adresse"];
+    document.querySelector("#city").placeholder = translations[lang]["Ville"];
+    document.querySelector("#postal").placeholder = translations[lang]["Code Postal"];
+    document.querySelector("#email").placeholder = translations[lang]["Email"];
+    document.querySelector("#order-form select option:first-child").textContent = translations[lang]["Sélectionnez un pays"];
+}
 
     window.onload = function() {
     displayCartItems();
