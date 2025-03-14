@@ -193,15 +193,6 @@
 <!-- Élément Google Translate (caché) -->
 <div id="google_translate_element" style="display: none;"></div>
 
-function observeCartChanges() {
-    let cartContainer = document.getElementById("cart-items-container");
-    let observer = new MutationObserver(() => {
-        let savedLang = localStorage.getItem("selectedLanguage") || "fr";
-        applyLanguage(savedLang);
-    });
-
-    observer.observe(cartContainer, { childList: true, subtree: true });
-}
 
     <script>
     function displayCartItems() {
