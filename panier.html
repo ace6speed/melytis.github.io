@@ -344,12 +344,14 @@ function applyLanguage(lang) {
 
     window.onload = function() {
     displayCartItems();
-    observeCartChanges(); // 👈 Ajoute l'observateur pour détecter les changements
+    observeCartChanges(); // Ajoute l'observateur pour détecter les changements
     setTimeout(() => {
         let savedLang = localStorage.getItem("selectedLanguage") || "fr";
         applyLanguage(savedLang);
-    }, 1000); // 👈 Applique la traduction après 1s
+        googleTranslateElementInit();
+    }, 1000); // Applique la traduction après 1s
 };
+
 
     </script>
 
