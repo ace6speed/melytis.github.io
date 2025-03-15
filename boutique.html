@@ -346,41 +346,7 @@ window.onload = updateCartCount;
 <div id="google_translate_element" style="display: none;"></div>
 
 <script>
-    function googleTranslateInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'fr',
-            includedLanguages: 'fr,en,es,de,it,pt,nl,pl,ro,hu,cz,sk,bg,hr,se,no,fi,dk,gr,tr,ua,mk,ar,hi,zh,ja,ko,ru,id,th,vi,bn,sw,he,fa,ta,mr,ms,ne,pa,gu,te'
-        }, 'google_translate_element');
-    }
-
-    function changeLanguage() {
-        var lang = document.getElementById("languageSelect").value;
-        localStorage.setItem("selectedLanguage", lang); // Sauvegarde la langue
-        applyLanguage(lang);
-    }
-
-    function applyLanguage(lang) {
-        var select = document.querySelector(".goog-te-combo");
-        if (select) {
-            select.value = lang;
-            select.dispatchEvent(new Event("change"));
-        }
-    }
-
-    // Charge Google Translate et applique la langue au chargement
-    window.onload = function () {
-        var script = document.createElement("script");
-        script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
-        document.body.appendChild(script);
-
-        var savedLang = localStorage.getItem("selectedLanguage") || "fr"; // Langue par défaut
-        document.getElementById("languageSelect").value = savedLang;
-
-        setTimeout(() => {
-            applyLanguage(savedLang);
-        }, 2000); // Délai pour s'assurer que Google Translate est chargé
-    };
-// Validation et messages de confirmation pour l'ajout au panier
+// Fonction unique pour ajouter au panier
 function addToCart(productName, productPrice) {
     try {
         // Trouver l'élément du produit cliqué
@@ -399,12 +365,25 @@ function addToCart(productName, productPrice) {
         
         // Mettre à jour le nombre d'articles dans le panier
         updateCartCount();
-
+        
         // Afficher une notification plus élégante
         showNotification(`${productName} a été ajouté au panier !`);
     } catch (e) {
         console.error('Erreur:', e);
         showNotification('Erreur lors de l\'ajout au panier', 'error');
+    }
+}
+
+// Fonction pour mettre à jour le compteur du panier
+function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartCount = cart.length;
+    
+    let cartLink = document.getElementById('cart-link');
+    if (cartCount > 0) {
+        cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo"><span>${cartCount}</span>`;
+    } else {
+        cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">`;
     }
 }
 
@@ -414,7 +393,6 @@ function showNotification(message, type = 'success') {
     notification.className = `notification ${type}`;
     notification.textContent = message;
     
-    // Styles pour la notification
     notification.style.position = 'fixed';
     notification.style.bottom = '20px';
     notification.style.left = '50%';
@@ -428,7 +406,6 @@ function showNotification(message, type = 'success') {
     
     document.body.appendChild(notification);
     
-    // Supprimer la notification après 3 secondes
     setTimeout(() => {
         notification.style.animation = 'slideDown 0.5s ease';
         setTimeout(() => {
@@ -437,7 +414,46 @@ function showNotification(message, type = 'success') {
     }, 3000);
 }
 
+// Fonction pour changer la langue
+function changeLanguage() {
+    var lang = document.getElementById("languageSelect").value;
+    localStorage.setItem("selectedLanguage", lang);
+    applyLanguage(lang);
+}
+
+function applyLanguage(lang) {
+    var select = document.querySelector(".goog-te-combo");
+    if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event("change"));
+    }
+}
+
+// Initialisation au chargement de la page
+window.onload = function() {
+    updateCartCount();
+    
+    // Chargement de Google Translate
+    var script = document.createElement("script");
+    script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
+    document.body.appendChild(script);
+    
+    // Application de la langue sauvegardée
+    var savedLang = localStorage.getItem("selectedLanguage") || "fr";
+    document.getElementById("languageSelect").value = savedLang;
+    setTimeout(() => {
+        applyLanguage(savedLang);
+    }, 2000);
+};
+
+function googleTranslateInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'fr,en,es,de,it,pt,nl,pl,ro,hu,cz,sk,bg,hr,se,no,fi,dk,gr,tr,ua,mk,ar,hi,zh,ja,ko,ru,id,th,vi,bn,sw,he,fa,ta,mr,ms,ne,pa,gu,te'
+    }, 'google_translate_element');
+}
 </script>
+
 
 </body>
 
