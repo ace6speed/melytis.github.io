@@ -358,6 +358,63 @@ window.onload = updateCartCount;
             applyLanguage(savedLang);
         }, 2000); // Délai pour s'assurer que Google Translate est chargé
     };
+// Validation et messages de confirmation pour l'ajout au panier
+function addToCart(productName, productPrice) {
+    try {
+        // Trouver l'élément du produit cliqué
+        let productElement = event.target.closest('.product');
+        let productImage = productElement.querySelector('.image-carousel img').src;
+        
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let product = {
+            name: productName,
+            price: productPrice,
+            image: productImage
+        };
+        
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Mettre à jour le nombre d'articles dans le panier
+        updateCartCount();
+
+        // Afficher une notification plus élégante
+        showNotification(`${productName} a été ajouté au panier !`);
+    } catch (e) {
+        console.error('Erreur:', e);
+        showNotification('Erreur lors de l\'ajout au panier', 'error');
+    }
+}
+
+// Fonction pour afficher des notifications stylées
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    // Styles pour la notification
+    notification.style.position = 'fixed';
+    notification.style.bottom = '20px';
+    notification.style.left = '50%';
+    notification.style.transform = 'translateX(-50%)';
+    notification.style.padding = '15px 25px';
+    notification.style.borderRadius = '5px';
+    notification.style.backgroundColor = type === 'success' ? '#4CAF50' : '#f44336';
+    notification.style.color = 'white';
+    notification.style.zIndex = '1000';
+    notification.style.animation = 'slideUp 0.5s ease';
+    
+    document.body.appendChild(notification);
+    
+    // Supprimer la notification après 3 secondes
+    setTimeout(() => {
+        notification.style.animation = 'slideDown 0.5s ease';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 500);
+    }, 3000);
+}
+
 </script>
 
 </body>
