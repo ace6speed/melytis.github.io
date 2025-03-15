@@ -404,6 +404,32 @@ function validateForm(formData) {
     document.querySelector("#email").placeholder = translations[lang]["Email"];
     document.querySelector("#order-form select option:first-child").textContent = translations[lang]["Sélectionnez un pays"];
 }
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    notification.style.position = 'fixed';
+    notification.style.bottom = '20px';
+    notification.style.left = '50%';
+    notification.style.transform = 'translateX(-50%)';
+    notification.style.padding = '15px 25px';
+    notification.style.borderRadius = '5px';
+    notification.style.backgroundColor = type === 'success' ? '#4CAF50' : '#f44336';
+    notification.style.color = 'white';
+    notification.style.zIndex = '1000';
+    notification.style.animation = 'slideUp 0.5s ease';
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideDown 0.5s ease';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 500);
+    }, 3000);
+}
+
 
     window.onload = function() {
     displayCartItems();
