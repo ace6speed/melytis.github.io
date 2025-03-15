@@ -12,7 +12,6 @@
             background-color: #000;
             color: #fff;
         }
-
         .navbar {
             background-color: #111;
             color: white;
@@ -22,7 +21,6 @@
             align-items: center;
             border-bottom: 1px solid #333;
         }
-
         .navbar a {
             color: white;
             text-decoration: none;
@@ -30,15 +28,12 @@
             padding: 10px;
             transition: all 0.3s ease;
         }
-
         .navbar a:hover {
             color: #ccc;
         }
-
         .cart-container {
             padding: 40px;
         }
-
         .cart-item {
             display: flex;
             align-items: center;
@@ -49,27 +44,22 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
         }
-
         .cart-item img {
             width: 80px;
             border-radius: 8px;
         }
-
         .cart-item-details {
             display: flex;
             flex-direction: column;
             gap: 5px;
         }
-
         .cart-item-name {
             font-size: 18px;
         }
-
         .cart-item-price {
             font-size: 16px;
             font-weight: bold;
         }
-
         .remove-button {
             background: #fff;
             color: #000;
@@ -80,17 +70,14 @@
             font-size: 14px;
             transition: background 0.3s ease;
         }
-
         .remove-button:hover {
             background: #ccc;
         }
-
         .total-price {
             margin-top: 30px;
             font-size: 24px;
             font-weight: bold;
         }
-
         .return-btn {
             background: #fff;
             color: #000;
@@ -102,37 +89,30 @@
             font-size: 16px;
             text-align: center;
         }
-
         .return-btn:hover {
             background: #ccc;
         }
-
         .order-form {
             display: flex;
             flex-direction: column;
             gap: 10px;
             margin-top: 20px;
         }
-
         .order-form input, .order-form select {
             padding: 10px;
             border-radius: 5px;
             border: none;
             font-size: 16px;
         }
+        .shipping-info {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 8px;
+        }
     </style>
-<script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'fr'}, 'google_translate_element');
-    }
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-
 </head>
-
 <body>
-
     <div class="navbar">
         <div class="links">
             <a href="index.html">Accueil</a>
@@ -142,11 +122,14 @@
 
     <div class="cart-container">
         <h2>Mon Panier</h2>
-        
         <div id="cart-items-container">
-            <!-- Articles du panier -->
+            <!-- Les articles du panier seront ajoutés ici dynamiquement -->
         </div>
         
+        <div class="shipping-info">
+            <p>Frais de port : 6.50€</p>
+        </div>
+
         <div class="total-price">
             Total : <span id="total-price">0,00€</span>
         </div>
@@ -158,229 +141,104 @@
             <input type="text" id="postal" placeholder="Code Postal" required>
             <input type="email" id="email" placeholder="Email" required>
             <select id="country" required>
-    <option value="">Sélectionnez un pays</option>
-    <option value="Albania">Albanie</option>
-    <option value="Andorra">Andorre</option>
-    <option value="Armenia">Arménie</option>
-    <option value="Austria">Autriche</option>
-    <option value="Azerbaijan">Azerbaïdjan</option>
-    <option value="Belarus">Biélorussie</option>
-    <option value="Belgium">Belgique</option>
-    <option value="Bosnia and Herzegovina">Bosnie-Herzégovine</option>
-    <option value="Bulgaria">Bulgarie</option>
-    <option value="Croatia">Croatie</option>
-    <option value="Cyprus">Chypre</option>
-    <option value="Czech Republic">République tchèque</option>
-    <option value="Denmark">Danemark</option>
-    <option value="Estonia">Estonie</option>
-    <option value="Finland">Finlande</option>
-    <option value="France">France</option>
-    <option value="Georgia">Géorgie</option>
-    <option value="Germany">Allemagne</option>
-    <option value="Greece">Grèce</option>
-    <option value="Hungary">Hongrie</option>
-    <option value="Iceland">Islande</option>
-    <option value="Ireland">Irlande</option>
-    <option value="Italy">Italie</option>
-    <option value="Kazakhstan">Kazakhstan</option>
-    <option value="Kosovo">Kosovo</option>
-    <option value="Latvia">Lettonie</option>
-    <option value="Liechtenstein">Liechtenstein</option>
-    <option value="Lithuania">Lituanie</option>
-    <option value="Luxembourg">Luxembourg</option>
-    <option value="Malta">Malte</option>
-    <option value="Moldova">Moldavie</option>
-    <option value="Monaco">Monaco</option>
-    <option value="Montenegro">Monténégro</option>
-    <option value="Netherlands">Pays-Bas</option>
-    <option value="North Macedonia">Macédoine du Nord</option>
-    <option value="Norway">Norvège</option>
-    <option value="Poland">Pologne</option>
-    <option value="Portugal">Portugal</option>
-    <option value="Romania">Roumanie</option>
-    <option value="Russia">Russie</option>
-    <option value="San Marino">Saint-Marin</option>
-    <option value="Serbia">Serbie</option>
-    <option value="Slovakia">Slovaquie</option>
-    <option value="Slovenia">Slovénie</option>
-    <option value="Spain">Espagne</option>
-    <option value="Sweden">Suède</option>
-    <option value="Switzerland">Suisse</option>
-    <option value="Turkey">Turquie</option>
-    <option value="Ukraine">Ukraine</option>
-    <option value="United Kingdom">Royaume-Uni</option>
-    <option value="Vatican City">Vatican</option>
-</select>
-
+                <option value="">Sélectionnez un pays</option>
+                <option value="France">France</option>
+                <!-- Ajoutez les autres pays ici -->
+            </select>
             <button type="submit" class="return-btn">Payer avec PayPal</button>
         </form>
     </div>
 
-<!-- Élément Google Translate (caché) -->
-<div id="google_translate_element" style="display: none;"></div>
-
-
     <script>
-    function displayCartItems() {
-        let cartContainer = document.getElementById('cart-items-container');
-function observeCartChanges() {
-    let cartContainer = document.getElementById("cart-items-container");
-    let observer = new MutationObserver(() => {
-        let savedLang = localStorage.getItem("selectedLanguage") || "fr";
-        applyLanguage(savedLang);
-    });
-
-    observer.observe(cartContainer, { childList: true, subtree: true });
-}
-
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let totalPrice = 0;
-        
-        cartContainer.innerHTML = '';
-        
-        cart.forEach((item, index) => {
-            totalPrice += item.price;
+        function displayCartItems() {
+            let cartContainer = document.getElementById('cart-items-container');
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let subtotal = 0;
             
-            let cartItem = document.createElement('div');
-            cartItem.className = 'cart-item';
-            cartItem.innerHTML = `
-                <img src="${item.image}" alt="${item.name}">
-                <div class="cart-item-details">
-                    <h3 class="cart-item-name">${item.name}</h3>
-                    <p class="cart-item-price">${item.price.toFixed(2)}€</p>
-                </div>
-                <button onclick="removeFromCart(${index})" class="remove-button">Supprimer</button>
-            `;
+            cartContainer.innerHTML = '';
             
-            cartContainer.appendChild(cartItem);
-        });
-        
-        document.getElementById('total-price').textContent = totalPrice.toFixed(2) + '€';
-    }
-
-    function removeFromCart(index) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.splice(index, 1);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        displayCartItems();
-    }
-
-    document.getElementById('order-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
-
-        if (totalPrice === 0) {
-            alert("Votre panier est vide.");
-            return;
+            cart.forEach((item, index) => {
+                subtotal += item.price;
+                
+                let cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h3 class="cart-item-name">${item.name}</h3>
+                        <p class="cart-item-price">${item.price.toFixed(2)}€</p>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="remove-button">Supprimer</button>
+                `;
+                
+                cartContainer.appendChild(cartItem);
+            });
+            
+            const shippingCost = subtotal > 0 ? 6.50 : 0;
+            const total = subtotal + shippingCost;
+            document.getElementById('total-price').textContent = total.toFixed(2) + '€';
         }
 
-        let formData = {
-            name: document.getElementById('name').value,
-            address: document.getElementById('address').value,
-            city: document.getElementById('city').value,
-            postal: document.getElementById('postal').value,
-            email: document.getElementById('email').value,
-            country: document.getElementById('country').value,
-        };
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+        }
 
-        let paypalUrl = `https://www.paypal.com/paypalme/Meslissahb/${totalPrice.toFixed(2)}`;
-        window.open(paypalUrl, "_blank");
+        document.getElementById('order-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Calcul du total avec frais de port
+            let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+            let shippingCost = subtotal > 0 ? 6.50 : 0;
+            let totalPrice = subtotal + shippingCost;
 
-        let mailBody = `
-Commande Payée !
+            if (subtotal === 0) {
+                alert("Votre panier est vide.");
+                return;
+            }
+
+            let formData = {
+                name: document.getElementById('name').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                postal: document.getElementById('postal').value,
+                email: document.getElementById('email').value,
+                country: document.getElementById('country').value,
+            };
+
+            // Création du lien PayPal avec montant fixe
+            let paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=melytis593@gmail.com&currency_code=EUR&amount=${totalPrice.toFixed(2)}&item_name=Commande Nike Vintage`;
+
+            // Redirection vers PayPal
+            window.location.href = paypalUrl;
+
+            let mailBody = `
+Commande à payer : ${totalPrice.toFixed(2)}€
+(Sous-total : ${subtotal.toFixed(2)}€ + Frais de port : ${shippingCost.toFixed(2)}€)
+
 Nom: ${formData.name}
 Adresse: ${formData.address}, ${formData.city}, ${formData.postal}, ${formData.country}
 Email: ${formData.email}
-Total: ${totalPrice.toFixed(2)}€
 
 Détails des articles:
 ${cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n")}
-        `;
+            `;
 
-        setTimeout(() => {
-            window.location.href = `mailto:melytis593@gmail.com?subject=Commande Payée&body=${encodeURIComponent(mailBody)}`;
-            localStorage.removeItem('cart');
+            // Envoi du mail après paiement
+            setTimeout(() => {
+                window.location.href = `mailto:melytis593@gmail.com?subject=Nouvelle Commande&body=${encodeURIComponent(mailBody)}`;
+                localStorage.removeItem('cart');
+                displayCartItems();
+            }, 3000);
+        });
+
+        // Initialisation au chargement de la page
+        window.onload = function() {
             displayCartItems();
-        }, 3000);
-    });
-function applyLanguage(lang) {
-    let translations = {
-        "fr": {
-            "Mon Panier": "Mon Panier",
-            "Total :": "Total :",
-            "Nom et Prénom": "Nom et Prénom",
-            "Adresse": "Adresse",
-            "Ville": "Ville",
-            "Code Postal": "Code Postal",
-            "Email": "Email",
-            "Sélectionnez un pays": "Sélectionnez un pays",
-            "Payer avec PayPal": "Payer avec PayPal"
-        },
-        "en": {
-            "Mon Panier": "My Cart",
-            "Total :": "Total:",
-            "Nom et Prénom": "Full Name",
-            "Adresse": "Address",
-            "Ville": "City",
-            "Code Postal": "Postal Code",
-            "Email": "Email",
-            "Sélectionnez un pays": "Select a country",
-            "Payer avec PayPal": "Pay with PayPal"
-        },
-        "es": {
-            "Mon Panier": "Mi Carrito",
-            "Total :": "Total:",
-            "Nom et Prénom": "Nombre y Apellido",
-            "Adresse": "Dirección",
-            "Ville": "Ciudad",
-            "Code Postal": "Código Postal",
-            "Email": "Correo Electrónico",
-            "Sélectionnez un pays": "Selecciona un país",
-            "Payer avec PayPal": "Pagar con PayPal"
-        }
-    };
-
-    let elements = {
-        "h2": "Mon Panier",
-        ".total-price": "Total :",
-        "#name": "Nom et Prénom",
-        "#address": "Adresse",
-        "#city": "Ville",
-        "#postal": "Code Postal",
-        "#email": "Email",
-        "#order-form select option:first-child": "Sélectionnez un pays",
-        ".return-btn": "Payer avec PayPal"
-    };
-
-    document.querySelectorAll("h2, .total-price, .return-btn").forEach(el => {
-        if (translations[lang] && translations[lang][el.textContent.trim()]) {
-            el.textContent = translations[lang][el.textContent.trim()];
-        }
-    });
-
-    document.querySelector("#name").placeholder = translations[lang]["Nom et Prénom"];
-    document.querySelector("#address").placeholder = translations[lang]["Adresse"];
-    document.querySelector("#city").placeholder = translations[lang]["Ville"];
-    document.querySelector("#postal").placeholder = translations[lang]["Code Postal"];
-    document.querySelector("#email").placeholder = translations[lang]["Email"];
-    document.querySelector("#order-form select option:first-child").textContent = translations[lang]["Sélectionnez un pays"];
-}
-
-    window.onload = function() {
-    displayCartItems();
-    observeCartChanges(); // Ajoute l'observateur pour détecter les changements
-    setTimeout(() => {
-        let savedLang = localStorage.getItem("selectedLanguage") || "fr";
-        applyLanguage(savedLang);
-        googleTranslateElementInit();
-    }, 1000); // Applique la traduction après 1s
-};
-
-
+        };
     </script>
-
-
 </body>
 </html>
