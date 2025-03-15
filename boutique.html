@@ -118,28 +118,6 @@
             font-size: 14px;
             border-top: 1px solid #333;
         }
-@keyframes slideUp {
-    from {
-        transform: translate(-50%, 100%);
-        opacity: 0;
-    }
-    to {
-        transform: translate(-50%, 0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideDown {
-    from {
-        transform: translate(-50%, 0);
-        opacity: 1;
-    }
-    to {
-        transform: translate(-50%, 100%);
-        opacity: 0;
-    }
-}
-
     </style>
 </head>
 
@@ -346,114 +324,41 @@ window.onload = updateCartCount;
 <div id="google_translate_element" style="display: none;"></div>
 
 <script>
-// Fonction unique pour ajouter au panier
-function addToCart(productName, productPrice) {
-    try {
-        // Trouver l'élément du produit cliqué
-        let productElement = event.target.closest('.product');
-        let productImage = productElement.querySelector('.image-carousel img').src;
-        
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let product = {
-            name: productName,
-            price: productPrice,
-            image: productImage
-        };
-        
-        cart.push(product);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Mettre à jour le nombre d'articles dans le panier
-        updateCartCount();
-        
-        // Afficher une notification plus élégante
-        showNotification(`${productName} a été ajouté au panier !`);
-    } catch (e) {
-        console.error('Erreur:', e);
-        showNotification('Erreur lors de l\'ajout au panier', 'error');
+    function googleTranslateInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'fr',
+            includedLanguages: 'fr,en,es,de,it,pt,nl,pl,ro,hu,cz,sk,bg,hr,se,no,fi,dk,gr,tr,ua,mk,ar,hi,zh,ja,ko,ru,id,th,vi,bn,sw,he,fa,ta,mr,ms,ne,pa,gu,te'
+        }, 'google_translate_element');
     }
-}
 
-// Fonction pour mettre à jour le compteur du panier
-function updateCartCount() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let cartCount = cart.length;
-    
-    let cartLink = document.getElementById('cart-link');
-    if (cartCount > 0) {
-        cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo"><span>${cartCount}</span>`;
-    } else {
-        cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">`;
+    function changeLanguage() {
+        var lang = document.getElementById("languageSelect").value;
+        localStorage.setItem("selectedLanguage", lang); // Sauvegarde la langue
+        applyLanguage(lang);
     }
-}
 
-// Fonction pour afficher des notifications stylées
-function showNotification(message, type = 'success') {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.textContent = message;
-    
-    notification.style.position = 'fixed';
-    notification.style.bottom = '20px';
-    notification.style.left = '50%';
-    notification.style.transform = 'translateX(-50%)';
-    notification.style.padding = '15px 25px';
-    notification.style.borderRadius = '5px';
-    notification.style.backgroundColor = type === 'success' ? '#4CAF50' : '#f44336';
-    notification.style.color = 'white';
-    notification.style.zIndex = '1000';
-    notification.style.animation = 'slideUp 0.5s ease';
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.animation = 'slideDown 0.5s ease';
+    function applyLanguage(lang) {
+        var select = document.querySelector(".goog-te-combo");
+        if (select) {
+            select.value = lang;
+            select.dispatchEvent(new Event("change"));
+        }
+    }
+
+    // Charge Google Translate et applique la langue au chargement
+    window.onload = function () {
+        var script = document.createElement("script");
+        script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
+        document.body.appendChild(script);
+
+        var savedLang = localStorage.getItem("selectedLanguage") || "fr"; // Langue par défaut
+        document.getElementById("languageSelect").value = savedLang;
+
         setTimeout(() => {
-            document.body.removeChild(notification);
-        }, 500);
-    }, 3000);
-}
-
-// Fonction pour changer la langue
-function changeLanguage() {
-    var lang = document.getElementById("languageSelect").value;
-    localStorage.setItem("selectedLanguage", lang);
-    applyLanguage(lang);
-}
-
-function applyLanguage(lang) {
-    var select = document.querySelector(".goog-te-combo");
-    if (select) {
-        select.value = lang;
-        select.dispatchEvent(new Event("change"));
-    }
-}
-
-// Initialisation au chargement de la page
-window.onload = function() {
-    updateCartCount();
-    
-    // Chargement de Google Translate
-    var script = document.createElement("script");
-    script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
-    document.body.appendChild(script);
-    
-    // Application de la langue sauvegardée
-    var savedLang = localStorage.getItem("selectedLanguage") || "fr";
-    document.getElementById("languageSelect").value = savedLang;
-    setTimeout(() => {
-        applyLanguage(savedLang);
-    }, 2000);
-};
-
-function googleTranslateInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'fr',
-        includedLanguages: 'fr,en,es,de,it,pt,nl,pl,ro,hu,cz,sk,bg,hr,se,no,fi,dk,gr,tr,ua,mk,ar,hi,zh,ja,ko,ru,id,th,vi,bn,sw,he,fa,ta,mr,ms,ne,pa,gu,te'
-    }, 'google_translate_element');
-}
+            applyLanguage(savedLang);
+        }, 2000); // Délai pour s'assurer que Google Translate est chargé
+    };
 </script>
-
 
 </body>
 
