@@ -265,57 +265,94 @@ function observeCartChanges() {
         displayCartItems();
     }
 
-    document.getElementById('order-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+    document.getElementById('order-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    let formData = {
+        name: document.getElementById('name').value,
+        address: document.getElementById('address').value,
+        city: document.getElementById('city').value,
+        postal: document.getElementById('postal').value,
+        email: document.getElementById('email').value,
+        country: document.getElementById('country').value,
+    };
 
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+    // Validation du formulaire
+    if (!validateForm(formData)) {
+        return;
+    }
 
-        if (totalPrice === 0) {
-            alert("Votre panier est vide.");
-            return;
-        }
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
 
-        let formData = {
-            name: document.getElementById('name').value,
-            address: document.getElementById('address').value,
-            city: document.getElementById('city').value,
-            postal: document.getElementById('postal').value,
-            email: document.getElementById('email').value,
-            country: document.getElementById('country').value,
-        };
+    if (totalPrice === 0) {
+        showNotification("Votre panier est vide.", "error");
+        return;
+    }
 
+    // Afficher un message de chargement
+    showNotification("Traitement de votre commande...");
+
+    try {
         let paypalUrl = `https://www.paypal.com/paypalme/Meslissahb/${totalPrice.toFixed(2)}`;
         window.open(paypalUrl, "_blank");
 
         let mailBody = `
-Commande Payée !
-Nom: ${formData.name}
-Adresse: ${formData.address}, ${formData.city}, ${formData.postal}, ${formData.country}
-Email: ${formData.email}
-Total: ${totalPrice.toFixed(2)}€
-
-Détails des articles:
-${cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n")}
+            Commande Payée !
+            Nom: ${formData.name}
+            Adresse: ${formData.address}, ${formData.city}, ${formData.postal}, ${formData.country}
+            Email: ${formData.email}
+            Total: ${totalPrice.toFixed(2)}€
+            
+            Détails des articles:
+            ${cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n")}
         `;
 
         setTimeout(() => {
             window.location.href = `mailto:melytis593@gmail.com?subject=Commande Payée&body=${encodeURIComponent(mailBody)}`;
             localStorage.removeItem('cart');
             displayCartItems();
+            showNotification("Commande traitée avec succès !");
         }, 3000);
-    });
-function applyLanguage(lang) {
-    let translations = {
-        "fr": {
-            "Mon Panier": "Mon Panier",
-            "Total :": "Total :",
-            "Nom et Prénom": "Nom et Prénom",
-            "Adresse": "Adresse",
-            "Ville": "Ville",
-            "Code Postal": "Code Postal",
-            "Email": "Email",
-            "Sélectionnez un pays": "Sélectionnez un pays",
+
+    } catch (error) {
+        console.error('Erreur:', error);
+        showNotification("Erreur lors du traitement de la commande", "error");
+    }
+});
+
+// Fonction de validation du formulaire
+function validateForm(formData) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const postalRegex = /^\d{5}$/;
+
+    if (!formData.name.trim()) {
+        showNotification("Veuillez entrer votre nom", "error");
+        return false;
+    }
+    if (!formData.address.trim()) {
+        showNotification("Veuillez entrer votre adresse", "error");
+        return false;
+    }
+    if (!formData.city.trim()) {
+        showNotification("Veuillez entrer votre ville", "error");
+        return false;
+    }
+    if (!postalRegex.test(formData.postal)) {
+        showNotification("Code postal invalide", "error");
+        return false;
+    }
+    if (!emailRegex.test(formData.email)) {
+        showNotification("Email invalide", "error");
+        return false;
+    }
+    if (!formData.country) {
+        showNotification("Veuillez sélectionner un pays", "error");
+        return false;
+    }
+    return true;
+}
+
             "Payer avec PayPal": "Payer avec PayPal"
         },
         "en": {
