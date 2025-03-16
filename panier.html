@@ -110,6 +110,9 @@
             background-color: #222;
             border-radius: 8px;
         }
+        #paypal-form {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -150,6 +153,17 @@
                 <option value="Royaume-Uni">Royaume-Uni</option>
             </select>
             <button type="submit" class="return-btn">Payer avec PayPal</button>
+        </form>
+        
+        <!-- Formulaire PayPal caché -->
+        <form id="paypal-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="melytis593@gmail.com">
+            <input type="hidden" name="currency_code" value="EUR">
+            <input type="hidden" name="amount" id="paypal-amount" value="0">
+            <input type="hidden" name="item_name" value="Commande Nike Vintage">
+            <input type="hidden" name="return" id="paypal-return" value="">
+            <input type="hidden" name="cancel_return" id="paypal-cancel" value="">
         </form>
     </div>
     <script>
@@ -212,18 +226,13 @@
                 country: document.getElementById('country').value,
             };
             
-            // Correction du lien PayPal
-            let paypalUrl = "https://www.paypal.com/cgi-bin/webscr" + 
-                "?cmd=_xclick" + 
-                "&business=melytis593@gmail.com" + 
-                "&currency_code=EUR" + 
-                "&amount=" + totalPrice.toFixed(2) + 
-                "&item_name=" + encodeURIComponent("Commande Nike Vintage") +
-                "&return=" + encodeURIComponent(window.location.origin + window.location.pathname) +
-                "&cancel_return=" + encodeURIComponent(window.location.origin + window.location.pathname);
+            // Préparation du formulaire PayPal
+            document.getElementById('paypal-amount').value = totalPrice.toFixed(2);
+            document.getElementById('paypal-return').value = window.location.href;
+            document.getElementById('paypal-cancel').value = window.location.href;
             
-            // Ouvrir dans un nouvel onglet
-            window.open(paypalUrl, '_blank');
+            // Soumission du formulaire PayPal
+            document.getElementById('paypal-form').submit();
             
             let mailBody = `
 Commande à payer : ${totalPrice.toFixed(2)}€
