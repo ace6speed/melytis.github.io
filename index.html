@@ -3,29 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Melytis'shop - Tracks Pants</title>
+    <title>Melytis - Boutique de Vêtements</title>
     <style>
+        /* Global Styles */
         body {
             font-family: 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f1f1f1;
             color: #333;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin: 40px 0;
             text-align: center;
         }
 
+        h2 {
+            font-size: 24px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Navbar styles */
         .navbar {
             background-color: #111;
             color: white;
-            padding: 15px;
+            padding: 15px 30px;
             display: flex;
-            justify-content: center;
-            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
+            font-size: 16px;
             padding: 10px 15px;
             border-radius: 5px;
             transition: background-color 0.3s ease;
@@ -33,47 +50,31 @@
 
         .navbar a:hover {
             background-color: #007bff;
+            text-decoration: underline;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        img {
-            max-width: 100%;
-            border-radius: 10px;
-        }
-
-        .price {
-            font-weight: bold;
-            font-size: 18px;
-            margin: 10px 0;
-        }
-
-        .button-container {
-            margin-top: 15px;
-        }
-
-        button {
-            background-color: #007bff;
+        /* Banner Styles */
+        .banner {
+            background-image: url('https://via.placeholder.com/1500x600?text=Boutique+Melytis');
+            background-size: cover;
+            background-position: center;
             color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            text-align: center;
+            padding: 100px 20px;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .banner h2 {
+            font-size: 48px;
+            font-weight: bold;
         }
 
+        .banner p {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #222;
+        }
+
+        /* Footer Styles */
         .footer {
             background-color: #111;
             color: white;
@@ -93,30 +94,31 @@
     </style>
 </head>
 <body>
+
     <!-- Navbar -->
     <div class="navbar">
         <a href="index.html">Accueil</a>
-        <a href="boutique.html">Boutique</a>
-        <a href="tracks-pants.html">Tracks Pants</a>
+        <a href="apple-section.html">Apple Section</a>
+        <a href="#about">À propos</a>
         <a href="https://wa.me/33612317014">Contact</a>
     </div>
 
-    <div class="container">
-        <h1>Tracks Pants</h1>
-        <!-- Nouvelle image Google Photos -->
-        <img src="https://lh3.googleusercontent.com/d/teZ5pstTE7kGoG1M7" alt="Tracks Pants">
-        <p class="price">50€</p>
-        <div class="button-container">
-            <a href="https://wa.me/33612317014" target="_blank">
-                <button>Commander via WhatsApp</button>
-            </a>
-        </div>
-        <p class="contact-info">WhatsApp : +33612317014</p>
+    <!-- Banner -->
+    <div class="banner">
+        <h2>Bienvenue chez Melytis</h2>
+        <p>Découvrez notre collection de vêtements tendances pour chaque occasion</p>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" style="padding: 50px 20px; text-align: center;">
+        <h2>À propos de Melytis</h2>
+        <p>Chez Melytis, nous offrons une large gamme de vêtements modernes et stylés. Notre mission est de rendre la mode accessible à tous, avec des produits de qualité à des prix abordables.</p>
     </div>
 
     <!-- Footer -->
     <div class="footer">
         <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
     </div>
+
 </body>
 </html>
