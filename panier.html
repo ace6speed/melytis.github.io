@@ -212,15 +212,15 @@
                 country: document.getElementById('country').value,
             };
             
-            // Solution corrigée: Utiliser le lien PayPal standard pour les paiements
+            // Correction du lien PayPal
             let paypalUrl = "https://www.paypal.com/cgi-bin/webscr" + 
                 "?cmd=_xclick" + 
                 "&business=melytis593@gmail.com" + 
                 "&currency_code=EUR" + 
-                "&amount=" + totalPrice.toFixed(2).replace(".", ",") + 
+                "&amount=" + totalPrice.toFixed(2) + 
                 "&item_name=" + encodeURIComponent("Commande Nike Vintage") +
-                "&return=" + encodeURIComponent(window.location.href) +
-                "&cancel_return=" + encodeURIComponent(window.location.href);
+                "&return=" + encodeURIComponent(window.location.origin + window.location.pathname) +
+                "&cancel_return=" + encodeURIComponent(window.location.origin + window.location.pathname);
             
             // Ouvrir dans un nouvel onglet
             window.open(paypalUrl, '_blank');
