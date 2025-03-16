@@ -3,32 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Melytis - Boutique de Vêtements</title>
+    <title>Panier - Nike Vintage</title>
     <style>
-        /* Global Styles */
         body {
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1f1f1;
-            color: #333;
-            line-height: 1.6;
-            text-align: center;
+            background-color: #000;
+            color: #fff;
         }
-
-        h1 {
-            font-size: 36px;
-            color: #333;
-            margin: 40px 0;
-        }
-
-        h2 {
-            font-size: 24px;
-            color: #666;
-            margin-bottom: 40px;
-        }
-
-        /* Navbar styles */
         .navbar {
             background-color: #111;
             color: white;
@@ -36,212 +19,234 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #333;
         }
-
         .navbar a {
             color: white;
             text-decoration: none;
             font-size: 16px;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+            padding: 10px;
+            transition: all 0.3s ease;
         }
-
         .navbar a:hover {
-            background-color: #007bff;
-            text-decoration: underline;
+            color: #ccc;
         }
-
-        /* Banner Styles */
-        .banner {
-            background-image: url('https://via.placeholder.com/1500x600?text=Boutique+Melytis');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
+        .cart-container {
+            padding: 40px;
         }
-
-        .banner h2 {
-            font-size: 48px;
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background-color: #111;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+        .cart-item img {
+            width: 80px;
+            border-radius: 8px;
+        }
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .cart-item-name {
+            font-size: 18px;
+        }
+        .cart-item-price {
+            font-size: 16px;
             font-weight: bold;
         }
-
-        .banner p {
-            font-size: 20px;
-            margin-top: 10px;
-            color: #222;
-        }
-
-        /* Grade Section */
-        .grade-section {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 50px 20px;
-            flex-wrap: wrap;
-        }
-
-        .grade-box {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-
-        .grade-box h3 {
-            font-size: 22px;
-            color: #222;
-        }
-
-        .grade-box p {
-            font-size: 16px;
-            color: #555;
-        }
-
-        /* Footer Styles */
-        .footer {
-            background-color: #111;
-            color: white;
-            padding: 20px;
+        .remove-button {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
             font-size: 14px;
+            transition: background 0.3s ease;
         }
-
-        .footer a {
-            color: white;
+        .remove-button:hover {
+            background: #ccc;
+        }
+        .total-price {
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .return-btn {
+            background: #fff;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 8px;
             text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
         }
-
-        .footer a:hover {
-            text-decoration: underline;
+        .return-btn:hover {
+            background: #ccc;
         }
-
-        /* Hide Google Translate elements */
-        #google_translate_element {
-            display: none !important;
+        .order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
         }
-
-        /* Hide the translation bar completely */
-        .goog-te-banner-frame {
-            display: none !important;
+        .order-form input, .order-form select {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
         }
-
-        .goog-te-gadget {
-            display: none !important;
+        .shipping-info {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 8px;
         }
     </style>
-
 </head>
 <body>
-
-    <!-- Navbar -->
     <div class="navbar">
-        <a href="index.html">Accueil</a>
-        <a href="boutique.html">Boutique</a>
-        <a href="#about">À propos</a>
-        <a href="https://wa.me/33612317014">Contact</a>
-    </div>
-
-    <!-- Banner -->
-    <div class="banner">
-        <h2>Bienvenue chez Melytis</h2>
-        <p>Découvrez notre collection de vêtements tendances pour chaque occasion</p>
-    </div>
-
-    <!-- Grade Section -->
-    <h1>Nos Classifications de Produits</h1>
-    <div class="grade-section">
-        <div class="grade-box">
-            <h3>Grade A</h3>
-            <p>Les articles classés <b>Grade A</b> sont en excellent état, presque comme neufs. Ils ne présentent aucun signe de trous, de taches ou de décoloration.</p>
-        </div>
-        <div class="grade-box">
-            <h3>Grade B</h3>
-            <p>Les articles classés <b>Grade B</b> peuvent présenter des défauts mineurs, tels que des très petites taches, une légère décoloration ou de très petits trous qui sont (pratiquement) imperceptibles lorsqu'ils sont portés.</p>
-        </div>
-        <div class="grade-box">
-            <h3>Grade C</h3>
-            <p>Les articles classés <b>Grade C</b> présentent des défauts plus importants, tels que de grosses taches, des trous plus visibles ou une décoloration importante. Ces imperfections sont visibles lorsqu'ils sont portés.</p>
+        <div class="links">
+            <a href="index.html">Accueil</a>
+            <a href="index.html#nike-vintage">Nike Vintage</a>
         </div>
     </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>WhatsApp : +33612317014 | <a href="#">Conditions Générales</a> | Boutique Française 🇫🇷</p>
+    <div class="cart-container">
+        <h2>Mon Panier</h2>
+        <div id="cart-items-container">
+            <!-- Les articles du panier seront ajoutés ici dynamiquement -->
+        </div>
+        
+        <div class="shipping-info">
+            <p>Frais de port : 6.50€</p>
+        </div>
+        <div class="total-price">
+            Total : <span id="total-price">0,00€</span>
+        </div>
+        <form id="order-form" class="order-form">
+            <input type="text" id="name" placeholder="Nom et Prénom" required>
+            <input type="text" id="address" placeholder="Adresse" required>
+            <input type="text" id="city" placeholder="Ville" required>
+            <input type="text" id="postal" placeholder="Code Postal" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <select id="country" required>
+                <option value="">Sélectionnez un pays</option>
+                <option value="France">France</option>
+                <option value="Belgique">Belgique</option>
+                <option value="Suisse">Suisse</option>
+                <option value="Luxembourg">Luxembourg</option>
+                <option value="Canada">Canada</option>
+                <option value="Espagne">Espagne</option>
+                <option value="Italie">Italie</option>
+                <option value="Allemagne">Allemagne</option>
+                <option value="Royaume-Uni">Royaume-Uni</option>
+            </select>
+            <button type="submit" class="return-btn">Payer avec PayPal</button>
+        </form>
     </div>
-
-    <!-- Sélecteur de langue -->
-<div id="language-container" style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
-    <label for="languageSelect" style="color: white;">🌍 Langue :</label>
-    <select id="languageSelect" onchange="changeLanguage()">
-        <option value="fr">🇫🇷 Français</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="es">🇪🇸 Español</option>
-        <option value="de">🇩🇪 Deutsch</option>
-        <option value="it">🇮🇹 Italiano</option>
-        <option value="pt">🇵🇹 Português</option>
-        <option value="nl">🇳🇱 Nederlands</option>
-        <option value="pl">🇵🇱 Polski</option>
-        <option value="ro">🇷🇴 Română</option>
-        <option value="hu">🇭🇺 Magyar</option>
-        <option value="cs">🇨🇿 Čeština</option>
-        <option value="sk">🇸🇰 Slovenčina</option>
-        <option value="bg">🇧🇬 Български</option>
-        <option value="hr">🇭🇷 Hrvatski</option>
-        <option value="sv">🇸🇪 Svenska</option>
-        <option value="no">🇳🇴 Norsk</option>
-        <option value="fi">🇫🇮 Suomi</option>
-        <option value="da">🇩🇰 Dansk</option>
-        <option value="el">🇬🇷 Ελληνικά</option>
-        <option value="tr">🇹🇷 Türkçe</option>
-        <option value="uk">🇺🇦 Українська</option>
-        <option value="mk">🇲🇰 Македонски</option>
-    </select>
-</div>
-
-<!-- Élément Google Translate (caché) -->
-<div id="google_translate_element" style="display: none;"></div>
-
-    <div id="google_translate_element" style="display: none;"></div>
-
     <script>
-        // Initialisation du script Google Translate
-        function googleTranslateInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'fr',
-                includedLanguages: 'fr,en,es,de,it,pt,nl,pl,ro,hu,cz,sk,bg,hr,se,no,fi,dk,gr,tr,ua,mk,ar,hi,zh,ja,ko,ru,id,th,vi,bn,sw,he,fa,ta,mr,ms,ne,pa,gu,te'
-            }, 'google_translate_element');
+        function displayCartItems() {
+            let cartContainer = document.getElementById('cart-items-container');
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let subtotal = 0;
+            
+            cartContainer.innerHTML = '';
+            
+            cart.forEach((item, index) => {
+                subtotal += item.price;
+                
+                let cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h3 class="cart-item-name">${item.name}</h3>
+                        <p class="cart-item-price">${item.price.toFixed(2)}€</p>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="remove-button">Supprimer</button>
+                `;
+                
+                cartContainer.appendChild(cartItem);
+            });
+            
+            const shippingCost = subtotal > 0 ? 6.50 : 0;
+            const total = subtotal + shippingCost;
+            document.getElementById('total-price').textContent = total.toFixed(2) + '€';
         }
 
-        function changeLanguage() {
-            var lang = document.getElementById("languageSelect").value;
-            localStorage.setItem("selectedLanguage", lang); // Sauvegarde la langue
-            applyLanguage(lang);
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
         }
 
-        function applyLanguage(lang) {
-            var select = document.querySelector(".goog-te-combo");
-            if (select) {
-                select.value = lang;
-                select.dispatchEvent(new Event("change"));
+        document.getElementById('order-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Calcul du total avec frais de port
+            let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+            let shippingCost = subtotal > 0 ? 6.50 : 0;
+            let totalPrice = subtotal + shippingCost;
+            
+            if (subtotal === 0) {
+                alert("Votre panier est vide.");
+                return;
             }
-        }
-
-        window.onload = function () {
-            var script = document.createElement("script");
-            script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
-            document.body.appendChild(script);
-
-            // Charger la langue sauvegardée ou la langue par défaut (fr)
-            var savedLang = localStorage.getItem("selectedLanguage") || "fr";
-            document.getElementById("languageSelect").value = savedLang;
-
+            
+            let formData = {
+                name: document.getElementById('name').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                postal: document.getElementById('postal').value,
+                email: document.getElementById('email').value,
+                country: document.getElementById('country').value,
+            };
+            
+            // Correction du lien PayPal
+            let paypalUrl = "https://www.paypal.com/cgi-bin/webscr" + 
+                "?cmd=_xclick" + 
+                "&business=melytis593@gmail.com" + 
+                "&currency_code=EUR" + 
+                "&amount=" + totalPrice.toFixed(2) + 
+                "&item_name=" + encodeURIComponent("Commande Nike Vintage") +
+                "&return=" + encodeURIComponent(window.location.origin + window.location.pathname) +
+                "&cancel_return=" + encodeURIComponent(window.location.origin + window.location.pathname);
+            
+            // Ouvrir dans un nouvel onglet
+            window.open(paypalUrl, '_blank');
+            
+            let mailBody = `
+Commande à payer : ${totalPrice.toFixed(2)}€
+(Sous-total : ${subtotal.toFixed(2)}€ + Frais de port : ${shippingCost.toFixed(2)}€)
+Nom: ${formData.name}
+Adresse: ${formData.address}, ${formData.city}, ${formData.postal}, ${formData.country}
+Email: ${formData.email}
+Détails des articles:
+${cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n")}
+            `;
+            
+            // Envoi du mail après paiement
             setTimeout(() => {
-                applyLanguage(savedLang);
-            }, 2000); // Delai pour assurer un chargement correct
+                window.location.href = `mailto:melytis593@gmail.com?subject=Nouvelle Commande&body=${encodeURIComponent(mailBody)}`;
+                localStorage.removeItem('cart');
+                displayCartItems();
+            }, 3000);
+        });
+
+        // Initialisation au chargement de la page
+        window.onload = function() {
+            displayCartItems();
         };
     </script>
-
 </body>
 </html>
