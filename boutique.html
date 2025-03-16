@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nike Vintage - Boutique en Ligne</title>
+    <title>Panier - Nike Vintage</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -12,9 +11,7 @@
             padding: 0;
             background-color: #000;
             color: #fff;
-            line-height: 1.6;
         }
-
         .navbar {
             background-color: #111;
             color: white;
@@ -24,7 +21,6 @@
             align-items: center;
             border-bottom: 1px solid #333;
         }
-
         .navbar a {
             color: white;
             text-decoration: none;
@@ -32,334 +28,225 @@
             padding: 10px;
             transition: all 0.3s ease;
         }
-
         .navbar a:hover {
             color: #ccc;
         }
-
-        .navbar .links {
+        .cart-container {
+            padding: 40px;
+        }
+        .cart-item {
             display: flex;
-            gap: 20px;
-        }
-
-        .cart-logo {
-            width: 40px;
-        }
-
-        .nike-vintage {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            padding: 60px 20px;
-        }
-
-        .product {
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
             background-color: #111;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-            padding: 20px;
-        }
-
-        .product:hover {
-            transform: translateY(-5px);
-        }
-
-        .image-carousel {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 10px;
-            padding: 10px;
-            scrollbar-width: none;
-        }
-
-        .image-carousel img {
-            width: 100%;
+            padding: 15px;
             border-radius: 10px;
-            scroll-snap-align: start;
-            flex: 0 0 auto;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
         }
-
-        .price {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 10px;
+        .cart-item img {
+            width: 80px;
+            border-radius: 8px;
         }
-
-        .old-price {
-            text-decoration: line-through;
-            color: #ccc;
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .cart-item-name {
             font-size: 18px;
-            margin-right: 10px;
         }
-
-        button {
+        .cart-item-price {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .remove-button {
             background: #fff;
             color: #000;
             border: none;
-            padding: 12px 20px;
+            padding: 8px 15px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             transition: background 0.3s ease;
         }
-
-        button:hover {
+        .remove-button:hover {
             background: #ccc;
         }
-
-        .footer {
-            background-color: #111;
-            color: white;
-            padding: 30px;
+        .total-price {
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .return-btn {
+            background: #fff;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
             text-align: center;
-            font-size: 14px;
-            border-top: 1px solid #333;
+        }
+        .return-btn:hover {
+            background: #ccc;
+        }
+        .order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .order-form input, .order-form select {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+        .shipping-info {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 8px;
         }
     </style>
 </head>
-
 <body>
     <div class="navbar">
         <div class="links">
             <a href="index.html">Accueil</a>
-            <a href="#nike-vintage">Nike Vintage</a>
+            <a href="index.html#nike-vintage">Nike Vintage</a>
         </div>
-        <a href="panier.html" id="cart-link">
-            <img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">
-        </a>
     </div>
-
-    <div id="nike-vintage" class="nike-vintage">
-        <!-- Produit 1 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/wjkg5VqW/20250219-174143.avif" alt="Jogging Nike Vintage 1">
-                <img src="https://i.postimg.cc/RZmvn8B6/20250219-174544.avif" alt="Jogging Nike Vintage 2">
-                <img src="https://i.postimg.cc/3wJ7tvW3/20250219-174606.avif" alt="Jogging Nike Vintage 3">
-                <img src="https://i.postimg.cc/zXKJvN9Y/20250219-174641.avif" alt="Jogging Nike Vintage 4">
-            </div>
-            <h3>Nike Vintage noir taille S</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
-            <button onclick="addToCart('Nike Vintage noir taille S', 30.79)">Ajouter Au Panier</button>
+    <div class="cart-container">
+        <h2>Mon Panier</h2>
+        <div id="cart-items-container">
+            <!-- Les articles du panier seront ajoutés ici dynamiquement -->
         </div>
-
-        <!-- Produit 2 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/TYGsjXK6/20250219-175030.avif" alt="Jogging Nike Vintage Bleu/Vert 1">
-                <img src="https://i.postimg.cc/wv826hJp/20250219-175150.avif" alt="Jogging Nike Vintage Bleu/Vert 2">
-                <img src="https://i.postimg.cc/tJbBzhC5/20250219-175231.avif" alt="Jogging Nike Vintage Bleu/Vert 3">
-            </div>
-            <h3>Nike Vintage bleu/vert taille S</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">45,79€</span> 30,79€</p>
-            <button onclick="addToCart('Nike Vintage bleu/vert taille S', 30.79)">Ajouter Au Panier</button>
-        </div>
-
-        <!-- Produit 3 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/wMHpZfkR/20250224-210119.avif" alt="Jogging Vintage noir 1">
-                <img src="https://i.postimg.cc/7PTJkfnx/20250224-210344.avif" alt="Jogging Vintage noir 2">
-                <img src="https://i.postimg.cc/63CKHJCN/20250224-210353.avif" alt="Jogging Vintage noir 3">
-                <img src="https://i.postimg.cc/63CKHJCN/20250224-210353.avif" alt="Jogging Vintage noir 4">
-            </div>
-            <h3>Jogging Vintage noir taille S</h3>
-            <p>Grade C</p>
-            <p class="price"><span class="old-price">34,79€</span> 21,79€</p>
-            <button onclick="addToCart('Jogging Vintage noir taille S', 21.79)">Ajouter Au Panier</button>
-        </div>
-
-        <!-- Produit 4 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/nzhz9WqY/20250219-180045.avif" alt="Nike Tracks Pants Bleu 1">
-                <img src="https://i.postimg.cc/15wqQLBf/20250219-180110.jpg" alt="Nike Tracks Pants Bleu 2">
-                <img src="https://i.postimg.cc/mgZ25q5x/20250219-180134.jpg" alt="Nike Tracks Pants Bleu 3">
-                <img src="https://i.postimg.cc/6Qy69ZKY/20250219-180233.jpg" alt="Nike Tracks Pants Bleu 4">
-            </div>
-            <h3>Nike Vintage Tracks Pants Bleu taille M</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">65,59€</span> 42,59€</p>
-            <button onclick="addToCart('Nike Vintage Tracks Pants Bleu taille M', 42.59)">Ajouter Au Panier</button>
-        </div>
-
-        <!-- Produit 5 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/x1XB83kJ/20250224-202106.avif" alt="Nike Vintage Blanc 1">
-                <img src="https://i.postimg.cc/t48wxnPr/20250224-202143.avif" alt="Nike Vintage Blanc 2">
-                <img src="https://i.postimg.cc/8CW3BkmT/20250224-202202.avif" alt="Nike Vintage Blanc 3">
-            </div>
-            <h3>Nike Vintage blanc taille XL</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">54,79€</span> 38,79€</p>
-            <button onclick="addToCart('Nike Vintage blanc taille XL', 38.79)">Ajouter Au Panier</button>
-        </div>
-
-        <!-- Produit 6 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/3rB5WZB9/20250224-210623.avif" alt="Nike Vintage Gris 1">
-                <img src="https://i.postimg.cc/cCdpXKsQ/20250224-210654.avif" alt="Nike Vintage Gris 2">
-                <img src="https://i.postimg.cc/BntGr12p/20250224-210701.avif" alt="Nike Vintage Gris 3">
-                <img src="https://i.postimg.cc/dVXKwtBY/20250224-210710.avif" alt="Nike Vintage Gris 4">
-                <img src="https://i.postimg.cc/50WdQ7TK/20250224-210718.avif" alt="Nike Vintage Gris 5">
-                <img src="https://i.postimg.cc/BbNdyq6R/20250224-210751.avif" alt="Nike Vintage Gris 6">
-                <img src="https://i.postimg.cc/Ghm0DsgR/20250224-210822.avif" alt="Nike Vintage Gris 7">
-                <img src="https://i.postimg.cc/FsW-MVsw-L/20250224-210937.avif" alt="Nike Vintage Gris 8">
-            </div>
-            <h3>Nike Vintage gris taille M</h3>
-            <p>Grade A</p>
-            <p class="price"><span class="old-price">50,79€</span> 34,79€</p>
-            <button onclick="addToCart('Nike Vintage gris taille M', 34.79)">Ajouter Au Panier</button>
-        </div>
-
         
-
-        <!-- Produit 7 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/RFCrT6Cw/20250224-212220.avif" alt="Nike vintage gris Therma-fit 1">
-                <img src="https://i.postimg.cc/T14X1d6g/20250224-212330.avif" alt="Nike vintage gris Therma-fit 2">
-                <img src="https://i.postimg.cc/JnpfYrtv/20250224-212427.avif" alt="Nike vintage gris Therma-fit 3">
-                <img src="https://i.postimg.cc/Vv533xC6/20250224-212437.avif" alt="Nike vintage gris Therma-fit 4">
-            </div>
-            <h3>Nike vintage gris Therma-fit Taille M</h3>
-            <p>Grade B</p>
-            <p class="price"><span class="old-price">53,19€</span> 33,19€</p>
-            <button onclick="addToCart('Nike vintage gris Therma-fit Taille M', 33.19)">Ajouter Au Panier</button>
+        <div class="shipping-info">
+            <p>Frais de port : 6.50€</p>
         </div>
-
-        <!-- Produit 8 -->
-        <div class="product">
-            <div class="image-carousel">
-                <img src="https://i.postimg.cc/bNwJvrQD/20250224-211739.avif" alt="Nike vintage noir Dri-Fit 1">
-                <img src="https://i.postimg.cc/prqLZMtL/20250224-211929.avif" alt="Nike vintage noir Dri-Fit 2">
-                <img src="https://i.postimg.cc/NFg0mfSn/20250224-212019.avif" alt="Nike vintage noir Dri-Fit 3">
-                <img src="https://i.postimg.cc/wvzxYjqB/20250224-211825.avif" alt="Nike vintage noir Dri-Fit 4">
-                <img src="https://i.postimg.cc/sXPXMZ6S/20250224-211900.avif" alt="Nike vintage noir Dri-Fit 5">
-            </div>
-            <h3>Nike vintage noir Dri-Fit Taille M</h3>
-            <p>Grade B</p>
-            <p class="price"><span class="old-price">45,99€</span> 31,99€</p>
-            <button onclick="addToCart('Nike vintage noir Dri-Fit Taille M', 31.99)">Ajouter Au Panier</button>
+        <div class="total-price">
+            Total : <span id="total-price">0,00€</span>
         </div>
+        <form id="order-form" class="order-form">
+            <input type="text" id="name" placeholder="Nom et Prénom" required>
+            <input type="text" id="address" placeholder="Adresse" required>
+            <input type="text" id="city" placeholder="Ville" required>
+            <input type="text" id="postal" placeholder="Code Postal" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <select id="country" required>
+                <option value="">Sélectionnez un pays</option>
+                <option value="France">France</option>
+                <option value="Belgique">Belgique</option>
+                <option value="Suisse">Suisse</option>
+                <option value="Luxembourg">Luxembourg</option>
+                <option value="Canada">Canada</option>
+                <option value="Espagne">Espagne</option>
+                <option value="Italie">Italie</option>
+                <option value="Allemagne">Allemagne</option>
+                <option value="Royaume-Uni">Royaume-Uni</option>
+            </select>
+            <button type="submit" class="return-btn">Payer avec PayPal</button>
+        </form>
     </div>
-
     <script>
-function addToCart(productName, productPrice) {
-    // Trouver l'élément du produit cliqué
-    let productElement = event.target.closest('.product');
-    // Obtenir la première image du carousel du produit
-    let productImage = productElement.querySelector('.image-carousel img').src;
-    
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let product = {
-        name: productName,
-        price: productPrice,
-        image: productImage
-    };
-    
-    cart.push(product);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Mettre à jour le nombre d'articles dans le panier
-    updateCartCount();
-    alert(productName + " a été ajouté au panier !");
-}
-
-function updateCartCount() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let cartCount = cart.length;
-    
-    let cartLink = document.getElementById('cart-link');
-    if (cartCount > 0) {
-        cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo"><span>${cartCount}</span>`;
-    } else {
-        cartLink.innerHTML = `<img src="https://i.postimg.cc/50SYwgd3/117641.png" alt="Panier" class="cart-logo">`;
-    }
-}
-
-// Mettre à jour le compteur au chargement de la page
-window.onload = updateCartCount;
-</script>
-
-
-
-<!-- Sélecteur de langue -->
-<div id="language-container" style="position: fixed; bottom: 20px; right: 20px; background: #111; padding: 10px; border-radius: 8px;">
-    <label for="languageSelect" style="color: white;">🌍 Langue :</label>
-    <select id="languageSelect" onchange="changeLanguage()">
-        <option value="fr">🇫🇷 Français</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="es">🇪🇸 Español</option>
-        <option value="de">🇩🇪 Deutsch</option>
-        <option value="it">🇮🇹 Italiano</option>
-        <option value="pt">🇵🇹 Português</option>
-        <option value="nl">🇳🇱 Nederlands</option>
-        <option value="pl">🇵🇱 Polski</option>
-        <option value="ro">🇷🇴 Română</option>
-        <option value="hu">🇭🇺 Magyar</option>
-        <option value="cs">🇨🇿 Čeština</option>
-        <option value="sk">🇸🇰 Slovenčina</option>
-        <option value="bg">🇧🇬 Български</option>
-        <option value="hr">🇭🇷 Hrvatski</option>
-        <option value="sv">🇸🇪 Svenska</option>
-        <option value="no">🇳🇴 Norsk</option>
-        <option value="fi">🇫🇮 Suomi</option>
-        <option value="da">🇩🇰 Dansk</option>
-        <option value="el">🇬🇷 Ελληνικά</option>
-        <option value="tr">🇹🇷 Türkçe</option>
-        <option value="uk">🇺🇦 Українська</option>
-        <option value="mk">🇲🇰 Македонски</option>
-    </select>
-</div>
-
-<!-- Élément Google Translate (caché) -->
-<div id="google_translate_element" style="display: none;"></div>
-
-<script>
-    function googleTranslateInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'fr',
-            includedLanguages: 'fr,en,es,de,it,pt,nl,pl,ro,hu,cz,sk,bg,hr,se,no,fi,dk,gr,tr,ua,mk,ar,hi,zh,ja,ko,ru,id,th,vi,bn,sw,he,fa,ta,mr,ms,ne,pa,gu,te'
-        }, 'google_translate_element');
-    }
-
-    function changeLanguage() {
-        var lang = document.getElementById("languageSelect").value;
-        localStorage.setItem("selectedLanguage", lang); // Sauvegarde la langue
-        applyLanguage(lang);
-    }
-
-    function applyLanguage(lang) {
-        var select = document.querySelector(".goog-te-combo");
-        if (select) {
-            select.value = lang;
-            select.dispatchEvent(new Event("change"));
+        function displayCartItems() {
+            let cartContainer = document.getElementById('cart-items-container');
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let subtotal = 0;
+            
+            cartContainer.innerHTML = '';
+            
+            cart.forEach((item, index) => {
+                subtotal += item.price;
+                
+                let cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h3 class="cart-item-name">${item.name}</h3>
+                        <p class="cart-item-price">${item.price.toFixed(2)}€</p>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="remove-button">Supprimer</button>
+                `;
+                
+                cartContainer.appendChild(cartItem);
+            });
+            
+            const shippingCost = subtotal > 0 ? 6.50 : 0;
+            const total = subtotal + shippingCost;
+            document.getElementById('total-price').textContent = total.toFixed(2) + '€';
         }
-    }
 
-    // Charge Google Translate et applique la langue au chargement
-    window.onload = function () {
-        var script = document.createElement("script");
-        script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateInit";
-        document.body.appendChild(script);
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+        }
 
-        var savedLang = localStorage.getItem("selectedLanguage") || "fr"; // Langue par défaut
-        document.getElementById("languageSelect").value = savedLang;
+        document.getElementById('order-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Calcul du total avec frais de port
+            let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+            let shippingCost = subtotal > 0 ? 6.50 : 0;
+            let totalPrice = subtotal + shippingCost;
+            
+            if (subtotal === 0) {
+                alert("Votre panier est vide.");
+                return;
+            }
+            
+            let formData = {
+                name: document.getElementById('name').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                postal: document.getElementById('postal').value,
+                email: document.getElementById('email').value,
+                country: document.getElementById('country').value,
+            };
+            
+            // Correction du lien PayPal
+            let paypalUrl = "https://www.paypal.com/cgi-bin/webscr" + 
+                "?cmd=_xclick" + 
+                "&business=melytis593@gmail.com" + 
+                "&currency_code=EUR" + 
+                "&amount=" + totalPrice.toFixed(2) + 
+                "&item_name=" + encodeURIComponent("Commande Nike Vintage") +
+                "&return=" + encodeURIComponent(window.location.origin + window.location.pathname) +
+                "&cancel_return=" + encodeURIComponent(window.location.origin + window.location.pathname);
+            
+            // Ouvrir dans un nouvel onglet
+            window.open(paypalUrl, '_blank');
+            
+            let mailBody = `
+Commande à payer : ${totalPrice.toFixed(2)}€
+(Sous-total : ${subtotal.toFixed(2)}€ + Frais de port : ${shippingCost.toFixed(2)}€)
+Nom: ${formData.name}
+Adresse: ${formData.address}, ${formData.city}, ${formData.postal}, ${formData.country}
+Email: ${formData.email}
+Détails des articles:
+${cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n")}
+            `;
+            
+            // Envoi du mail après paiement
+            setTimeout(() => {
+                window.location.href = `mailto:melytis593@gmail.com?subject=Nouvelle Commande&body=${encodeURIComponent(mailBody)}`;
+                localStorage.removeItem('cart');
+                displayCartItems();
+            }, 3000);
+        });
 
-        setTimeout(() => {
-            applyLanguage(savedLang);
-        }, 2000); // Délai pour s'assurer que Google Translate est chargé
-    };
-</script>
-
+        // Initialisation au chargement de la page
+        window.onload = function() {
+            displayCartItems();
+        };
+    </script>
 </body>
-
 </html>
