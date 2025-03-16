@@ -119,7 +119,6 @@
             <a href="index.html#nike-vintage">Nike Vintage</a>
         </div>
     </div>
-
     <div class="cart-container">
         <h2>Mon Panier</h2>
         <div id="cart-items-container">
@@ -129,11 +128,9 @@
         <div class="shipping-info">
             <p>Frais de port : 6.50€</p>
         </div>
-
         <div class="total-price">
             Total : <span id="total-price">0,00€</span>
         </div>
-
         <form id="order-form" class="order-form">
             <input type="text" id="name" placeholder="Nom et Prénom" required>
             <input type="text" id="address" placeholder="Adresse" required>
@@ -148,7 +145,6 @@
             <button type="submit" class="return-btn">Payer avec PayPal</button>
         </form>
     </div>
-
     <script>
         function displayCartItems() {
             let cartContainer = document.getElementById('cart-items-container');
@@ -194,12 +190,12 @@
             let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
             let shippingCost = subtotal > 0 ? 6.50 : 0;
             let totalPrice = subtotal + shippingCost;
-
+            
             if (subtotal === 0) {
                 alert("Votre panier est vide.");
                 return;
             }
-
+            
             let formData = {
                 name: document.getElementById('name').value,
                 address: document.getElementById('address').value,
@@ -208,25 +204,28 @@
                 email: document.getElementById('email').value,
                 country: document.getElementById('country').value,
             };
-
-            // Création du lien PayPal avec montant fixe
-            let paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=melytis593@gmail.com&currency_code=EUR&amount=${totalPrice.toFixed(2)}&item_name=Commande Nike Vintage`;
-
-            // Redirection vers PayPal
-            window.location.href = paypalUrl;
-
+            
+            // CORRECTION: Création du lien PayPal avec encodage correct des paramètres
+            let paypalUrl = "https://www.paypal.com/cgi-bin/webscr" + 
+                "?cmd=_xclick" + 
+                "&business=" + encodeURIComponent("melytis593@gmail.com") + 
+                "&currency_code=EUR" + 
+                "&amount=" + encodeURIComponent(totalPrice.toFixed(2)) + 
+                "&item_name=" + encodeURIComponent("Commande Nike Vintage");
+            
+            // CORRECTION: Ouvrir dans un nouvel onglet au lieu de rediriger
+            window.open(paypalUrl, '_blank');
+            
             let mailBody = `
 Commande à payer : ${totalPrice.toFixed(2)}€
 (Sous-total : ${subtotal.toFixed(2)}€ + Frais de port : ${shippingCost.toFixed(2)}€)
-
 Nom: ${formData.name}
 Adresse: ${formData.address}, ${formData.city}, ${formData.postal}, ${formData.country}
 Email: ${formData.email}
-
 Détails des articles:
 ${cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n")}
             `;
-
+            
             // Envoi du mail après paiement
             setTimeout(() => {
                 window.location.href = `mailto:melytis593@gmail.com?subject=Nouvelle Commande&body=${encodeURIComponent(mailBody)}`;
