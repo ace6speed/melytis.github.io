@@ -140,7 +140,14 @@
             <select id="country" required>
                 <option value="">Sélectionnez un pays</option>
                 <option value="France">France</option>
-                <!-- Ajoutez les autres pays ici -->
+                <option value="Belgique">Belgique</option>
+                <option value="Suisse">Suisse</option>
+                <option value="Luxembourg">Luxembourg</option>
+                <option value="Canada">Canada</option>
+                <option value="Espagne">Espagne</option>
+                <option value="Italie">Italie</option>
+                <option value="Allemagne">Allemagne</option>
+                <option value="Royaume-Uni">Royaume-Uni</option>
             </select>
             <button type="submit" class="return-btn">Payer avec PayPal</button>
         </form>
@@ -205,15 +212,17 @@
                 country: document.getElementById('country').value,
             };
             
-            // CORRECTION: Création du lien PayPal avec encodage correct des paramètres
+            // Solution corrigée: Utiliser le lien PayPal standard pour les paiements
             let paypalUrl = "https://www.paypal.com/cgi-bin/webscr" + 
                 "?cmd=_xclick" + 
-                "&business=" + encodeURIComponent("melytis593@gmail.com") + 
+                "&business=melytis593@gmail.com" + 
                 "&currency_code=EUR" + 
-                "&amount=" + encodeURIComponent(totalPrice.toFixed(2)) + 
-                "&item_name=" + encodeURIComponent("Commande Nike Vintage");
+                "&amount=" + totalPrice.toFixed(2).replace(".", ",") + 
+                "&item_name=" + encodeURIComponent("Commande Nike Vintage") +
+                "&return=" + encodeURIComponent(window.location.href) +
+                "&cancel_return=" + encodeURIComponent(window.location.href);
             
-            // CORRECTION: Ouvrir dans un nouvel onglet au lieu de rediriger
+            // Ouvrir dans un nouvel onglet
             window.open(paypalUrl, '_blank');
             
             let mailBody = `
